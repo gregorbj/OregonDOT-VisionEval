@@ -1,0 +1,66 @@
+Test
+Test of VESimHouseholds package modules
+2019-07-25_10:51:50
+
+2019-07-25 10:51:50 : Testing CalculateComEnergyAndEmissions. 
+
+2019-07-25 10:51:50 : Attempting to load datastore. 
+
+2019-07-25 10:51:50 : Datastore loaded. 
+
+2019-07-25 10:51:51 : Attempting to load and check specifications. 
+
+2019-07-25 10:51:51 : Module specifications successfully loaded and checked for errors. 
+
+2019-07-25 10:51:51 : Attempting to process, check and load module inputs. 
+
+2019-07-25 10:51:51 : Module inputs successfully checked and loaded into datastore. 
+
+2019-07-25 10:51:52 : Checking whether datastore contains all datasets in Get specifications. 
+
+2019-07-25 10:51:52 : Datastore contains all datasets identified in module Get specifications. 
+
+Test
+Test of VESimHouseholds package modules
+2019-07-25_12:00:20
+
+2019-07-25 12:00:20 : Testing CalculateComEnergyAndEmissions. 
+
+2019-07-25 12:00:24 : Attempting to load datastore. 
+
+2019-07-25 12:00:27 : Datastore loaded. 
+
+2019-07-25 12:00:28 : Attempting to load and check specifications. 
+
+2019-07-25 12:00:53 : Module specifications successfully loaded and checked for errors. 
+
+2019-07-25 12:00:54 : Attempting to process, check and load module inputs. 
+
+2019-07-25 12:01:18 : Module inputs successfully checked and loaded into datastore. 
+
+2019-07-25 12:01:19 : Checking whether datastore contains all datasets in Get specifications. 
+
+2019-07-25 12:01:30 : Datastore contains all datasets identified in module Get specifications. 
+
+Test
+Test of VESimHouseholds package modules
+2019-07-25_12:18:09
+
+2019-07-25 12:18:10 : Testing CalculateComEnergyAndEmissions. 
+
+2019-07-25 12:18:14 : Attempting to load datastore. 
+
+2019-07-25 12:18:16 : Datastore loaded. 
+
+2019-07-25 12:18:17 : Attempting to load and check specifications. 
+
+2019-07-25 12:18:43 : Module specifications successfully loaded and checked for errors. 
+
+2019-07-25 12:18:44 : Attempting to process, check and load module inputs. 
+
+2019-07-25 12:19:06 : Module inputs successfully checked and loaded into datastore. 
+
+2019-07-25 12:19:07 : Checking whether datastore contains all datasets in Get specifications. 
+
+2019-07-25 12:19:19 : Datastore contains all datasets identified in module Get specifications. 
+
