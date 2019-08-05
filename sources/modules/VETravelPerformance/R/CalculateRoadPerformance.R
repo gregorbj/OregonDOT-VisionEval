@@ -1373,16 +1373,16 @@ CalculateRoadPerformanceSpecifications <- list(
         "BusTotDelay"),
       TABLE = "Marea",
       GROUP = "Year",
-      TYPE = "compound",
-      UNITS = "HR/MI",
+      TYPE = "time",
+      UNITS = "HR",
       NAVALUE = -1,
       PROHIBIT = "< 0",
       ISELEMENTOF = "",
       SIZE = 0,
       DESCRIPTION = items(
-        "Total light-duty vehicle delay (hours per mile) on urban area roads",
-        "Total urban light-duty vehicle delay (hours per mile) on urban area roads",
-        "Total urban light-duty vehicle delay (hours per mile) on urban area roads")
+        "Total light-duty vehicle delay (hours per day) on urban area roads",
+        "Total heavy truck vehicle delay (hours per day) on urban area roads",
+        "Total bus vehicle delay (hours per day) on urban area roads")
     ),
     item(
       NAME = "AveCongPrice",

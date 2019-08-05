@@ -387,9 +387,9 @@ DESCRIPTION - A description of the data.
 |HvyTrkAveSpeed      |Marea |Year   |compound |MI/HR      |< 0      |            |Average speed (miles per hour) of heavy truck travel on urban area roads                                      |
 |BusAveSpeed         |Marea |Year   |compound |MI/HR      |< 0      |            |Average speed (miles per hour) of bus travel on urban area roads                                              |
 |NonUrbanAveSpeed    |Marea |Year   |compound |MI/HR      |< 0      |            |Average speed (miles per hour) of vehicle travel on non-urban area roads                                      |
-|LdvTotDelay         |Marea |Year   |compound |HR/MI      |< 0      |            |Total light-duty vehicle delay (hours per mile) on urban area roads                                           |
-|HvyTrkTotDelay      |Marea |Year   |compound |HR/MI      |< 0      |            |Total urban light-duty vehicle delay (hours per mile) on urban area roads                                     |
-|BusTotDelay         |Marea |Year   |compound |HR/MI      |< 0      |            |Total urban light-duty vehicle delay (hours per mile) on urban area roads                                     |
+|LdvTotDelay         |Marea |Year   |time     |HR         |< 0      |            |Total light-duty vehicle delay (hours per day) on urban area roads                                            |
+|HvyTrkTotDelay      |Marea |Year   |time     |HR         |< 0      |            |Total heavy truck vehicle delay (hours per day) on urban area roads                                           |
+|BusTotDelay         |Marea |Year   |time     |HR         |< 0      |            |Total bus vehicle delay (hours per day) on urban area roads                                                   |
 |AveCongPrice        |Marea |Year   |currency |USD        |< 0      |            |Average price paid (dollars per mile) in congestion fees                                                      |
 |FwyDvmtPropNoneCong |Marea |Year   |double   |proportion |< 0, > 1 |            |Proportion of freeway DVMT occurring when there is no congestion                                              |
 |FwyDvmtPropModCong  |Marea |Year   |double   |proportion |< 0, > 1 |            |Proportion of freeway DVMT occurring when congestion is moderate                                              |
