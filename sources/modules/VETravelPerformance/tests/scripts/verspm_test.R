@@ -45,41 +45,6 @@ Tests_ls <- list(
        LoadDatastore = TRUE, SaveDatastore = TRUE, DoRun = TRUE,
        RequiredPackages = "VEHouseholdTravel"),
   list(ModuleName = "BalanceRoadCostsAndRevenues",
-       LoadDatastore = TRUE, SaveDatastore = TRUE, DoRun = TRUE)
-)
-
-#Set up, run tests, and save test results
-setUpTests(TestSetup_ls)
-doTests(Tests_ls, TestSetup_ls)
-
-#Define the module tests
-Tests_ls <- list(
-  list(ModuleName = "Initialize",
-       LoadDatastore = TRUE, SaveDatastore = TRUE, DoRun = TRUE),
-  list(ModuleName = "CalculateRoadDvmt",
-       LoadDatastore = TRUE, SaveDatastore = TRUE, DoRun = TRUE,
-       RunFor = "BaseYear"),
-  list(ModuleName = "CalculateRoadDvmt",
-       LoadDatastore = TRUE, SaveDatastore = TRUE, DoRun = TRUE,
-       RunFor = "NotBaseYear"),
-  list(ModuleName = "CalculateRoadPerformance",
-       LoadDatastore = TRUE, SaveDatastore = TRUE, DoRun = TRUE,
-       RunFor = "BaseYear"),
-  list(ModuleName = "CalculateRoadPerformance",
-       LoadDatastore = TRUE, SaveDatastore = TRUE, DoRun = TRUE,
-       RunFor = "NotBaseYear"),
-  list(ModuleName = "CalculateMpgMpkwhAdjustments",
-       LoadDatastore = TRUE, SaveDatastore = TRUE, DoRun = TRUE,
-       RequiredPackages = "VEPowertrainsAndFuels"),
-  list(ModuleName = "AdjustHhVehicleMpgMpkwh",
-       LoadDatastore = TRUE, SaveDatastore = TRUE, DoRun = TRUE,
-       RequiredPackages = c("VEHouseholdTravel", "VEPowertrainsAndFuels")),
-  list(ModuleName = "CalculateVehicleOperatingCost",
-       LoadDatastore = TRUE, SaveDatastore = TRUE, DoRun = TRUE),
-  list(ModuleName = "BudgetHouseholdDvmt",
-       LoadDatastore = TRUE, SaveDatastore = TRUE, DoRun = TRUE,
-       RequiredPackages = "VEHouseholdTravel"),
-  list(ModuleName = "BalanceRoadCostsAndRevenues",
        LoadDatastore = TRUE, SaveDatastore = TRUE, DoRun = TRUE),
   list(ModuleName = "CalculateComEnergyAndEmissions",
        LoadDatastore = TRUE, SaveDatastore = TRUE, DoRun = TRUE,
