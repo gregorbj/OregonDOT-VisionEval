@@ -5,7 +5,7 @@
 #<doc>
 #
 ## CalculateComEnergyAndEmissions Module
-#### July 25, 2019
+#### August 5, 2019
 #
 #This module calculates the energy consumption and carbon emissions of heavy trucks and light-duty commercial service vehicles. It does not calculate the values for car service vehicles which are calculated as part of the household emissions. It also does not calculate public transit emissions which are calculated in the CalculatePtranEnergyAndEmissions module.
 #
@@ -674,7 +674,7 @@ CalculateComEnergyAndEmissions <- function(L) {
     #If no rural DVMT, return list containing 0 values
     if (is.na(HvyTrkDvmt)) {
       return(list(Energy_Et = c(GGE = 0, KWH = 0), CO2e = 0, Dvmt = 0))
-    #Otherwise calculate energy and emissions values
+      #Otherwise calculate energy and emissions values
     } else {
       HvyTrkDvmt_Pt <- HvyTrkDvmt * HvyTrkProp_Pt
       #Calculate average MPG and MPKWH by Marea and powertrain
@@ -696,7 +696,7 @@ CalculateComEnergyAndEmissions <- function(L) {
       HvyTrkEnergyMJ_Et <- c(
         convertUnits(HvyTrkEnergy_Et["GGE"], "energy", "GGE", "MJ")$Values,
         convertUnits(HvyTrkEnergy_Et["KWH"], "energy", "KWH", "MJ")$Values
-        )
+      )
       #Calculate CO2e
       HvyTrkCI_Et <- c(HvyTrkFuelCI, ElectricityCI)
       HvyTrkCO2e <- sum(HvyTrkEnergyMJ_Et * HvyTrkCI_Et)
@@ -776,7 +776,7 @@ documentModule("CalculateComEnergyAndEmissions")
 #   # SaveDatastore = TRUE
 #   SaveDatastore = FALSE
 # )
-# setUpTests(TestSetup_ls)
+# # setUpTests(TestSetup_ls)
 # #Run test module
 # TestDat_ <- testModule(
 #   ModuleName = "CalculateComEnergyAndEmissions",
