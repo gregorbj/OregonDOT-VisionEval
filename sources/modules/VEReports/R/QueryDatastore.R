@@ -467,7 +467,8 @@ summarizeDatasets <-
         if (is.character(ByData_)) {
           By_ls[[nm]] <- as.factor(ByData_)
         }
-        if (is.integer(ByData_)) {
+        if (is.integer(ByData_) | all(round(ByData_) == as.integer(ByData_))) {
+          ByData_ <- as.integer(ByData_)
           if (!is.null(Breaks_ls[[nm]])) {
             Breaks_ <- unique(c(min(ByData_), Breaks_ls[[nm]], max(ByData_)))
             By_ls[[nm]] <- cut(ByData_, Breaks_, include.lowest = TRUE)
@@ -475,7 +476,7 @@ summarizeDatasets <-
             By_ls[[nm]] <- as.factor(ByData_)
           }
         }
-        if (is.double(ByData_)) {
+        if (is.double(ByData_) & !all(round(ByData_) == as.integer(ByData_))) {
           if (!is.null(Breaks_ls[[nm]])) {
             Breaks_ <- unique(c(min(ByData_), Breaks_ls[[nm]], max(ByData_)))
             By_ls[[nm]] <- cut(ByData_, Breaks_, include.lowest = TRUE)
