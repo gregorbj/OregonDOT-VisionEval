@@ -1,0 +1,20 @@
+{
+  "Model": "AAMPO",
+  "Scenario": "Base",
+  "Description": "AAMPO Base",
+  "Region": "AAMPO",
+  "BaseYear": "2010",
+  "Years": ["2010", "2040"],
+  "DatastoreName": "Datastore",
+  "DatastoreType": "RD",
+  "Seed": 1,
+  "RequiredVEPackages": [
+    "VESimHouseholds",
+    "VELandUse",
+    "VETransportSupply",
+    "VEHouseholdVehicles",
+    "VEHouseholdTravel",
+    "VEPowertrainsAndFuelsxAPx20180302x20181213",
+    "VETravelPerformance"
+  ]
+}

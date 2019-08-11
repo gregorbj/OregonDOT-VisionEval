@@ -1,0 +1,66 @@
+{
+
+  "Datastore": {
+    "Path": "Datastore",
+    "Type": "RD"
+  },
+  
+  "Measures": {
+    "Household_DVMT":{
+      "Calculation": "sum(Dvmt)",
+      "Units": {
+        "Dvmt": "MI/DAY",
+        "LocType": ""
+      },
+      "Table": "Household",
+      "Description": "Total average daily vehicle miles traveled by persons in households residing in the region."
+    },
+    
+    "Group_Household_DVMT":{
+      "Calculation": "sum(Dvmt[HhType == 'Grp'])",
+      "Units": {
+        "Dvmt": "MI/DAY",
+        "HhType": ""
+      },
+      "Table": "Household",
+      "Description": "Total average daily vehicle miles traveled by persons in group-quarters households residing in the region."
+    },
+    
+    "Households":{
+      "Calculation": "count(HhSize)",
+      "Units": {
+        "HhSize": "PRSN"
+      },
+      "Table": "Household",
+      "Description": "Total number of households residing in the region."
+    },
+    
+    "Population":{
+      "Calculation": "sum(HhSize)",
+      "Units": {
+        "HhSize": "PRSN"
+      },
+      "Table": "Household",
+      "Description": "Total population residing in the region."
+    },
+    
+    "Average_Household_Size":{
+      "Calculation": "sum(HhSize) / count(HhSize)",
+      "Units": {
+        "HhSize": "PRSN"
+      },
+      "Table": "Household",
+      "Description": "Total population residing in the region."
+    },
+    
+    "Average_Per_Capita_DVMT":{
+      "Calculation": "sum(Dvmt) / sum(HhSize)",
+      "Units": {
+        "HhSize": "PRSN",
+        "Dvmt": "MI/DAY"
+      },
+      "Table": "Household",
+      "Description": "Total population residing in the region."
+    }
+  }
+}
