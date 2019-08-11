@@ -13,8 +13,9 @@ summarizeDatasets(Expr, Units_, By_ = NULL, Breaks_ls = NULL, Table,
 datasets. Operands in the expression are the names of datasets to use to
 create the summary. The only operators that may be used are '+', '-', '*',
 and '/'. The only functions that may be used are 'sum', 'count', 'mean', and
-'wtmean'. Note that all the datasets must be located in the table specified
-by the 'Table' argument.}
+'wtmean'. The calculation can include data indexing (subsetting) expressions.
+Note that all the datasets must be located in the table specified by the
+'Table' argument.}
 
 \item{Units_}{a named character vector identifying the units to be used for
 each operand in the expression. The values are allowable VE units values.
@@ -56,8 +57,7 @@ argument.
 the values in another dataset in the table.
 }
 \details{
-This function computes either the total or average values for a table dataset
-by the values of another dataset in the table. For example, the total income
-of households by Azone could be computed. In addition, if averages are
-computed a dataset may be specified to use in calculating weighted averages.
+This function computes either the total, count, average, or weighted average
+values for a table dataset or groups of a table dataset. For example, the
+total income of households by Azone could be computed.
 }

@@ -7,13 +7,13 @@
 documentGroupDatasets(Group, Filename, QueryPrep_ls)
 }
 \arguments{
+\item{Group}{a string identifying the name of the Group in the datastore.}
+
 \item{QueryPrep_ls}{a list created by calling the prepareForDatastoreQuery
 function which identifies the datastore location(s), listing(s), and
 functions for listing and read the datastore(s).}
 
-\item{a}{string identifying the name of the Group in the datastore.}
-
-\item{a}{string identifying the name of the Excel workbook file to save. The
+\item{File}{a string identifying the name of the Excel workbook file to save. The
 name must include the relative path information if it is to be saved in other
 than the current working directory.}
 }

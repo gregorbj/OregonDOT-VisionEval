@@ -12,7 +12,7 @@ datastores to extract the datasets from. Each entry must be the full relative
 path to a datastore (e.g. 'tests/Datastore').}
 
 \item{DstoreType}{a string identifying the type of datastore
-(e.g. 'RD', 'H5'). Note}
+(e.g. 'RD', 'H5').}
 }
 \value{
 A named list having three components. The 'Dir' component is a
