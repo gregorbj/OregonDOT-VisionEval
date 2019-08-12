@@ -1,0 +1,10 @@
+Geo,Year,CenterEcoProp,InnerEcoProp,OuterEcoProp,FringeEcoProp,CenterImpProp,InnerImpProp,OuterImpProp,FringeImpProp
+Albany,2010,0,0,0,0,0,0,0,0
+Bend,2010,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01
+Corvallis,2010,0.021,0.021,0.021,0.021,0.014,0.014,0.014,0.014
+Eugene,2010,0.025,0.025,0.025,0.025,0.006,0.006,0.006,0.006
+Grants Pass,2010,0,0,0,0,0,0,0,0
+Portland,2010,0.2,0.2,0.2,0.2,0.09,0.09,0.09,0.09
+None,2010,0,0,0,0,0,0,0,0
+Medford,2010,0.026,0.026,0.026,0.026,0,0,0,0
+Salem,2010,0.2,0.2,0.2,0.2,0.01,0.01,0.01,0.01

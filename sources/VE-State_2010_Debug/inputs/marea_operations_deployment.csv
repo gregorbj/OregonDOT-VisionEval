@@ -1,0 +1,10 @@
+Geo,Year,RampMeterDeployProp,IncidentMgtDeployProp,SignalCoordDeployProp,AccessMgtDeployProp,OtherFwyOpsDeployProp,OtherArtOpsDeployProp
+Albany,2010,0,0,0,0.789473684,0,0
+Bend,2010,0,0,0,0,0,0
+Corvallis,2010,0,0,0.298507463,0.536290323,0,0
+Eugene,2010,0.149253731,0,0,0,0,0
+Grants Pass,2010,0.5,0.4,0.567164179,0.442073171,0,0
+Portland,2010,0.348484848,0.4,0.4,0,0,0
+Medford,2010,0.401785714,0.401785714,0.583333333,0.5,0,0
+Salem,2010,0.401785714,0.142857143,0.401785714,0.401785714,0,0
+None,2010,0,0,0,0,0,0

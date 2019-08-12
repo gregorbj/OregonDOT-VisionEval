@@ -1,0 +1,10 @@
+Geo,Year,CenterPropWkrPay,InnerPropWkrPay,OuterPropWkrPay,CenterPropCashOut,InnerPropCashOut,OuterPropCashOut,CenterPkgCost.2005,InnerPkgCost.2005,OuterPkgCost.2005
+Portland,2010,0.13,0.13,0.13,0,0,0,4,4,4
+Bend,2010,0.045305343,0.001083915,0,0,0,0,0.824545709,0.824545709,0
+Corvallis,2010,0.45,0.01,0,0,0,0,1.43,1.53,4.12
+Eugene,2010,0.0715,0.0715,0.0715,0,0,0,3.2,3.2,3.2
+Medford,2010,0.11,0.01,0.02,0,0,0,2.89,2.17,8.25
+Salem,2010,0.32,0,0,0,0,0,4.12,4.12,0
+Albany,2010,0.02,0,0,0,0,0,2.43,0,0
+Grants Pass,2010,0,0,0,0,0,0,0,0,0
+None,2010,0.02,0,0,0,0,0,2.43,0,0
