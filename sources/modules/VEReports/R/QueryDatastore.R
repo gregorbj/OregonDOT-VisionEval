@@ -230,7 +230,6 @@
 #Code for development/testing
 # library(visioneval)
 # library(filesstrings)
-# library(xlsx)
 
 
 #=============================
@@ -416,47 +415,56 @@ listDatasets <- function(Table, Group, QueryPrep_ls) {
 }
 
 
-#CREATE EXCEL WORKBOOK TO DOCUMENT ALL DATASETS IN A DATASTORE GROUP
-#===================================================================
-#' Save an Excel workbook to document all tables/datasets in a datastore group.
+#CREATE DOCUMENTATION OF DATASETS IN A DATASTORE
+#===============================================
+#' Save an zip archive which documents all tables/datasets in a datastore.
 #'
-#' \code{documentGroupDatasets} save an Excel workbook which documents
-#' datasets in all tables in a datastore group.
+#' \code{documentDatastoreTables} saves a zip archive of a set of csv-formatted
+#' text files which document tables in a datastore.
 #'
-#' This function inventories all datsets in the tables in a datastore group and
-#' creates an Excel workbook where the dataset inventory for each table is in
-#' a separate worksheet. Each worksheet lists the names of the datasets, their
-#' types, their units, and descriptions.
+#' This function inventories all datsets in the tables in a datastore and
+#' creates a set of csv-formatted text files where the dataset inventory for
+#' each table is in a csv-formatted text file having the name of the table.
+#' Each csv file lists the names of the datasets, their types, their units, and
+#' descriptions. The files are saved in a zip archive organized by datastore
+#' group.
 #'
-#' @param Group a string identifying the name of the Group in the datastore.
-#' @param File a string identifying the name of the Excel workbook file to save. The
-#' name must include the relative path information if it is to be saved in other
-#' than the current working directory.
+#' @param SaveArchiveName a string identifying the name of the zip archive file
+#' that will be saved. The name should not include any suffix (e.g. '.zip') as
+#' that will be automatically added. The file will be saved in the current
+#' working directory.
 #' @param QueryPrep_ls a list created by calling the prepareForDatastoreQuery
 #' function which identifies the datastore location(s), listing(s), and
 #' functions for listing and read the datastore(s).
-#' @return a logical identifying whether the Excel file has been saved.
+#' @return a logical identifying whether the archive file has been saved.
 #' @export
-#' @import xlsx
-documentGroupDatasets <- function(Group, Filename, QueryPrep_ls) {
-  Workbook_XL <- createWorkbook()
-  Tables_ <- listTables(Group, QueryPrep_ls)$Datastore
-  for (tb in Tables_) {
-    TableSheet_XL <- createSheet(Workbook_XL, sheetName = tb)
-    Dsets_df <- listDatasets(tb, Group, QueryPrep_ls)$Datastore
-    addDataFrame(Dsets_df, TableSheet_XL, col.names = TRUE, row.names = FALSE,
-                 startRow = 1, startColumn = 1, showNA = FALSE)
+#' @import filesstrings
+documentDatastoreTables <- function(SaveArchiveName, QueryPrep_ls) {
+  GroupNames_ <- QueryPrep_ls$Listing$Datastore$Datastore$groupname
+  Groups_ <- GroupNames_[-grep("/", GroupNames_)]
+  Groups_ <- Groups_[-(Groups_ == "")]
+  TempDir <- SaveArchiveName
+  dir.create(TempDir)
+  for (Group in Groups_) {
+    GroupDir <- file.path(TempDir, Group)
+    dir.create(GroupDir)
+    Tables_ <- listTables(Group, QueryPrep_ls)$Datastore
+    for (tb in Tables_) {
+      Listing_df <- listDatasets(tb, Group, QueryPrep_ls)$Datastore
+      write.table(Listing_df, file = file.path(GroupDir, paste0(tb, ".csv")),
+                  row.names = FALSE, col.names = TRUE, sep = ",")
+    }
   }
-  saveWorkbook(Workbook_XL, Filename)
+  zip(paste0(SaveArchiveName, ".zip"), TempDir)
+  remove_dir(TempDir)
   TRUE
 }
-#Example
+# #Example
 # QPrep_ls <- prepareForDatastoreQuery(
 #   DstoreLocs_ = c("Datastore"),
 #   DstoreType = "RD"
 # )
-# documentGroupDatasets("Global", "Global_Group_Datasets.xlsx", QPrep_ls)
-# documentGroupDatasets("2010", "Year_Group_Datasets.xlsx", QPrep_ls)
+# documentDatastoreTables("Datastore_Documentation", QPrep_ls)
 # rm(QPrep_ls)
 
 #READ MULTIPLE DATASETS FROM DATASTORES
