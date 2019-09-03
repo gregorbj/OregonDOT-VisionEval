@@ -1,2 +1,3 @@
 # OregonDOT-VisionEval
-VisionEval packages customized for the Oregon DOT
+VisionEval packages and model data customized for the Oregon DOT. New and revised VisionEval packages are included in the 'sources/modules' directory. Binary versions are also available. The 'sources' directory includes the 'updateVisionEvalInstall.R' script. This script defines the updateVisionEvalInstall() function. This function allows user to update a standard VisionEval installation (see https://visioneval.org/category/download.html) with additional or modified packages. It is recommended that the user start with an official installation and then use this function to modify that installation.
+
