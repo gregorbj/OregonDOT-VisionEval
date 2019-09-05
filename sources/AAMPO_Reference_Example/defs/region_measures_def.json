@@ -50,7 +50,7 @@
         "HhSize": "PRSN"
       },
       "Table": "Household",
-      "Description": "Total population residing in the region."
+      "Description": "Average household size (number of persons) of households residing in region."
     },
     
     "Average_Per_Capita_DVMT":{
@@ -60,7 +60,7 @@
         "Dvmt": "MI/DAY"
       },
       "Table": "Household",
-      "Description": "Total population residing in the region."
+      "Description": "Average daily vehicle miles of travel of households residing in region per person"
     },
       
     "Average_Daily_LDV_Delay_Per_Capita":{
