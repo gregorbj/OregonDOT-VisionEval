@@ -971,7 +971,7 @@ calcRegionSummaryMeasures <- function(
     for (Name in Measures_) {
       Value <- summarizeDatasets(
         Expr = MeasuresDef_ls$Measures[[Name]]$Calculation,
-        Units_ = MeasuresDef_ls$Measures[[Name]]$Units,
+        Units_ = unlist(MeasuresDef_ls$Measures[[Name]]$Units),
         Table = MeasuresDef_ls$Measures[[Name]]$Table,
         Group = Year,
         QueryPrep_ls = QueryPrep_ls
