@@ -61,6 +61,16 @@
       },
       "Table": "Household",
       "Description": "Total population residing in the region."
+    },
+      
+    "Average_Daily_LDV_Delay_Per_Capita":{
+      "Calculation": "LdvTotDelay / UrbanPop",
+      "Units": {
+        "LdvTotDelay": "MIN",
+        "UrbanPop": "PRSN"
+      },
+      "Table": "Marea",
+      "Description": "Average daily light-duty vehicle delay on urbanized area roadways per person in minutes"
     }
   }
 }
