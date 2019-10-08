@@ -4,9 +4,9 @@
 
 ## Issue
 
-VisionEval models address some of the potential effects of driverless vehicles on travel, but don't address several important effects. The capability exists for model users to simulate the effects of the deployment of driverless vehicles in car services on vehicle ownership and relative car service use. Users can change the car service prices and service levels to reflect the effects of deploying driverless vehicles (which should lower labor costs, thus lowering prices and increasing service levels). The model adjusts vehicle ownership and the effective number of vehicles available as a function of car service prices. It also adjusts the relative use of car services as a function of relative car service prices. Presently, however, no guidance is provided to users on when or how the deployment of driverless vehicles in car services is likely to affect price or service levels. Several other important effects of driverless vehicles can't be analyzed using VisionEval models. These include the effects of driverless vehicles on road performance (congestion, delay, accidents, reliability)and how the ownership of driverless vehicles could affect the amount of travel by increasing the number of length of vehicle trips. 
+VisionEval models address some of the potential effects of driverless vehicles on travel, but don't address several important effects. The capability exists for model users to simulate the effects of the deployment of driverless vehicles in car services on vehicle ownership and relative car service use. Users can change the car service prices and service levels to reflect the effects of deploying driverless vehicles (which should lower labor costs, thus lowering prices and increasing service levels). The model adjusts vehicle ownership and the effective number of vehicles available as a function of car service prices. It also adjusts the relative use of car services as a function of relative car service prices. Presently, however, no guidance is provided to users on when or how the deployment of driverless vehicles in car services is likely to affect price or service levels. Several other important effects of driverless vehicles can't be analyzed using VisionEval models. These include the effects of driverless vehicles on road performance (congestion, delay, accidents, reliability) and how the ownership of driverless vehicles could affect the amount of travel by increasing the number and length of vehicle trips. 
 
-It should be noted that the term *driverless* is used instead of *autonomous* because driverless refers to a level of vehicle autonomy which enables vehicles to travel without human intervention. Other levels of autonomy require drivers to monitor and intervene in vehicle operation to some degree. Driverless automony has the potential for substantially changing travel behavior and road performance by:
+It should be noted that the term *driverless* is used instead of *autonomous* because driverless refers to a level of vehicle autonomy which enables vehicles to travel without human intervention (other than identifying where the vehicle goes). Other levels of autonomy require drivers to monitor and intervene in vehicle operation to some degree. Driverless automony has the potential for substantially changing travel behavior and road performance by:
 - Allowing all vehicle occupants to spend their time while traveling doing things that are more enjoyable than driving, potentially reducing the disutility of travel and increasing the amount of travel;
 - Substantially reducing the cost of car service travel by eliminating driver labor cost;
 - Enabling vehicles to shuttle non-drivers (e.g. children);
@@ -15,13 +15,13 @@ It should be noted that the term *driverless* is used instead of *autonomous* be
 While lower levels of vehicle autonomy can increase travel safety and comfort, their effects on vehicle travel and road performance are likely to be a small fraction of the effects of driverless vehicles. Therefore only driverless autonomy is being considered.
 
 Following are effects of driverless vehicles proposed to be included in VisionEval:
-1. **Effect of driverless vehicles on highway capacity and emissions**: Researchers have estimated that widespread deployment of connected autonomous vehicles could substantially increase highway capacity as a result of better harmonized traffic flows, shorter headways, and lower crash rates. More harmonized traffic flows will also result in lower emissions (for internal combustion engine vehicles) because less fuel will be wasted due to operation at a more constant traffic speeds.
+1. **Effect of driverless vehicles on highway capacity and emissions**: Researchers have estimated that widespread deployment of connected autonomous vehicles could substantially increase highway capacity as a result of better harmonized traffic flows, shorter headways, and lower crash rates. More harmonized traffic flows will also result in lower emissions (for internal combustion engine vehicles) because less fuel will be wasted due to operation at more constant traffic speeds.
 2. **Effect of driverless vehicles on distance traveled**: The use of driverless vehicles may increase the distances that people are willing to travel because vehicle travel is made less onerous. Travelers can spend their time doing more enjoyable or productive things than driving their vehicles.
 3. **Effect of driverless vehicles on unoccupied vehicle trips**: Driverless vehicles will enable and perhaps encourage trips to be made that are now not possible. Having a driverless vehicle may make it possible for a traveler to avoid parking difficulties and/or fees by sending the vehicle to a more remote location to park (such as sending it back home) or by having the vehicle circulate in taffic until it is needed.
 
 It also possible that driverless vehicles may result in a greater number of passenger trips. For example, adults who are incapable of driving or children may be able to travel by personal vehicle unaccompanied by a driver. Moreover, the availability of driverless vehicles could affect vehicle ownership by allowing these persons to travel independently by personal vehicle. Adding the capabilities to model these potential effects, however, would be a complex endeavor that is beyond the scope of this project. It would likely require a substantial amount of basic research and modification of the household driver, vehicle ownership, and travel models. 
 
-Although widespread ownership of driverless vehicles could substantially increase the amount of vehicle travel for the reasons noted above, the deployment of driverless vehicles by car services might have the opposite effect. The use of driverless vehicles by car services could substantially reduce operating costs and in so doing increase the proportion of households who opt for using car services in lieu of owning a car. For those households, vehicle travel would likely be reduced because the sunk cost of vehicle travel would be lower and the variable cost of vehicle travel would be higher. Such reductions would be offset to some degree, however, because lower car service fares would also encourage travelers to use car services rather than other non-car modes (e.g. bus, walk, bike). VisionEval modules currently enable users to address these effects to some degree as follows:
+Although widespread ownership of driverless vehicles could substantially increase the amount of vehicle travel for the reasons noted above, the deployment of driverless vehicles by car services might have the opposite effect. The use of driverless vehicles by car services could substantially reduce fares and in so doing increase the proportion of households who opt for using car services in lieu of owning a car. For those households, vehicle travel would likely be reduced because the sunk cost of vehicle travel would be lower and the variable cost of vehicle travel would be higher. Such reductions would be offset to some degree, however, because lower car service fares would also encourage travelers to use car services rather than other non-car modes (e.g. bus, walk, bike). VisionEval modules currently enable users to address these effects to some degree as follows:
 - Car service is categorized as high or low level service. With high level service, car service access time (waiting for pickup and walking time at drop-off) is competitive with owned vehicle access time (walking to parking, parking, and walking from parking). High level service is what is now available by TNCs like Uber and Lyft in many urban areas. Users can set up a scenario with assumptions about how driverless vehicle technology might affect the extent of high level service.
 - The user specifies fares ($/mile) for high level and low level service. Fare assumptions can reflect assumptions about the deployment of driverless vehicles and their effect on lowering labor costs.
 - The AdjustVehicleOwnership module in the VEHouseholdVehicles package adjusts household vehicle ownership by comparing the cost of ownership with the cost of car service use for households living in places where high level car service is available. A household vehicle would qualify for substitution if the ownership cost per mile of travel is greater than the car service cost. Whether or not a substitution is made also depends on user assumptions about other factors that would affect subsitutability. For example, some households own light trucks to use for towing an RV, boat, or other trailer; a use that a car service would not provide. These assumptions are encoded in substitution probabilities for automobiles (AutoCarSvcSubProp) and light trucks (LtTrkCarSvcSubProp).
@@ -39,7 +39,7 @@ The objective is to account for the car service and autonomous vehicle effects l
 
 ### CreateVehicleTable Module
 
-The CreateVehicleTable module processes the car service inputs in the **azone_carsvc_characteristics.csv** file. This file will be modified to include factors which specify deadhead proportions for high level car service and for low level car service (HighCarSvcDeadheadProp, LowCarSvcDeadheadProp) by Azone and year. Deadhead proportion will be defined as deadhead mileage divided by fare mileage. That will enable the total car service mileage to be easily computed from the the household car service use. Guidelines will be provided to assist users in specifying plausible values for these inputs.
+Among other things, the CreateVehicleTable module processes the car service inputs in the **azone_carsvc_characteristics.csv** file. This file will be modified to include factors which specify deadhead proportions for high level car service and for low level car service (HighCarSvcDeadheadProp, LowCarSvcDeadheadProp) by Azone and year. Deadhead proportion will be defined as deadhead mileage divided by fare mileage. That will enable the total car service mileage to be easily computed from the the household car service use. Guidelines will be provided to assist users in specifying plausible values for these inputs.
 
 ### AssignDriverlessVehicles Module
 
@@ -66,7 +66,7 @@ The module's Get specifications will include specifications for retrieving the d
 
 This module will be run after the AdjustVehicleOwnership module is run. Household vehicles of each age and type will be randomly assigned as driverless given the assigned probability for the age and type. The assignments will be recorded in the *Driverless* dataset in the *Vehicle* table with a value of 1 for driverless vehicles owned by the household and 0 for other household vehicles. Car services assigned to the household will be assigned the LowCarSvcDriverlessProp value or HighCarSvcDriverlessProp value for the car service level applicable to the household.
 
-The module will also calculate a preliminary estimate of the proportion of household DVMT that is in driverless vehicles. This will be stored in the *DriverlessDvmtProp* dataset in the *Household* table and the *HhDriverlessDvmtProp* dataset in the *Marea* table. This is necessary in order for the CalculateRoadPerformance module to calculate the effects of driverless vehicles on road performance. These preliminary estimates will be based on the assumption that household DVMT is split equally among vehicles available to the household (excluding low level car service). This can be calculated from the vehicle data for each household by selecting the *Driverless* values where *VehicleAccess* is not equal to *LowCarSvc*. The preliminary estimate of the driverless DVMT proportion for the household will be the sum of the selected *Driverless* values divided by the number of selected values. Note that these preliminary estimates are refined to reflect a more realistic distribution of household DVMT among vehicles and account for low level car service use, car service deadhead, relative car service occupancy, and potential for greater use of driverless vehicles by the CalculateVehicleOperatingCost module.
+The module will also calculate a preliminary estimate of the proportion of household DVMT that is in driverless vehicles. This will be stored in the *DriverlessDvmtProp* dataset in the *Household* table. This is necessary in order for the CalculateRoadPerformance module to calculate the effects of driverless vehicles on road performance. These preliminary estimates will be based on the assumption that household DVMT is split equally among vehicles available to the household (excluding low level car service). This can be calculated from the vehicle data for each household by selecting the *Driverless* values where *VehicleAccess* is not equal to *LowCarSvc*. The preliminary estimate of the driverless DVMT proportion for the household will be the sum of the selected *Driverless* values divided by the number of selected values. Note that these preliminary estimates are refined to reflect a more realistic distribution of household DVMT among vehicles and account for low level car service use, car service deadhead, relative car service occupancy, and potential for greater use of driverless vehicles by the CalculateVehicleOperatingCost module.
 
 The Set specifications for the module will save the following:
 - *DriverlessDvmtProp* in the *Household* table; and,
@@ -83,7 +83,7 @@ To make the calculations, the module Get specifications will be modified to load
 The module will create 4 additional datasets that will be stored in the *Marea* table of the relevant year group(s): *LdvDriverlessProp*, *HvyTrkDriverlessProp*, *BusDriverlessProp*, and *AveDriverlessProp*. The module Set specifications will be modified accordingly to specify the attributes of these datasets.
 
 The module code will be modified to calculate *LdvDriverlessProp*, *HvyTrkDriverlessProp*, and *BusDriverlessProp* by Marea as follows:
-1. An approximation function will be defined to calculate the driverless DVMT proportions for commercial service vehicles, heavy trucks, public transit vans, and buses for the model run year from the data in the *RegionDriverlessProps* table in the *Global* group. This function will be the same as or very similar to the *approxWithNaCheck* function defined in the *CalculateComEnergyAndEmissions* module function. The function will be called with each of the *ComSvcDriverlessProp*, *HvyTrkDriverlessProp*, *PtVanDriverlessProp, and *BusDriverlessProp* datasets loaded from the *RegionDriverlessProp* table along with the *Year* dataset from that same table, and the model run year to calculate the respective driverless DVMT proportions for the model run year.
+1. An approximation function will be defined to calculate the driverless DVMT proportions for commercial service vehicles, heavy trucks, public transit vans, and buses for the model run year from the data in the *RegionDriverlessProps* table in the *Global* group. This function will be the same as or very similar to the *approxWithNaCheck* function defined in the *CalculateComEnergyAndEmissions* module function. The function will be called with each of the *ComSvcDriverlessProp*, *HvyTrkDriverlessProp*, *PtVanDriverlessProp*, and *BusDriverlessProp* datasets loaded from the *RegionDriverlessProp* table along with the *Year* dataset from that same table, and the model run year to calculate the respective driverless DVMT proportions for the model run year.
 2. The Marea values for *HvyTrkDrivelessProp* and *BusDriverlessProp* will be set equal to the respective driverless proportions calculated in #1 above for the model run year. Note that values are the same for all Mareas.
 3. The average household driverless DVMT proportion for each Marea will be calculated from the *Dvmt* and *DriverlessDvmtProp* values for households residing in the Marea.
 4. The *LdvDriverlessProp* value will be calculated for each Marea as a DVMT weighted average of the average household driverless DVMT proportion (step 3) for the Marea, *ComSvcDriverlessProp*, and *PtVanDriverlessProp*. The respective DVMT weightings are the respective metropolitan area DVMT for households, commercial service vehicles and public transit vans. Following is an example of what code could be inserted at line 868
@@ -275,7 +275,7 @@ balanceFwyArtDvmt <- function(ma) {
 }
 </pre>
 
-The call to the *balanceFwyArtDvmt* function (lines will be changed to population the list of speed and delay data by metropolitan area (*SpeedAndDelay_ls*) to incorporate the results of the function call. This list is used by other portions of the main function code. Code like the following would be added at line 1758:
+The call to the *balanceFwyArtDvmt* function (lines will be changed to populate the list of speed and delay data by metropolitan area (*SpeedAndDelay_ls*) to incorporate the results of the function call. This list is used by other portions of the main function code. Code like the following would be added at line 1758:
 
 <pre style="font-size: 11px">
 SpeedAndDelay_ls <- lapply(BalanceResults_ls, function(x) x$SpeedAndDelay_ls)
@@ -393,29 +393,30 @@ After household DVMT is allocated to vehicles based on the respective composite 
 
 Modifications will be made to the CalculateVehicleOperatingCost module to account for the following effects of driverless and car service vehicle travel:
 - Lower travel time disutility for travel in driverless vehicles;
-- Lower access time made possible by driverless vehicles (through remote control);
-- Parking fee avoidance made possible by driverless vehicles (through remote control);
+- Lower access time made possible by driverless vehicles through remote control;
+- Parking fee avoidance made possible by driverless vehicles through remote control;
+- Additional driverless vehicle travel through remote control;
 - Deadhead mileage of car services.
 
 These modifications will have the following parts.
 1. Modification of existing code to incorporate the effect of driverless vehicles on the allocation of household DVMT among household vehicles.
 2. Adding code to calculate adjustments to the DVMT assigned to each owned driverless vehicle to account for additional travel that may occur.
 3. Adding code to calculate adjustments car service travel to account for deadhead mileage. 
-4. Adding/modifying code to calculate household totals and averages used in this and other modules including (dataset names in parethesis, new dataset in bold):
-   a. Total DVMT including the additional driverless DVMT and car service deadhead (Dvmt)
-   b. Proportion of total DVMT that is the added driverless DVMT (**DriverlessDvmtAdjProp**)
-   c. Proportion of total DVMT that is the added car service deadhead mileage (**DeadheadDvmtAdjProp**)
-   d. Proportion of total DVMT that is driverless (**DriverlessDvmtProp**)
-   e. Average out-of-pocket vehicle cost per mile excluding car service deadhead mileage (AveVehCostPM)
-   f. Average social/environmental cost per mile based on total DVMT (AveSocEnvCostPM)
-   g. Average road use tax per mile (AveRoadUseTaxPM)
-   h. Average gallons per mile based on total DVMT (AveGPM)
-   i. Average kilowatts per mile based on total DVMT (AveKWHPM)
-   j. Average CO2e per mile based on total DVMT (AveCO2ePM)
+4. Adding/modifying code to calculate household totals and averages used in this and other modules including (dataset names in parethesis, new dataset in bold):  
+   a. Total DVMT including the additional driverless DVMT and car service deadhead (Dvmt)  
+   b. Proportion of total DVMT that is the added driverless DVMT (**DriverlessDvmtAdjProp**)  
+   c. Proportion of total DVMT that is the added car service deadhead mileage (**DeadheadDvmtAdjProp**)  
+   d. Proportion of total DVMT that is driverless (**DriverlessDvmtProp**)  
+   e. Average out-of-pocket vehicle cost per mile excluding car service deadhead mileage (AveVehCostPM)  
+   f. Average social/environmental cost per mile based on total DVMT (AveSocEnvCostPM)  
+   g. Average road use tax per mile (AveRoadUseTaxPM)  
+   h. Average gallons per mile based on total DVMT (AveGPM)  
+   i. Average kilowatts per mile based on total DVMT (AveKWHPM)  
+   j. Average CO2e per mile based on total DVMT (AveCO2ePM)  
 
-The Set specifications for the module will be modified to include saving the *DriverlessDvmtAdjProp* and *DeadheadDvmtAdjProp* values noted in #4 above. 
+The Set specifications for the module will be modified to include saving the *Dvmt*, *DriverlessDvmtAdjProp*, *DeadheadDvmtAdjProp*, and *DriverlessDvmtProp* values noted in #4 above. 
 
-The code will be written in recognition that this module and others in the VETravelPerformance package are run in an iterated manner to balance amounts of travel, congestion, travel costs, travel budgets, and road revenues. Iteration makes it necessary to carry out calculations in a manner which avoids 'double-counting' the vehicle mileage adjustments. To avoid double counting, the driverless vehicle mileage adjustments and car service mileage adjustments are removed from the household total DVMT if they have been added in a previous iteration. This is determined by checking whether there are values for *DriverlessDvmtAdjProp* and *DeadheadDvmtAdjProp*. This will be established by identifying these datasets as OPTIONAL in the *Get* specifications for the module, and then determining whether they exist in the *Year$Household* component of the dataset list provided to the module function. After those components are removed from total household DVMT, the module calculations are run to allocate household DVMT to vehicles, calculated added driverless and deadhead travel, and to recalculate household totals and averages. 
+The code will be written in recognition that this module and others in the VETravelPerformance package are run in an iterated manner to balance amounts of travel, congestion, travel costs, travel budgets, and road revenues. Iteration makes it necessary to carry out calculations in a manner which avoids 'double-counting' the vehicle mileage adjustments. To avoid double counting, the driverless vehicle mileage adjustments and car service mileage adjustments are removed from the household total DVMT if they have been added in a previous iteration. This is determined by checking whether there are values for *DriverlessDvmtAdjProp* and *DeadheadDvmtAdjProp*. This will be established by identifying these datasets as OPTIONAL in the *Get* specifications for the module, and then determining whether they exist in the *Year$Household* component of the dataset list provided to the module function. After those components are removed from total household DVMT, the module calculations are run to allocate household DVMT to vehicles, calculate added driverless and deadhead travel, and to recalculate household totals and averages. 
 
 The calculations to account for the effects of driverless vehicles require additional parameters supplied by the user. These will be in a new input file, **region_driverless_vehicle_parameters.csv**. The file will contain the following fields:
 - RunTimeUtilityAdj: This factor is used to adjust the travel time component of composite vehicle operating cost of driverless vehicles. For example, a value of 0.8 means that the travel time in a driverless vehicle is 80% as onerous as the travel time in a vehicle that is not driverless. This factor will be applied to the travel time rate for driverless vehicles owned by the household in the calculation of composite cost. It will also be used in the calculation of added driverless vehicle travel as explained below.
@@ -446,12 +447,12 @@ The effect of driverless vehicles on running time cost and access time cost will
 <pre style="font-size: 11px">
 IsDriverless <- L$Year$Vehicle$VehicleAccess == "Own" & L$Year$Driverless == 1
 RunTimeRate_Ve[IsDriverless] <- RunTimeRate_Ve[IsDriverless] * RunTimeUtilityAdj
-AccTimeRate_Ve[IsDriverless] <- AccTimeRate_Ve[IsDriverless] * (1 - PropRemoteAccess + (AccessTimeUtilityAdj * PropRemoteAccess))
+AccTimeRate_Ve[IsDriverless] <- AccTimeRate_Ve[IsDriverless] * ((1 - PropRemoteAccess) + (AccessTimeUtilityAdj * PropRemoteAccess))
 </pre>
 
 #### Calculate Driverless Vehicle DVMT Adjustments
 
-Driverless vehicle DVMT will be adjusted to account for additional travel resulting from the greater passenger trip distances due to lower travel time disutility, the additional travel resulting from remote vehicle operation (e.g. to avoid parking cost), and additional vehicle travel of non-drivers. The effect of each of these factors will be calculated for each driverless vehicle and the results will be added to the DVMT initially allocated. 
+Driverless vehicle DVMT will be adjusted to account for additional travel resulting from the greater passenger trip distances due to lower travel time disutility and the additional travel resulting from remote vehicle operation (e.g. to avoid parking cost). These effects will be calculated for each driverless vehicle and the results will be added to the DVMT initially allocated. 
 
 Vehicle DVMT is not currently calculated for each vehicle so the code will need to calculate it from the household DVMT and the vehicle DVMT split that is calculated:
 
@@ -542,7 +543,7 @@ DriverlessDvmtProp_Hh <- DriverlessDvmt_Hh / Dvmt_Hh
 
 Existing code will calculate the other averages.
 
-The Set specifications for the module will be changed to save the adjusted DVMT values (Dvmt), DriverlessDvmtAdjProp, DeadheadDvmtAdjProp, and DriverlessDvmtProp values in the household table of the datastore. 
+The Set specifications for the module will be changed to save the adjusted DVMT values (Dvmt), DriverlessDvmtAdjProp, DeadheadDvmtAdjProp, and DriverlessDvmtProp values in the household table of the datastore, as well as saving the HhDriverlessDvmtProp dataset in the marea table. 
 
 ### BudgetHouseholdDvmt Module
 
@@ -563,7 +564,7 @@ The local function which applies the budget adjustments and produces a list of a
 <pre style="font-size: 11px">
 Adj_ls <- local({
   #Calculate DVMT without car service deadhead miles
-  <b>DhAdjProp <- (1 - L$Year$Household$DeadheadDvmtAdjProp)</b>
+  <b>DhAdjProp <- L$Year$Household$DeadheadDvmtAdjProp</b>
   <b>NoDhDvmt_Hh <- Dvmt_Hh * (1 - DhAdjProp)</b>
   #Calculate budget based on the adjusted income
   VehOpBudget_Hh <- AdjIncome_Hh * BudgetProp_Hh
