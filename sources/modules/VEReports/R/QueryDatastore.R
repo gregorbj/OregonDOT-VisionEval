@@ -702,44 +702,62 @@ summarizeDatasets <-
     }
     #Simplify the data list
     Data_ls <- list(data.frame(Data_ls$Data[[Table]]))
-    #Process the data list using the By_ argument
+    #If there is a By_ argument do calculations by group and return as array
     if (!is.null(By_)) {
       By_ls <- list()
       #Check and process the By data into categories
       for (nm in By_) {
         ByData_ <- Data_ls[[1]][[nm]]
-        if (is.factor(ByData_)) {
-          By_ls[[nm]] <- ByData_
-        }
-        if (is.character(ByData_)) {
-          By_ls[[nm]] <- as.factor(ByData_)
-        }
-        if (is.integer(ByData_) | all(round(ByData_) == as.integer(ByData_))) {
-          ByData_ <- as.integer(ByData_)
-          if (!is.null(Breaks_ls[[nm]])) {
-            Breaks_ <- unique(c(min(ByData_), Breaks_ls[[nm]], max(ByData_)))
-            By_ls[[nm]] <- cut(ByData_, Breaks_, include.lowest = TRUE)
-          } else {
+        if (!is.numeric(ByData_)) {
+          if (is.factor(ByData_)) {
+            By_ls[[nm]] <- ByData_
+          }
+          if (is.character(ByData_)) {
             By_ls[[nm]] <- as.factor(ByData_)
           }
-        }
-        if (is.double(ByData_) & !all(round(ByData_) == as.integer(ByData_))) {
-          if (!is.null(Breaks_ls[[nm]])) {
-            Breaks_ <- unique(c(min(ByData_), Breaks_ls[[nm]], max(ByData_)))
-            By_ls[[nm]] <- cut(ByData_, Breaks_, include.lowest = TRUE)
-          } else {
-            stop(paste(nm, "is non-integer number. Breaks must be specified."))
+        } else {
+          if (is.integer(ByData_) | all(round(ByData_) == as.integer(ByData_))) {
+            ByData_ <- as.integer(ByData_)
+            if (!is.null(Breaks_ls[[nm]])) {
+              Breaks_ <- unique(c(min(ByData_), Breaks_ls[[nm]], max(ByData_)))
+              By_ls[[nm]] <- cut(ByData_, Breaks_, include.lowest = TRUE)
+            } else {
+              By_ls[[nm]] <- as.factor(ByData_)
+            }
+          }
+          if (is.double(ByData_) & !all(round(ByData_) == as.integer(ByData_))) {
+            if (!is.null(Breaks_ls[[nm]])) {
+              Breaks_ <- unique(c(min(ByData_), Breaks_ls[[nm]], max(ByData_)))
+              By_ls[[nm]] <- cut(ByData_, Breaks_, include.lowest = TRUE)
+            } else {
+              stop(paste(nm, "is non-integer number. Breaks must be specified."))
+            }
           }
         }
       }
+      #Split Data_ls by the By_ls
       Data_ls <- split(Data_ls[[1]], By_ls)
+      #Evaluate the expression for each component of Data_ls
+      Results_ls <- lapply(Data_ls, function(x) {
+        eval(parse(text = Expr), envir = x)
+      })
+      #Identify the dimension names for each By dimension
+      ByNames_ls <- lapply(By_ls, function(x) unique(as.character(x)))
+      #Set up array to store results
+      Results_ar <- array(NA,
+                          dim = unlist(lapply(ByNames_ls, length)),
+                          dimnames = ByNames_ls)
+      #Put results into array
+      Idx_mx <- do.call(rbind, strsplit(names(Results_ls), "\\."))
+      Results_ar[Idx_mx] <- unlist(Results_ls)
+      return(Results_ar)
     }
-    #Process the Data_ls using the Filter
-    #Evaluate the expression using each component of the Data_ls
-    lapply(Data_ls, function(x) {
-      eval(parse(text = Expr), envir = x)
-    })
-
+    #If there isn't a By_ argument, do calculations and return a vector
+    if (is.null(By_)) {
+      unlist(lapply(Data_ls, function(x) {
+        eval(parse(text = Expr), envir = x)
+      }))
+    }
   }
 
 # #Examples of summarizing datasets
