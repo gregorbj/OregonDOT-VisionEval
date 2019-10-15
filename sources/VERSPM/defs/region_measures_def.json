@@ -1,0 +1,398 @@
+{
+
+  "Datastore": {
+    "Path": "Datastore",
+    "Type": "RD"
+  },
+
+  "Measures": {
+    "Population":{
+      "Calculation": "sum(UrbanPop) + sum(TownPop) + sum(RuralPop)",
+      "Units": {
+        "UrbanPop": "PRSN",
+        "TownPop": "PRSN",
+        "RuralPop": "PRSN"
+      },
+      "Table": {
+        "UrbanPop": "Marea",
+        "TownPop": "Marea",
+        "RuralPop": "Marea"
+      },
+      "Description": "Populaton (HH, GQ) in all Marea Loc Types (Urban, Town, Rural)."
+    },
+    "Population_HH":{
+      "Calculation": "sum(Age0to14) + sum(Age15to19) + sum(Age20to29) + sum(Age30to54) + sum(Age55to64) + sum(Age65Plus)",
+      "Units": {
+        "Age0to14": "PRSN",
+        "Age15to19": "PRSN",
+        "Age20to29": "PRSN",
+        "Age30to54": "PRSN",
+        "Age55to64": "PRSN",
+        "Age65Plus": "PRSN"
+      },
+      "Table": {
+        "Age0to14": "Azone",
+        "Age15to19": "Azone",
+        "Age20to29": "Azone",
+        "Age30to54": "Azone",
+        "Age55to64": "Azone",
+        "Age65Plus": "Azone"
+      },
+      "Description": "Populaton of  HH in all Azones (summed by age group)."
+    },
+    "Population_GQ":{
+      "Calculation": "sum(GrpAge0to14) + sum(GrpAge15to19) + sum(GrpAge20to29) + sum(GrpAge30to54) + sum(GrpAge55to64) + sum(GrpAge65Plus)",
+      "Units": {
+        "GrpAge0to14": "PRSN",
+        "GrpAge15to19": "PRSN",
+        "GrpAge20to29": "PRSN",
+        "GrpAge30to54": "PRSN",
+        "GrpAge55to64": "PRSN",
+        "GrpAge65Plus": "PRSN"
+      },
+      "Table": {
+        "GrpAge0to14": "Azone",
+        "GrpAge15to19": "Azone",
+        "GrpAge20to29": "Azone",
+        "GrpAge30to54": "Azone",
+        "GrpAge55to64": "Azone",
+        "GrpAge65Plus": "Azone"
+      },
+      "Description": "Populaton of  GQ in all Azones (summed by age group)."
+    },
+    "SFDU":{
+      "Calculation": "sum(SFDU)",
+      "Units": {
+        "SFDU": "HH"
+      },
+      "Table": {
+        "SFDU": "Bzone"
+      },
+      "Description": "Single Family Dwelling Units in all Bzones."
+    },
+    "MFDU":{
+      "Calculation": "sum(MFDU)",
+      "Units": {
+        "MFDU": "HH"
+      },
+      "Table": {
+        "MFDU": "Bzone"
+      },
+      "Description": "Multi Family Dwelling Units in all Bzones."
+    },
+    "GQDU":{
+      "Calculation": "sum(GQDU)",
+      "Units": {
+        "GQDU": "HH"
+      },
+      "Table": {
+        "GQDU": "Bzone"
+      },
+      "Description": "GQ Dwelling Units in all Bzones."
+    },
+    "Num_HH":{
+      "Calculation": "sum(NumHh)",
+      "Units": {
+        "NumHh": "HH"
+      },
+      "Table": {
+        "NumHh": "Azone"
+      },
+      "Description": "Number of households in all Azones."
+    },
+    "Num_GQ":{
+      "Calculation": "sum(NumGq)",
+      "Units": {
+        "NumGq": "HH" // The dataset actually has PRSN as units
+      },
+      "Table": {
+        "NumGq": "Azone"
+      },
+      "Description": "Number of group quarters in all Azones."
+    },
+    "DVMT_HH":{
+      "Calculation": "sum(Dvmt)",
+      "Units": {
+        "Dvmt": "MI/DAY"
+      },
+      "Table": {
+        "Dvmt": "Household"
+      },
+      "Description": "DVMT  from all HHs (CarSvs, HH-GQ owned veh)." //?hh-gq
+    },
+    "DVMT_ComSvc":{
+      "Calculation": "sum(ComSvcUrbanDvmt) + sum(ComSvcTownDvmt) + sum(ComSvcRuralDvmt)",
+      "Units": {
+        "ComSvcUrbanDvmt": "MI/DAY",
+        "ComSvcTownDvmt": "MI/DAY",
+        "ComSvcRuralDvmt": "MI/DAY"
+      },
+      "Table": {
+        "ComSvcUrbanDvmt": "Marea",
+        "ComSvcTownDvmt": "Marea",
+        "ComSvcRuralDvmt": "Marea"
+      },
+      "Description": "DVMT  from all Marea commercial service travel."
+    },
+    "DVMT_LDV":{
+      "Calculation": "sum(Dvmt) +sum(ComSvcUrbanDvmt) + sum(ComSvcTownDvmt) + sum(ComSvcRuralDvmt)",
+      "Units": {
+        "Dvmt": "MI/DAY",
+        "ComSvcUrbanDvmt": "MI/DAY",
+        "ComSvcTownDvmt": "MI/DAY",
+        "ComSvcRuralDvmt": "MI/DAY"
+      },
+      "Table": {
+        "Dvmt": "Household",
+        "ComSvcUrbanDvmt": "Marea",
+        "ComSvcTownDvmt": "Marea",
+        "ComSvcRuralDvmt": "Marea"
+      },
+      "Description": "DVMT from all Marea LDV (commercial service, CarSvs, HH-GQ owned veh)."
+    },
+    "DVMTLDV_Per_Cap":{
+      "Calculation": "(sum(Dvmt) + sum(ComSvcUrbanDvmt) + sum(ComSvcTownDvmt) + sum(ComSvcRuralDvmt))/(sum(UrbanPop) + sum(TownPop) + sum(RuralPop))",
+      "Units": {
+        "Dvmt": "MI/DAY",
+        "ComSvcUrbanDvmt": "MI/DAY",
+        "ComSvcTownDvmt": "MI/DAY",
+        "ComSvcRuralDvmt": "MI/DAY",
+        "UrbanPop": "PRSN",
+        "TownPop": "PRSN",
+        "RuralPop": "PRSN"
+      },
+      "Table": {
+        "Dvmt": "Household",
+        "ComSvcUrbanDvmt": "Marea",
+        "ComSvcTownDvmt": "Marea",
+        "ComSvcRuralDvmt": "Marea",
+        "UrbanPop": "Marea",
+        "TownPop": "Marea",
+        "RuralPop": "Marea"
+      },
+      "Description": "DVMT per capita from all Marea LDV (commercial service, CarSvs, HH-GQ owned veh)."
+    },
+    "Co2eDaily_HH":{
+      "Calculation": "sum(DailyCO2e)",
+      "Units": {
+        "DailyCO2e": "KG/DAY"
+      },
+      "Table": {
+        "DailyCO2e": "Household"
+      },
+      "Description": "CO2e from all Marea LDV HH (CarSvs, HH-GQ owned veh)."
+    },
+    "GHG_HH_Per_Cap":{
+      "Calculation": "sum(DailyCO2e) / (sum(UrbanPop) + sum(TownPop) + sum(RuralPop))",
+      "Units": {
+        "DailyCO2e": "KG/DAY",
+        "UrbanPop": "PRSN",
+        "TownPop": "PRSN",
+        "RuralPop": "PRSN"
+      },
+      "Table": {
+        "DailyCO2e": "Household",
+        "UrbanPop": "Marea",
+        "TownPop": "Marea",
+        "RuralPop": "Marea"
+      },
+      "Description": "CO2e per capita from HH (HH, GQ, CarSvc) Marea travel."
+    },
+    "GHG_HH_Per_MI":{
+      "Calculation": "sum(DailyCO2e) / sum(Dvmt)",
+      "Units": {
+        "DailyCO2e": "KG/DAY",
+        "Dvmt": "MI/DAY"
+      },
+      "Table": {
+        "DailyCO2e": "Household",
+        "Dvmt": "Household"
+      },
+      "Description": "CO2e per mile from HH (HH, GQ, CarSvc) Marea travel."
+    },
+    "Co2eDaily_LDV":{
+      "Calculation": "sum(DailyCO2e) + sum(ComSvcUrbanCO2e) + sum(ComSvcNonUrbanCO2e)",
+      "Units": {
+        "DailyCO2e": "KG/DAY",
+        "ComSvcUrbanCO2e": "KG/DAY",
+        "ComSvcNonUrbanCO2e": "KG/DAY"
+      },
+      "Table": {
+        "DailyCO2e": "Household",
+        "ComSvcUrbanCO2e": "Marea",
+        "ComSvcNonUrbanCO2e": "Marea"
+      },
+      "Description": "CO2e from all Marea LDV (CarSvs, HH-GQ owned veh)."
+    },
+    "GHG_LDV_Per_Cap":{
+      "Calculation": "(sum(DailyCO2e) + sum(ComSvcUrbanCO2e) + sum(ComSvcNonUrbanCO2e)) / (sum(UrbanPop) + sum(TownPop) + sum(RuralPop))",
+      "Units": {
+        "DailyCO2e": "KG/DAY",
+        "ComSvcUrbanCO2e": "KG/DAY",
+        "ComSvcNonUrbanCO2e": "KG/DAY",
+        "UrbanPop": "PRSN",
+        "TownPop": "PRSN",
+        "RuralPop": "PRSN"
+      },
+      "Table": {
+        "DailyCO2e": "Household",
+        "ComSvcUrbanCO2e": "Marea",
+        "ComSvcNonUrbanCO2e": "Marea",
+        "UrbanPop": "Marea",
+        "TownPop": "Marea",
+        "RuralPop": "Marea"
+      },
+      "Description": "CO2e per capita from all Marea LDV (ComSvc, CarSvs, HH-GQ owned veh)."
+    },
+    "GHG_LDV_Per_MI":{
+      "Calculation": "(sum(DailyCO2e) + sum(ComSvcUrbanCO2e) + sum(ComSvcNonUrbanCO2e)) / (sum(Dvmt) + sum(ComSvcUrbanDvmt) + sum(ComSvcTownDvmt) + sum(ComSvcRuralDvmt))",
+      "Units": {
+        "DailyCO2e": "KG/DAY",
+        "ComSvcUrbanCO2e": "KG/DAY",
+        "ComSvcNonUrbanCO2e": "KG/DAY",
+        "Dvmt": "MI/DAY",
+        "ComSvcUrbanDvmt": "MI/DAY",
+        "ComSvcTownDvmt": "MI/DAY",
+        "ComSvcRuralDvmt": "MI/DAY"
+      },
+      "Table": {
+        "DailyCO2e": "Household",
+        "ComSvcUrbanCO2e": "Marea",
+        "ComSvcNonUrbanCO2e": "Marea",
+        "Dvmt": "Household",
+        "ComSvcUrbanDvmt": "Marea",
+        "ComSvcTownDvmt": "Marea",
+        "ComSvcRuralDvmt": "Marea"
+      },
+      "Description": "CO2e per mile from all Marea LDV (ComSvc, CarSvs, HH-GQ owned veh)."
+    },
+    "DGGE_HH":{
+      "Calculation": "sum(DailyGGE)",
+      "Units": {
+        "DailyGGE": "GGE/DAY"
+      },
+      "Table": {
+        "DailyGGE": "Household"
+      },
+      "Description": "Gasoline equivalent gallons consumed per day by HHs (HH, GQ, CarSvc) vehicle travel."
+    },
+    "DGGE_ComSvc":{
+      "Calculation": "sum(ComSvcUrbanGGE) + sum(ComSvcNonUrbanGGE)",
+      "Units": {
+        "ComSvcUrbanGGE": "GGE/DAY",
+        "ComSvcNonUrbanGGE": "GGE/DAY"
+      },
+      "Table": {
+        "ComSvcUrbanGGE": "Marea",
+        "ComSvcNonUrbanGGE": "Marea"
+      },
+      "Description": "Gasoline equivalent gallons consumed per day by ComSvc vehicle travel."
+    },
+    "DGGE_LDV":{
+      "Calculation": "sum(DailyGGE) + sum(ComSvcUrbanGGE) + sum(ComSvcNonUrbanGGE)",
+      "Units": {
+        "DailyGGE": "GGE/DAY",
+        "ComSvcUrbanGGE": "GGE/DAY",
+        "ComSvcNonUrbanGGE": "GGE/DAY"
+      },
+      "Table": {
+        "DailyGGE": "Household",
+        "ComSvcUrbanGGE": "Marea",
+        "ComSvcNonUrbanGGE": "Marea"
+      },
+      "Description": "Gasoline equivalent gallons consumed per day by LDV (ComSvc, CarSvs, HH-GQ owned veh)."
+    },
+    "MPG_LDV":{
+      "Calculation": "(sum(Dvmt) +sum(ComSvcUrbanDvmt) + sum(ComSvcTownDvmt) + sum(ComSvcRuralDvmt)) / (sum(DailyGGE) + sum(ComSvcUrbanGGE) + sum(ComSvcNonUrbanGGE))",
+      "Units": {
+        "Dvmt": "MI/DAY",
+        "ComSvcUrbanDvmt": "MI/DAY",
+        "ComSvcTownDvmt": "MI/DAY",
+        "ComSvcRuralDvmt": "MI/DAY",
+        "DailyGGE": "GGE/DAY",
+        "ComSvcUrbanGGE": "GGE/DAY",
+        "ComSvcNonUrbanGGE": "GGE/DAY"
+      },
+      "Table": {
+        "Dvmt": "Household",
+        "ComSvcUrbanDvmt": "Marea",
+        "ComSvcTownDvmt": "Marea",
+        "ComSvcRuralDvmt": "Marea",
+        "DailyGGE": "Household",
+        "ComSvcUrbanGGE": "Marea",
+        "ComSvcNonUrbanGGE": "Marea"
+      },
+      "Description": "Net fuel efficiency of all LDV travel (includes EV miles)."
+    },
+    "Bike_Trips":{
+      "Calculation": "sum(BikeTrips)",
+      "Units": {
+        "BikeTrips": "TRIP/DAY"
+      },
+      "Table": {
+        "BikeTrips": "Household"
+      },
+      "Description": "Average number of bike trips per day by HH (HH, GQ) members."
+    },
+    "Walk_Trips":{
+      "Calculation": "sum(WalkTrips)",
+      "Units": {
+        "WalkTrips": "TRIP/DAY"
+      },
+      "Table": {
+        "WalkTrips": "Household"
+      },
+      "Description": "Average number of walk trips per day by HH (HH, GQ) members."
+    },
+    "Transit_Trips":{
+      "Calculation": "sum(TransitTrips)",
+      "Units": {
+        "TransitTrips": "TRIP/DAY"
+      },
+      "Table": {
+        "TransitTrips": "Household"
+      },
+      "Description": "Average number of transit trips per day by HH (HH, GQ) members."
+    },
+    "Mix_Use_HH":{
+      "Calculation": "sum(IsUrbanMixNbrhd)",
+      "Units": {
+        "IsUrbanMixNbrhd": "HH"
+      },
+      "Table": {
+        "IsUrbanMixNbrhd": "Household"
+      },
+      "Description": ""
+    },
+    "LDV_Tot_Delay":{
+      "Calculation": "sum(LdvTotDelay)",
+      "Units": {
+        "LdvTotDelay": "MIN/DAY"
+      },
+      "Table": {
+        "LdvTotDelay": "Marea"
+      },
+      "Description": "Total light-duty vehicle delay (hours per mile) on urban area roads."
+    },
+    "Hvy_Trk_Tot_Delay":{
+      "Calculation": "sum(HvyTrkTotDelay)",
+      "Units": {
+        "HvyTrkTotDelay": "MIN/DAY"
+      },
+      "Table": {
+        "HvyTrkTotDelay": "Marea"
+      },
+      "Description": "Total urban light-duty vehicle delay (hours per mile) on urban area roads."
+    },
+    "Veh_Costs_Own":{
+      "Calculation": "sum(OwnCost)",
+      "Units": {
+        "OwnCost": "USD"
+      },
+      "Table": {
+        "OwnCost": "Household"
+      },
+      "Description": "Annual HH (HH, GQ) vehicle ownership cost (depreciation, finance, insurance, taxes)."
+    }
+  }
+}
