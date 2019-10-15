@@ -5,7 +5,7 @@
 \title{Summarize the values in a table dataset according to the values in another
 dataset in the table.}
 \usage{
-summarizeDatasets(Expr, Units_, By_ = NULL, Breaks_ls = NULL, Table,
+summarizeDatasets(Expr, Units_, By_ = NULL, Breaks_ls = NULL, Table_,
   Group, QueryPrep_ls)
 }
 \arguments{
@@ -35,7 +35,7 @@ the list is a vector of values to be used to split the respective By
 dataset into groups. Minimum and maximum values do not need to be specified
 as they are computed from the dataset.}
 
-\item{Table}{a string identifying the table where the datasets are located.}
+\item{Table_}{a character vector identifying the tables where the datasets are located.}
 
 \item{Group}{a string identifying the group where the dataset is located.}
 

@@ -17,7 +17,7 @@
 #- Region summaries can be produced for a set of measures specified in a json-formatted definitions file
 #
 #There are some limitations to the calculations that may be performed, however:
-#- All datasets identified in a calculation must be in the same table. The functions at the present time do not allow you to use datasets in different tables (e.g. Households and Vehicles) in a calculation.
+#- For group by operations, all datasets identified in a calculation must be in the same table. The functions at the present time do not allow you to use datasets in different tables (e.g. Households and Vehicles) when calculations are performed by groups.
 #- Summarization functions are limited to:
 #  - sum: sum the values in the dataset,
 #  - count: count the number of values in the dataset,
@@ -45,7 +45,7 @@
 #- `Units_`: a named character vector identifying the units to be used for each operand in the expression. The values are allowable VE units values. The names are the names of the datasets specified in the calculation expression. The vector must have an element for each dataset name in the expression. Setting the value equal to "" for an operand will use the units stored in the datastore.
 #- `By_`: a vector identifying the names of the datasets that are used to identify datasets to be used to group the expression calculation. If NULL, then the entire datasets are used in the calculation. Note that all the datasets must be located in the table specified by the 'Table' argument.
 #- `Breaks_ls`: a named list of vectors identifying the values to use for splitting numeric datasets into categories. The names must be the same as names of the datasets identified in the By_ vector. Each named component of the list is a vector of values to be used to split the respective 'By' dataset into groups. Minimum and maximum values do not need to be specified as they are computed from the dataset.
-#- `Table`: a string identifying the table where the datasets are located.
+#- `Table_`: a character vector identifying the tables where the datasets are located. The names are the names of the datasets specified in the calculation expression. The vector must have an element for each dataset name in the expression. Empty values are not allowed.
 #- `Group`: a string identifying the group where the dataset is located.
 #- `QueryPrep_ls`: a list created by calling the prepareForDatastoreQuery function which identifies the datastore location(s), listing(s), and functions for listing and read the datastore(s).
 #
@@ -57,7 +57,9 @@
 #   Units_ = c(
 #     Dvmt = "MI/DAY"
 #   ),
-#   Table = "Household",
+#   Table = c(
+#     Dvmt = "Household",
+#   ),
 #   Group = "2010",
 #   QueryPrep_ls = QPrep_ls
 # )
@@ -69,7 +71,9 @@
 #   Units_ = c(
 #     Dvmt = "KM/DAY"
 #   ),
-#   Table = "Household",
+#   Table_ = c(
+#     Dvmt = "Household"
+#   ),
 #   Group = "2010",
 #   QueryPrep_ls = QPrep_ls
 # )
@@ -82,7 +86,9 @@
 #   Units_ = c(
 #     HhSize = ""
 #   ),
-#   Table = "Household",
+#   Table_ = c(
+#     HhSize = "Household"
+#   ),
 #   Group = "2010",
 #   QueryPrep_ls = QPrep_ls
 # )
@@ -94,7 +100,9 @@
 #   Units_ = c(
 #     AveGPM = "GGE/MI"
 #   ),
-#   Table = "Household",
+#   Table_ = c(
+#     AveGPM = "Household"
+#   ),
 #   Group = "2010",
 #   QueryPrep_ls = QPrep_ls
 # )
@@ -107,7 +115,10 @@
 #     AveGPM = "GGE/MI",
 #     Dvmt = "MI/DAY"
 #   ),
-#   Table = "Household",
+#   Table_ = c(
+#     AveGPM = "Household",
+#     Dvmt = "Household"
+#   ),
 #   Group = "2010",
 #   QueryPrep_ls = QPrep_ls
 # )
@@ -120,7 +131,10 @@
 #       NumAuto = "VEH",
 #       HhSize = "PRSN"
 #     ),
-#     Table = "Household",
+#   Table_ = c(
+#     HhSize = "Household",
+#     NumAuto = "Household"
+#   ),
 #     Group = "2010",
 #     QueryPrep_ls = QPrep_ls)
 #```
@@ -133,7 +147,11 @@
 #       HhSize = "PRSN",
 #       LocType = ""
 #     ),
-#     Table = "Household",
+#   Table_ = c(
+#     HhSize = "Household",
+#     NumAuto = "Household",
+#     LocType = "Household"
+#   ),
 #     Group = "2010",
 #     QueryPrep_ls = QPrep_ls)
 #```
@@ -146,7 +164,10 @@
 #     HhSize = "PRSN"
 #   ),
 #   By_ = "HhSize",
-#   Table = "Household",
+#   Table_ = c(
+#     HhSize = "Household",
+#     NumAuto = "Household"
+#   ),
 #   Group = "2010",
 #   QueryPrep_ls = QPrep_ls)
 #```
@@ -162,7 +183,10 @@
 #   Breaks_ls = list(
 #     HhSize = c(0,1,2,3,4)
 #   ),
-#   Table = "Household",
+#   Table_ = c(
+#     HhSize = "Household",
+#     NumAuto = "Household"
+#   ),
 #   Group = "2010",
 #   QueryPrep_ls = QPrep_ls)
 #```
@@ -181,7 +205,10 @@
 #     HhSize = c(0,1,2,3,4),
 #     Income = c(20000, 40000, 60000, 80000, 100000)
 #   ),
-#   Table = "Household",
+#   Table_ = c(
+#     HhSize = "Household",
+#     NumAuto = "Household"
+#   ),
 #   Group = "2010",
 #   QueryPrep_ls = QPrep_ls)
 #```
@@ -205,7 +232,9 @@
 #       "Units": {
 #         "Dvmt": "MI/DAY"
 #       },
-#       "Table": "Household",
+#       "Table": {
+#         "Dvmt": "Household"
+#       },
 #       "Description": "Total DVMT of households residing in the region."
 #     },
 #     "Average_Per_Capita_DVMT":{
@@ -214,7 +243,10 @@
 #       "HhSize": "PRSN",
 #       "Dvmt": "MI/DAY"
 #       },
-#       "Table": "Household",
+#       "Table": {
+#       "HhSize": "Household",
+#       "Dvmt": "Household"
+#       },
 #       "Description": "Total population residing in the region."
 #     }
 #   }
@@ -616,7 +648,7 @@ readDatastoreTables <- function(Tables_ls, Group, QueryPrep_ls) {
 #' the list is a vector of values to be used to split the respective By
 #' dataset into groups. Minimum and maximum values do not need to be specified
 #' as they are computed from the dataset.
-#' @param Table a string identifying the table where the datasets are located.
+#' @param Table_ a character vector identifying the tables where the datasets are located.
 #' @param Group a string identifying the group where the dataset is located.
 #' @param QueryPrep_ls a list created by calling the prepareForDatastoreQuery
 #' function which identifies the datastore location(s), listing(s), and
@@ -635,7 +667,7 @@ summarizeDatasets <-
     Units_,
     By_ = NULL,
     Breaks_ls = NULL,
-    Table,
+    Table_,
     Group,
     QueryPrep_ls)
   {
@@ -681,6 +713,10 @@ summarizeDatasets <-
     if (!all(Operands_ %in% names(Units_))) {
       stop("Some of the operands in the expression don't have specified units.")
     }
+    #Check that all operands have table (If By_ exists then Table_ should be a single table name)
+    if (!all(Operands_ %in% names(Table_)) & is.null(By_)) {
+      stop("Some of the operands in the expression don't have specified table.")
+    }
     #Add the By dataset names and units to Units_
     if (!is.null(By_)) {
       ByUnits_ <- rep("", length(By_))
@@ -691,18 +727,24 @@ summarizeDatasets <-
     }
     #Get the datasets from the datastore
     Tables_ls <- list()
-    Tables_ls[[Table]] <- Units_
+    for(Operand in Operands_){
+      Tables_ls[[Table_[Operand]]] <- c(Tables_ls[[Table_[Operand]]],
+                                        Units_[Operand])
+    }
+    # Tables_ls[[Table_]] <- Units_
     Data_ls <- readDatastoreTables(Tables_ls, Group, QueryPrep_ls)
     #Stop if any of the datasets are missing
-    if (length(Data_ls$Missing[[Table]]) != 0) {
-      MissingDsets_ <- paste(Data_ls$Missing[[Table]], collapse = ", ")
-      Msg <- paste("The following datasets are not present in the",
-                   Table, "table", "in the", Group, "group:", MissingDsets_)
-      stop(Msg)
+    for(Table in unique(Table_)){
+      if (length(Data_ls$Missing[[Table]]) != 0) {
+        MissingDsets_ <- paste(Data_ls$Missing[[Table]], collapse = ", ")
+        Msg <- paste("The following datasets are not present in the",
+                     Table, "table", "in the", Group, "group:", MissingDsets_)
+        stop(Msg)
+      }
     }
     #Simplify the data list
-    Data_ls <- list(data.frame(Data_ls$Data[[Table]]))
-    #If there is a By_ argument do calculations by group and return as array
+    Data_ls <- lapply(Data_ls$Data[unique(Table_)], data.frame)
+    #Process the data list using the By_ argument
     if (!is.null(By_)) {
       By_ls <- list()
       #Check and process the By data into categories
@@ -752,12 +794,19 @@ summarizeDatasets <-
       Results_ar[Idx_mx] <- unlist(Results_ls)
       return(Results_ar)
     }
-    #If there isn't a By_ argument, do calculations and return a vector
-    if (is.null(By_)) {
-      unlist(lapply(Data_ls, function(x) {
+    #Process the Data_ls using the Filter
+    #Evaluate the expression using each component of the Data_ls
+    #If By_ argument provided then process differently
+    if (!is.null(By_)){
+      lapply(Data_ls, function(x) {
         eval(parse(text = Expr), envir = x)
-      }))
+      })
+    } else {
+      Data_ls <- unlist(Data_ls, recursive = FALSE)
+      names(Data_ls) <- gsub("^.*\\.", "", names(Data_ls)) # Remove the table part of the name
+      eval(parse(text = Expr), envir = list2env(Data_ls))
     }
+
   }
 
 # #Examples of summarizing datasets
@@ -990,7 +1039,7 @@ calcRegionSummaryMeasures <- function(
       Value <- summarizeDatasets(
         Expr = MeasuresDef_ls$Measures[[Name]]$Calculation,
         Units_ = unlist(MeasuresDef_ls$Measures[[Name]]$Units),
-        Table = MeasuresDef_ls$Measures[[Name]]$Table,
+        Table_ = unlist(MeasuresDef_ls$Measures[[Name]]$Table),
         Group = Year,
         QueryPrep_ls = QueryPrep_ls
       )
