@@ -585,6 +585,7 @@ CalculateComEnergyAndEmissions <- function(L) {
     }
     #Calculate energy consumed by powertrain, vehicle type, and Marea
     Energy_PtVtMa <- Dvmt_PtVtMa / MpgMpkwh_PtVtMa
+    Energy_PtVtMa[Dvmt_PtVtMa == 0] <- 0  #So no NaN values
     #Aggregate by energy type (fuel vs. electricity)
     Et <- c("GGE", "KWH")
     Energy_EtVtMa <-
