@@ -311,6 +311,7 @@ CalculatePtranEnergyAndEmissions <- function(L) {
       )
     }
     Energy_MaPt <- sweep(Dvmt_MaPt, 2, MpgMpkwh_Pt, "/")
+    Energy_MaPt[Dvmt_MaPt == 0] <- 0
     Et <- c("GGE", "KWH")
     Energy_MaEt <- array(0, dim = c(length(Ma), 2), dimnames = list(Ma, Et))
     for (ma in Ma) {
@@ -384,8 +385,8 @@ documentModule("CalculatePtranEnergyAndEmissions")
 #module functions
 #-------------------------------------------------------------------------------
 # #Load libraries and test functions
-# library(visioneval)
-# library(filesstrings)
+library(visioneval)
+library(filesstrings)
 # source("tests/scripts/test_functions.R")
 # #Set up test environment
 # TestSetup_ls <- list(
@@ -398,15 +399,15 @@ documentModule("CalculatePtranEnergyAndEmissions")
 #   SaveDatastore = FALSE
 # )
 # setUpTests(TestSetup_ls)
-# #Run test module
-# TestDat_ <- testModule(
-#   ModuleName = "CalculatePtranEnergyAndEmissions",
-#   LoadDatastore = TRUE,
-#   SaveDatastore = FALSE,
-#   DoRun = FALSE,
-#   RequiredPackages = "VEPowertrainsAndFuels"
-# )
-# L <- TestDat_$L
+#Run test module
+TestDat_ <- testModule(
+  ModuleName = "CalculatePtranEnergyAndEmissions",
+  LoadDatastore = TRUE,
+  SaveDatastore = FALSE,
+  DoRun = FALSE,
+  RequiredPackages = "VEPowertrainsAndFuels"
+)
+L <- TestDat_$L
 # R <- CalculatePtranEnergyAndEmissions(L)
 #
 # TestDat_ <- testModule(
