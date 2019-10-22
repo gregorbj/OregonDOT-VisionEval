@@ -317,7 +317,7 @@ LogTranRevMiPerAc             1.2519     0.2556   4.898  4.5e-06 ***
 LogAveD1D                     2.4247     0.7267   3.337  0.00125 ** 
 LogTranRevMiPerAc:LogAveD1D  -0.6370     0.1881  -3.386  0.00107 ** 
 ---
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 Residual standard error: 0.84 on 86 degrees of freedom
 Multiple R-squared:  0.3827,	Adjusted R-squared:  0.3611 

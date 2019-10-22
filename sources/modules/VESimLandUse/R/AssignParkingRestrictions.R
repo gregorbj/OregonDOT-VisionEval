@@ -28,6 +28,8 @@
 #
 #- Proportion of worker paid parking in *cash-out_buy-back* program
 #
+#- Proportion of non-work trip (like shopping, exercise, etc.) to the Bzone who pay for parking
+#
 #- Average daily parking cost
 #
 #The user only provides information for the *center*, *inner*, and *outer* area types. For simplicity it is assumed that there are no parking restrictions or costs in fringe areas.
@@ -36,7 +38,7 @@
 #
 #A worker is assigned as paying or not paying for parking through a random draw with the probability of paying equal to the proportion of paying workers that is input for the area type of the worker's job location. A worker identified as paying for parking is identified as being in a *cash-out-buy-back* program through a random draw with the participation probability being the input value for the area type of the worker's job location. The daily parking cost assigned to the worker's job site area type is assigned to the work to use in vehicle use calculations.
 #
-#Average daily parking costs for other (non-work) household travel purposes (e.g. shopping) are assigned to households based on their location type and area type. Households in rural and town locations are assigned a value of 0. Households in urban locations are assigned a weighted average value of the parking costs assigned to the area types in the urban area where the proportion of urban retail and service employment in each area type is used as the weighting factor. This cost is adjusted to account for the number of household vehicle trips when the household's vehicle use costs are calculated.
+#Average daily parking costs for other (non-work) household travel purposes (e.g. shopping) are assigned to households based on their location type and area type. Households in rural and town locations are assigned a value of 0. Households in urban locations are assigned a weighted average value of the parking costs assigned to the area types in the urban area where the proportion of urban retail and service employment in each area type is used as the weighting factor. This cost is adjusted to account for the number of household vehicle trips when the household's vehicle use costs are calculated and the proportion of non-work trip to each area type that pays for parking.
 #
 #</doc>
 
@@ -105,7 +107,10 @@ AssignParkingRestrictionsSpecifications <- list(
           "OuterPropWkrPay",
           "CenterPropCashOut",
           "InnerPropCashOut",
-          "OuterPropCashOut"),
+          "OuterPropCashOut",
+          "CenterPropNonWrkTripPay",
+          "InnerPropNonWrkTripPay",
+          "OuterPropNonWrkTripPay"),
       FILE = "marea_parking-cost_by_area-type.csv",
       TABLE = "Marea",
       GROUP = "Year",
@@ -124,7 +129,10 @@ AssignParkingRestrictionsSpecifications <- list(
           "Proportion of workers who pay for parking in outer area type",
           "Proportions of workers paying for parking in a cash-out-buy-back program in center area type",
           "Proportions of workers paying for parking in a cash-out-buy-back program in inner area type",
-          "Proportions of workers paying for parking in a cash-out-buy-back program in outer area type"
+          "Proportions of workers paying for parking in a cash-out-buy-back program in outer area type",
+          "Proportions of shopping and other non-work trips to center area type that pay for parking",
+          "Proportions of shopping and other non-work trips to inner area type that pay for parking",
+          "Proportions of shopping and other non-work trips to outer area type that pay for parking"
         )
     ),
     item(
@@ -188,7 +196,10 @@ AssignParkingRestrictionsSpecifications <- list(
           "OuterPropWkrPay",
           "CenterPropCashOut",
           "InnerPropCashOut",
-          "OuterPropCashOut"),
+          "OuterPropCashOut",
+          "CenterPropNonWrkTripPay",
+          "InnerPropNonWrkTripPay",
+          "OuterPropNonWrkTripPay"),
       TABLE = "Marea",
       GROUP = "Year",
       TYPE = "double",
@@ -495,6 +506,11 @@ AssignParkingRestrictions <- function(L) {
   PkgCost_Bz <-
     setNames(mapply(getMaAtVal, L$Year$Bzone$Marea, L$Year$Bzone$AreaType), Bz)
   rm(Vals_MaAt)
+  #Bzone proportion of non-work trip that pays parking
+  Vals_MaAt <- makeValsMaAt("PropNonWrkTripPay", 0)
+  NonWorkPkgCostProp_Bz <-
+    setNames(mapply(getMaAtVal, L$Year$Bzone$Marea, L$Year$Bzone$AreaType), Bz)
+  rm(Vals_MaAt)
 
   #-------------------------------------------------------------------
   #Iterate by Marea to assign parking values to households and workers
@@ -559,7 +575,7 @@ AssignParkingRestrictions <- function(L) {
       #Calculate an other parking cost for urban dwellers
       IsUrban <- LocType_Bx == "Urban"
       RetSvcEmp_Bx <- with(L$Year$Bzone, RetEmp + SvcEmp)[BzInMa]
-      PkgCost_Bx <- PkgCost_Bz[BzInMa]
+      PkgCost_Bx <- PkgCost_Bz[BzInMa] * NonWorkPkgCostProp_Bz[BzInMa]
       OtherPkgCost_Bx[IsUrban] <-
         sum(RetSvcEmp_Bx[IsUrban] * PkgCost_Bx[IsUrban]) / sum(RetSvcEmp_Bx[IsUrban])
       setNames(OtherPkgCost_Bx, Bx)
