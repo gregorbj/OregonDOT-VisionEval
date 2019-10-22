@@ -180,6 +180,18 @@ AssignParkingRestrictionsSpecifications <- list(
       ISELEMENTOF = ""
     ),
     item(
+      NAME =
+        items(
+          "PropNonWrkTripPay"
+        ),
+      TABLE = "Bzone",
+      GROUP = "Year",
+      TYPE = "double",
+      UNITS = "proportion",
+      PROHIBIT = c("NA", "< 0", "> 1"),
+      ISELEMENTOF = ""
+    ),
+    item(
       NAME = "PkgCost",
       TABLE = "Bzone",
       GROUP = "Year",
@@ -461,7 +473,7 @@ AssignParkingRestrictions <- function(L) {
     #Calculate attraction probabilities
     AttrProb_BzBz <- sweep(Attr_BzBz, 1, rowSums(Attr_BzBz), "/")
     #Calculate the weighted parking cost
-    rowSums(sweep(AttrProb_BzBz, 2, L$Year$Bzone$PkgCost & L$Year$Bzone$PropNonWrkTripPay, "*"))
+    rowSums(sweep(AttrProb_BzBz, 2, L$Year$Bzone$PkgCost * L$Year$Bzone$PropNonWrkTripPay, "*"))
   })
   #Assign other parking cost to households
   OtherPkgCost_Hh <- OtherPkgCost_Bz[BzToHh_]

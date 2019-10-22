@@ -81,23 +81,24 @@ PROHIBIT - Values that are prohibited. Values in the datastore do not meet any o
 
 ISELEMENTOF - Categorical values that are permitted. Values in the datastore are one or more of the listed values.
 
-|NAME             |TABLE     |GROUP |TYPE       |UNITS          |PROHIBIT     |ISELEMENTOF |
-|:----------------|:---------|:-----|:----------|:--------------|:------------|:-----------|
-|Bzone            |Bzone     |Year  |character  |ID             |             |            |
-|PkgSpacesPerSFDU |Bzone     |Year  |double     |parking spaces |NA, < 0      |            |
-|PkgSpacesPerMFDU |Bzone     |Year  |double     |parking spaces |NA, < 0      |            |
-|PkgSpacesPerGQ   |Bzone     |Year  |double     |parking spaces |NA, < 0      |            |
-|PropWkrPay       |Bzone     |Year  |double     |proportion     |NA, < 0, > 1 |            |
-|PropCashOut      |Bzone     |Year  |double     |proportion     |NA, < 0, > 1 |            |
-|PkgCost          |Bzone     |Year  |currency   |USD            |NA, < 0      |            |
-|NumHh            |Bzone     |Year  |households |HH             |NA, < 0      |            |
-|RetEmp           |Bzone     |Year  |people     |PRSN           |NA, < 0      |            |
-|SvcEmp           |Bzone     |Year  |people     |PRSN           |NA, < 0      |            |
-|Latitude         |Bzone     |Year  |double     |NA             |NA           |            |
-|Longitude        |Bzone     |Year  |double     |NA             |NA           |            |
-|HouseType        |Household |Year  |character  |category       |             |SF, MF, GQ  |
-|Bzone            |Household |Year  |character  |ID             |             |            |
-|Bzone            |Worker    |Year  |character  |ID             |             |            |
+|NAME              |TABLE     |GROUP |TYPE       |UNITS          |PROHIBIT     |ISELEMENTOF |
+|:-----------------|:---------|:-----|:----------|:--------------|:------------|:-----------|
+|Bzone             |Bzone     |Year  |character  |ID             |             |            |
+|PkgSpacesPerSFDU  |Bzone     |Year  |double     |parking spaces |NA, < 0      |            |
+|PkgSpacesPerMFDU  |Bzone     |Year  |double     |parking spaces |NA, < 0      |            |
+|PkgSpacesPerGQ    |Bzone     |Year  |double     |parking spaces |NA, < 0      |            |
+|PropWkrPay        |Bzone     |Year  |double     |proportion     |NA, < 0, > 1 |            |
+|PropCashOut       |Bzone     |Year  |double     |proportion     |NA, < 0, > 1 |            |
+|PropNonWrkTripPay |Bzone     |Year  |double     |proportion     |NA, < 0, > 1 |            |
+|PkgCost           |Bzone     |Year  |currency   |USD            |NA, < 0      |            |
+|NumHh             |Bzone     |Year  |households |HH             |NA, < 0      |            |
+|RetEmp            |Bzone     |Year  |people     |PRSN           |NA, < 0      |            |
+|SvcEmp            |Bzone     |Year  |people     |PRSN           |NA, < 0      |            |
+|Latitude          |Bzone     |Year  |double     |NA             |NA           |            |
+|Longitude         |Bzone     |Year  |double     |NA             |NA           |            |
+|HouseType         |Household |Year  |character  |category       |             |SF, MF, GQ  |
+|Bzone             |Household |Year  |character  |ID             |             |            |
+|Bzone             |Worker    |Year  |character  |ID             |             |            |
 
 ## Datasets Produced by the Module
 The following table documents each dataset that is retrieved from the datastore and used by the module. Each row in the table describes a dataset. All the datasets must be present in the datastore. One or more of these datasets may be entered into the datastore from the user input files. The table names and their meanings are as follows:
