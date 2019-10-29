@@ -1,9 +1,3 @@
-Ma <- c("Albany", "Bend", "Corvallis", "EugeneSpringfield", "GrantsPass", 
-        "Metro", "RogueValley", "SalemKeizer", "None")
-Year <- "2005"
-DstoreLocs_ <- c("Datastore")
-DstoreType <- "RD"
-
 #==============================================================
 #Define function to calculate metropolitan performance measures
 #==============================================================
