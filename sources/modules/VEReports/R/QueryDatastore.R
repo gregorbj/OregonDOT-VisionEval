@@ -581,6 +581,41 @@ readDatastoreTables <- function(Tables_ls, Group, QueryPrep_ls) {
 #     QueryPrep_ls = QPrep_ls
 #   )
 
+#CHECK FOR DATASET PRESENCE
+#==========================
+#' Check whether a dataset is present in a table
+#'
+#' \code{isDatasetPresent} checks whether a dataset is present in a table
+#'
+#' This function checks for the presence of a dataset in a table. The role of
+#' this function is to enable the calculation of a measure to be switched
+#' based on the presence of one or more datasets. For example, some datasets
+#' present in a VE-State model are not present in a VE-RSPM model and vice
+#' verse. So in some instances, a measure needs to be calculated in a different
+#' way for VE-State and VE-RSPM models.
+#'
+#' @param Dataset a string identifying the name of the dataset to check the
+#' presence of.
+#' @param Table a string identifying the name of the table where the dataset may
+#' be located.
+#' @param Group a string identifying the name of the group where the dataset may
+#' be located.
+#' @param QueryPrep_ls a list created by calling the prepareForDatastoreQuery
+#' function which identifies the datastore location(s), listing(s), and
+#' functions for listing and read the datastore(s).
+#' @return TRUE if the dataset is present and FALSE if it is not present.
+#' @import visioneval
+#' @export
+isDatasetPresent <- function(Dataset, Table, Group, QueryPrep_ls) {
+  DstoreLocs_ <- QueryPrep_ls$Dir
+  DatasetPresent_ <- logical(length(DstoreLocs_))
+  for (i in 1:length(DstoreLocs_)) {
+    ModelState_ls <- QueryPrep_ls$Listing[[DstoreLocs_[i]]]
+    DatasetPresent_[i] <-
+      checkDataset(Dataset, Table, Group, ModelState_ls$Datastore)
+  }
+  any(DatasetPresent_)
+}
 
 #READ AND SUMMARIZE A DATASET
 #============================
@@ -653,7 +688,7 @@ summarizeDatasets <-
     # }
     #Identify whether symbol is an operand
     isOperand <- function(Symbol) {
-      Functions_ <- c("sum", "count", "mean", "wtmean")
+      Functions_ <- c("sum", "count", "mean", "wtmean", "max", "min", "median")
       Operators_ <- c("+", "-", "*", "/")
       Comparators_ <- c("==", ">=", "<=", "!=", ">", "<")
       Group_ <- c("(", ")", "[", "]")
