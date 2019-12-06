@@ -306,17 +306,22 @@ SimulateEmployment <- function(L) {
         if (NumWkr_AzLt[az,lt] > 0) {
           Bx <- with(Bzone_ls, Bzone[Azone == az & LocType == lt])
           Emp_Bx <- with(Bzone_ls, TotEmp[Azone == az & LocType == lt])
+          names(Emp_Bx) <- 1:length(Emp_Bx)
           #If is Town, adjust town employment to match town workers
           if (lt == "Town") {
             if (sum(Emp_Bx) != NumWkr_AzLt[az,lt]) {
-              Emp_Bx <-
+              RevEmp_Bx <- Emp_Bx * 0
+              AdjEmp_Bx <-
                 table(
-                  sample(1:length(Emp_Bx),
+                  sample(names(Emp_Bx),
                          NumWkr_AzLt[az,lt],
                          replace = TRUE,
                          prob = Emp_Bx / sum(Emp_Bx)
                   )
                 )
+              RevEmp_Bx[names(AdjEmp_Bx)] <- AdjEmp_Bx
+              Emp_Bx <- RevEmp_Bx
+              rm(RevEmp_Bx, AdjEmp_Bx)
             }
           }
           Worker_ls$Bzone[Worker_ls$ResAzone == az & Worker_ls$LocType == lt] <-
