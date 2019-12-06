@@ -390,7 +390,7 @@ calcMetropolitanMeasures <-
 
     #Average population density
     #--------------------------
-    AvePopDen_Ma <- summarizeDatasets(
+    UrbanAvePopDen_Ma <- summarizeDatasets(
       Expr = "sum(UrbanPop) / sum(UrbanArea)",
       Units_ = c(
         UrbanArea = "ACRE",
@@ -401,9 +401,27 @@ calcMetropolitanMeasures <-
       Group = Year,
       QueryPrep_ls = QPrep_ls
     )[Ma]	
-    attributes(AvePopDen_Ma) <- list(
+    attributes(UrbanAvePopDen_Ma) <- list(
       Units = "Persons per acre",
       Description = "Average number of persons per acre in the urbanized area"
+    )
+    
+    #Average population in towns
+    #---------------------------
+    TownAvePopDen_Ma <- summarizeDatasets(
+      Expr = "sum(TownPop) / sum(TownArea)",
+      Units_ = c(
+        TownArea = "ACRE",
+        TownPop = "PRSN"
+      ),
+      By_ = "Marea",
+      Table = "Bzone",
+      Group = Year,
+      QueryPrep_ls = QPrep_ls
+    )[Ma]	
+    attributes(TownAvePopDen_Ma) <- list(
+      Units = "Persons per acre",
+      Description = "Average number of persons per acre in towns"
     )
     
     #Mean Bzone population density
@@ -851,7 +869,8 @@ calcMetropolitanMeasures <-
     #--------------------------------------
     LuCharacteristics_df <- makeMeasureDataFrame(
       DataNames_ = c(
-        "AvePopDen_Ma",
+        "UrbanAvePopDen_Ma",
+        "TownAvePopDen_Ma",
         "MeanBzonePopDen_Ma",
         "MaxBzonePopDen_Ma",
         "MedianBzonePopDen_Ma",
@@ -1236,7 +1255,7 @@ calcMetropolitanMeasures <-
     
     #Van CO2e for Marea
     #------------------
-    MareaVanCO2e_Ma <- summarizeDatasets(
+    MareaVanCO2e_Ma <- 365 * summarizeDatasets(
       Expr = "sum(VanCO2e)",
       Units = c(
         VanCO2e = "MT"
@@ -1304,7 +1323,7 @@ calcMetropolitanMeasures <-
     
     #Van CO2e for urbanized area
     #---------------------------
-    VanCO2e_Ma <- summarizeDatasets(
+    VanCO2e_Ma <- 365 * summarizeDatasets(
       Expr = "sum(VanCO2e)",
       Units = c(
         VanCO2e = "MT"
