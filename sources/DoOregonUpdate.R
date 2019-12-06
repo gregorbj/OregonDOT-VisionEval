@@ -15,7 +15,7 @@ library(httr)
 updateVisionEvalInstall(
   From = list(
     Repository = "gregorbj/OregonDOT-VisionEval",
-    Branch = "development"
+    Branch = "master"
   ),
   Packages = c(
     "sources/framework/visioneval",
