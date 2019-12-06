@@ -18,6 +18,7 @@
 #     Branch = "master"
 #   ),
 #   Packages = c(
+#     "sources/framework/visioneval",
 #     "sources/modules/VEPowertrainsAndFuelsxAPx20180302x20181213",
 #     "sources/modules/VEPowertrainsAndFuelsxSTSRecx2017x20181213",
 #     "sources/modules/VESimLandUse",
@@ -107,4 +108,6 @@ updateVisionEvalInstall <-
         dependencies = TRUE,
         upgrade = FALSE)
     }
+    
+    on.exit(unlink(TempDir, recursive = TRUE))
 }
