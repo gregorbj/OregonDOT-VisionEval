@@ -936,7 +936,9 @@ Initialize <- function(L) {
         names(IsMetro_) <- L$Data$Year$Azone$Geo[IsYear]
         MetroActDen_Az <- Activity_AzLt[IsMetro_,"Urban"] / MetroLandArea_Az[IsMetro_]
         IsLowDen_Az <- MetroActDen_Az < UrbanActDenRng_[1]
+        IsLowDen_Az[is.nan(MetroActDen_Az)] <- FALSE
         IsHighDen_Az <- MetroActDen_Az > UrbanActDenRng_[2]
+        IsHighDen_Az[is.nan(MetroActDen_Az)] <- FALSE
         if (any(IsLowDen_Az)) {
           ErrAzones_ <- names(IsLowDen_Az)[IsLowDen_Az]
           Msg <- paste0(
