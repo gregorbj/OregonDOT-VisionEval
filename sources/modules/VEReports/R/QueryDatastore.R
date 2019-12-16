@@ -308,6 +308,11 @@ prepareForDatastoreQuery <- function(DstoreLocs_, DstoreType) {
   #Return the query preparation list
   Prep_ls
 }
+# #Example
+# QPrep_ls <- prepareForDatastoreQuery(
+#   DstoreLocs_ = c("Datastore"),
+#   DstoreType = "RD"
+# )
 
 
 #LIST GROUPS
@@ -335,6 +340,12 @@ listGroups <- function(QueryPrep_ls) {
     Groups_[!is.na(Groups_)]
   })
 }
+# #Example
+# QPrep_ls <- prepareForDatastoreQuery(
+#   DstoreLocs_ = c("Datastore"),
+#   DstoreType = "RD"
+# )
+# listGroups(QPrep_ls)
 
 
 #LIST TABLES IN GROUP
@@ -364,6 +375,15 @@ listTables <- function(Group, QueryPrep_ls) {
     Tables_[!is.na(Tables_)]
   })
 }
+# #Example
+# QPrep_ls <- prepareForDatastoreQuery(
+#   DstoreLocs_ = c("Datastore"),
+#   DstoreType = "RD"
+# )
+# Grp <- listGroups(QPrep_ls)$Datastore
+# for (grp in Grp) {
+#   print(listTables(grp, QPrep_ls))
+# }
 
 
 #LIST DATASETS IN GROUP
@@ -413,6 +433,12 @@ listDatasets <- function(Table, Group, QueryPrep_ls) {
     DstoreListing_df
   })
 }
+# #Example
+# QPrep_ls <- prepareForDatastoreQuery(
+#   DstoreLocs_ = c("Datastore"),
+#   DstoreType = "RD"
+# )
+# listDatasets("Household", "2010", QPrep_ls)
 
 
 #CREATE DOCUMENTATION OF DATASETS IN A DATASTORE
@@ -442,7 +468,9 @@ listDatasets <- function(Table, Group, QueryPrep_ls) {
 documentDatastoreTables <- function(SaveArchiveName, QueryPrep_ls) {
   GroupNames_ <- QueryPrep_ls$Listing$Datastore$Datastore$groupname
   Groups_ <- GroupNames_[-grep("/", GroupNames_)]
-  Groups_ <- Groups_[-(Groups_ == "")]
+  if (any(Groups_ == "")) {
+    Groups_ <- Groups_[-(Groups_ == "")]
+  }
   TempDir <- SaveArchiveName
   dir.create(TempDir)
   for (Group in Groups_) {
@@ -466,6 +494,7 @@ documentDatastoreTables <- function(SaveArchiveName, QueryPrep_ls) {
 # )
 # documentDatastoreTables("Datastore_Documentation", QPrep_ls)
 # rm(QPrep_ls)
+
 
 #READ MULTIPLE DATASETS FROM DATASTORES
 #======================================
@@ -551,7 +580,6 @@ readDatastoreTables <- function(Tables_ls, Group, QueryPrep_ls) {
   #Return the table data
   list(Data = Out_ls, Missing = Missing_ls)
 }
-
 # #Example
 # #-------
 # #Prepare for datastore query
@@ -580,6 +608,7 @@ readDatastoreTables <- function(Tables_ls, Group, QueryPrep_ls) {
 #     Group = "2010",
 #     QueryPrep_ls = QPrep_ls
 #   )
+
 
 #CHECK FOR DATASET PRESENCE
 #==========================
@@ -637,10 +666,11 @@ isDatasetPresent <- function(Dataset, Table, Group, QueryPrep_ls) {
 #' Note that all the datasets must be located in the table specified by the
 #' 'Table' argument.
 #' @param Units_ a named character vector identifying the units to be used for
-#' each operand in the expression. The values are allowable VE units values.
-#' The names are the names of the operands in the expression. The vector must
-#' have an element for each operand in the expression. Setting the value equal
-#' to "" for an operand will use the units stored in the datastore.
+#'   each operand in the expression and each 'By_' dataset. The values are
+#'   allowable VE units values. The names are the names of the operands in the
+#'   expression. The vector must have an element for each operand in the
+#'   expression. Setting the value equal to "" for an operand will use the units
+#'   stored in the datastore.
 #' @param By_ a vector identifying the names of the datasets that are used to
 #' identify datasets to be used to group the expression calculation. If NULL,
 #' then the entire datasets are used in the calculation. Note that all the
@@ -674,18 +704,13 @@ summarizeDatasets <-
     Group,
     QueryPrep_ls)
   {
+    #----------------
+    #Define functions
+    #----------------
     #Count function
     count <- function(x) length(x)
     #Weighted mean function
     wtmean <- function(x, w) sum(x * w) / sum(w)
-    #Function to determine if is summary function in the expression
-    # isFun <- function(Name) {
-    #   Name %in% c("sum", "count", "mean", "wtmean")
-    # }
-    #Function to determine if is operator in the expression
-    # isOp <- function(Name) {
-    #   Name %in% c("+", "-", "*", "/")
-    # }
     #Identify whether symbol is an operand
     isOperand <- function(Symbol) {
       Functions_ <- c("sum", "count", "mean", "wtmean", "max", "min", "median")
@@ -696,13 +721,6 @@ summarizeDatasets <-
       !(deparse(Symbol) %in% NonOperands_) & !is.character(Symbol)
     }
     #Function to get the operands in an expression
-    # getOperands <- function(AST, Result = "") {
-    #   if (length(AST) == 1) {
-    #     if (!isFun(deparse(AST)) & !isOp(deparse(AST))) deparse(AST)
-    #   } else {
-    #     unlist(lapply(AST, function(x) getOperands(x)))
-    #   }
-    # }
     getOperands <- function(AST) {
       if (length(AST) == 1) {
         if (isOperand(AST)) deparse(AST)
@@ -712,18 +730,27 @@ summarizeDatasets <-
     }
     #Identify the operands of the Expr
     Operands_ <- getOperands(str2lang(Expr))
+    #------------------------------
+    #Check Units_ and By_ arguments
+    #------------------------------
     #Check that all operands have units
     if (!all(Operands_ %in% names(Units_))) {
       stop("Some of the operands in the expression don't have specified units.")
     }
-    #Add the By dataset names and units to Units_
-    if (!is.null(By_)) {
-      ByUnits_ <- rep("", length(By_))
-      names(ByUnits_) <- By_
-      # Remove ByUnits_ names that are duplicates of Units_ names
-      ByUnits_ <- ByUnits_[!(names(ByUnits_) %in% names(Units_))]
-      Units_ <- c(Units_, ByUnits_)
+    #Check that all datasets named in the By_ argument have units
+    if (!all(By_ %in% names(Units_))) {
+      stop(paste(
+        "Some of the datasets listed in the 'By_' argument",
+        "don't have specified units."))
     }
+    #Check the not more than 2 By_ datasets
+    if (length(By_) > 2) {
+      stop(paste(
+        "Function currently does not support more than 2 'By_' arguments."))
+    }
+    #----------------------------------------------------------------------
+    #Retrieve datasets from datastore and format for calculation of summary
+    #----------------------------------------------------------------------
     #Get the datasets from the datastore
     Tables_ls <- list()
     Tables_ls[[Table]] <- Units_
@@ -737,6 +764,9 @@ summarizeDatasets <-
     }
     #Simplify the data list
     Data_ls <- list(data.frame(Data_ls$Data[[Table]]))
+    #-----------------------------
+    #Calculate the summary measure
+    #-----------------------------
     #If there is a By_ argument do calculations by group and return as array
     if (!is.null(By_)) {
       By_ls <- list()
@@ -770,21 +800,38 @@ summarizeDatasets <-
           }
         }
       }
-      #Split Data_ls by the By_ls
-      Data_ls <- split(Data_ls[[1]], By_ls)
-      #Evaluate the expression for each component of Data_ls
-      Results_ls <- lapply(Data_ls, function(x) {
-        eval(parse(text = Expr), envir = x)
-      })
       #Identify the dimension names for each By dimension
-      ByNames_ls <- lapply(By_ls, function(x) unique(as.character(x)))
+      ByNames_ls <- lapply(By_ls, function(x) as.character(levels(x)))
       #Set up array to store results
       Results_ar <- array(NA,
                           dim = unlist(lapply(ByNames_ls, length)),
                           dimnames = ByNames_ls)
-      #Put results into array
-      Idx_mx <- do.call(rbind, strsplit(names(Results_ls), "\\."))
-      Results_ar[Idx_mx] <- unlist(Results_ls)
+      #Calculate values if length of By_ is 1
+      if (length(By_) == 1) {
+        for (n1 in ByNames_ls[[1]]) {
+          Select_ <- By_ls[[1]] == n1
+          if (sum(Select_) != 0) {
+            Data_df <- Data_ls[[1]][Select_,]
+            Results_ar[n1] <- eval(parse(text = Expr), envir = Data_df)
+          } else {
+            Results_ar[n1] <- NA
+          }
+        }
+      }
+      #Calculate values if length of By_ is 2
+      if (length(By_) == 2) {
+        for (n1 in ByNames_ls[[1]]) {
+          for (n2 in ByNames_ls[[2]]) {
+            Select_ <- By_ls[[1]] == n1 & By_ls[[2]] == n2
+            if (sum(Select_) != 0) {
+              Data_df <- Data_ls[[1]][Select_,]
+              Results_ar[n1,n2] <- eval(parse(text = Expr), envir = Data_df)
+            } else {
+              Results_ar[n1,n2] <- NA
+            }
+          }
+        }
+      }
       return(Results_ar)
     }
     #If there isn't a By_ argument, do calculations and return a vector
@@ -895,7 +942,6 @@ summarizeDatasets <-
 #   Table = "Household",
 #   Group = "2010",
 #   QueryPrep_ls = QPrep_ls)
-#
 # #Specify breaks for establish household size groups
 # summarizeDatasets(
 #   Expr = "sum(NumAuto) / sum(HhSize)",
@@ -903,27 +949,28 @@ summarizeDatasets <-
 #     NumAuto = "VEH",
 #     HhSize = "PRSN"
 #   ),
-#   By_ = "HhSize",
+#   By_ = c("HhSize"),
 #   Breaks_ls = list(
 #     HhSize = c(0,1,2,3,4)
 #   ),
 #   Table = "Household",
 #   Group = "2010",
 #   QueryPrep_ls = QPrep_ls)
-#
 # #Split by household size and income groups
 # summarizeDatasets(
-#   Expr = "sum(NumAuto) / sum(HhSize)",
+#   Expr = "sum(NumAuto) / sum(Drivers)",
 #   Units_ = c(
 #     NumAuto = "VEH",
+#     Drivers = "PRSN",
+#     Income = "USD",
 #     HhSize = "PRSN"
 #   ),
 #   By_ = c(
 #     "HhSize",
 #     "Income"),
 #   Breaks_ls = list(
-#     HhSize = c(0,1,2,3,4),
-#     Income = c(20000, 40000, 60000, 80000, 100000)
+#     HhSize = c(1,2,3,4),
+#     Income = c(20000, 40000, 60000, 80000)
 #   ),
 #   Table = "Household",
 #   Group = "2010",
