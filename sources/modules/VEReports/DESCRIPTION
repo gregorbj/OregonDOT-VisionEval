@@ -1,8 +1,8 @@
 Package: VEReports
 Type: Package
 Title: Create reports for performance metrics using VE framework
-Version: 0.6
-Date: 10/29/2019
+Version: 0.7
+Date: 12/14/2019
 Author: Aditya Gore <aditya.gore@rsginc.com> [cre], Ben Stabler <ben.stabler@rsginc.com> [cre],  Brian Gregor <gregor@or-analytics.com> [auth]
 Maintainer: Aditya Gore <aditya.gore@rsginc.com>, Ben Stabler <ben.stabler@rsginc.com>
 Copyright: AASHTO
