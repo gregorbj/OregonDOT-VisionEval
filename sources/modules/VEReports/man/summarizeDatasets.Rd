@@ -18,10 +18,11 @@ Note that all the datasets must be located in the table specified by the
 'Table' argument.}
 
 \item{Units_}{a named character vector identifying the units to be used for
-each operand in the expression. The values are allowable VE units values.
-The names are the names of the operands in the expression. The vector must
-have an element for each operand in the expression. Setting the value equal
-to "" for an operand will use the units stored in the datastore.}
+each operand in the expression and each 'By_' dataset. The values are
+allowable VE units values. The names are the names of the operands in the
+expression. The vector must have an element for each operand in the
+expression. Setting the value equal to "" for an operand will use the units
+stored in the datastore.}
 
 \item{By_}{a vector identifying the names of the datasets that are used to
 identify datasets to be used to group the expression calculation. If NULL,
