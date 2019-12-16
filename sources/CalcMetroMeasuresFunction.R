@@ -45,8 +45,8 @@ calcMetropolitanMeasures <-
     MareaHhNum_Ma <- summarizeDatasets(
       Expr = "count(HhSize)",
       Units_ = c(
-        HhSize = ""
-        ),
+        HhSize = "",
+        Marea = ""),
       By_ = "Marea",
       Table = "Household",
       Group = Year,
@@ -61,7 +61,8 @@ calcMetropolitanMeasures <-
     MareaHhPop_Ma <- summarizeDatasets(
       Expr = "sum(HhSize)",
       Units_ = c(
-        HhSize = ""
+        HhSize = "",
+        Marea = ""
       ),
       By_ = "Marea",
       Table = "Household",
@@ -77,7 +78,8 @@ calcMetropolitanMeasures <-
     MareaHhWorkers_Ma <- summarizeDatasets(
       Expr = "sum(Workers)",
       Units_ = c(
-        Workers = "PRSN"
+        Workers = "PRSN",
+        Marea = ""
       ),
       By_ = "Marea",
       Table = "Household",
@@ -93,7 +95,8 @@ calcMetropolitanMeasures <-
     MareaHhIncome_Ma <- summarizeDatasets(
       Expr = "sum(Income)",
       Units_ = c(
-        Income = "USD"
+        Income = "USD",
+        Marea = ""
       ),
       By_ = "Marea",
       Table = "Household",
@@ -109,7 +112,8 @@ calcMetropolitanMeasures <-
     MareaHhDrivers_Ma <- summarizeDatasets(
       Expr = "sum(Drivers)",
       Units_ = c(
-        Drivers = "PRSN"
+        Drivers = "PRSN",
+        Marea = ""
       ),
       By_ = "Marea",
       Table = "Household",
@@ -125,7 +129,8 @@ calcMetropolitanMeasures <-
     MareaHhVehicles_Ma <- summarizeDatasets(
       Expr = "sum(Vehicles)",
       Units_ = c(
-        Vehicles = "VEH"
+        Vehicles = "VEH",
+        Marea = ""
       ),
       By_ = "Marea",
       Table = "Household",
@@ -142,7 +147,8 @@ calcMetropolitanMeasures <-
       Expr = "count(HhSize[LocType == 'Urban'])",
       Units_ = c(
         HhSize = "",
-        LocType = ""
+        LocType = "",
+        Marea = ""
       ),
       By_ = "Marea",
       Table = "Household",
@@ -159,7 +165,8 @@ calcMetropolitanMeasures <-
       Expr = "sum(HhSize[LocType == 'Urban'])",
       Units_ = c(
         HhSize = "",
-        LocType = ""
+        LocType = "",
+        Marea = ""
       ),
       By_ = "Marea",
       Table = "Household",
@@ -180,7 +187,8 @@ calcMetropolitanMeasures <-
       Expr = "sum(Workers[LocType == 'Urban'])",
       Units_ = c(
         Workers = "PRSN",
-        LocType = ""
+        LocType = "",
+        Marea = ""
       ),
       By_ = "Marea",
       Table = "Household",
@@ -201,7 +209,8 @@ calcMetropolitanMeasures <-
       Expr = "sum(Income[LocType == 'Urban'])",
       Units_ = c(
         Income = "USD",
-        LocType = ""
+        LocType = "",
+        Marea = ""
       ),
       By_ = "Marea",
       Table = "Household",
@@ -239,7 +248,8 @@ calcMetropolitanMeasures <-
       Expr = "sum(Drivers[LocType == 'Urban'])",
       Units_ = c(
         Drivers = "PRSN",
-        LocType = ""
+        LocType = "",
+        Marea = ""
       ),
       By_ = "Marea",
       Table = "Household",
@@ -277,7 +287,8 @@ calcMetropolitanMeasures <-
       Expr = "sum(Vehicles[LocType == 'Urban'])",
       Units_ = c(
         Vehicles = "VEH",
-        LocType = ""
+        LocType = "",
+        Marea = ""
       ),
       By_ = "Marea",
       Table = "Household",
@@ -322,7 +333,8 @@ calcMetropolitanMeasures <-
       Expr = "sum(NumLtTrk[LocType == 'Urban'])",
       Units_ = c(
         NumLtTrk = "VEH",
-        LocType = ""
+        LocType = "",
+        Marea = ""
       ),
       By_ = "Marea",
       Table = "Household",
@@ -342,7 +354,8 @@ calcMetropolitanMeasures <-
     MareaHhAveVehAge_Ma <- summarizeDatasets(
       Expr = "mean(Age)",
       Units_ = c(
-        Age = "YR"
+        Age = "YR",
+        Marea = ""
       ),
       By_ = "Marea",
       Table = "Vehicle",
@@ -394,7 +407,8 @@ calcMetropolitanMeasures <-
       Expr = "sum(UrbanPop) / sum(UrbanArea)",
       Units_ = c(
         UrbanArea = "ACRE",
-        UrbanPop = "PRSN"
+        UrbanPop = "PRSN",
+        Marea = ""
       ),
       By_ = "Marea",
       Table = "Bzone",
@@ -412,7 +426,8 @@ calcMetropolitanMeasures <-
       Expr = "sum(TownPop) / sum(TownArea)",
       Units_ = c(
         TownArea = "ACRE",
-        TownPop = "PRSN"
+        TownPop = "PRSN",
+        Marea = ""
       ),
       By_ = "Marea",
       Table = "Bzone",
@@ -431,7 +446,8 @@ calcMetropolitanMeasures <-
         Expr = "mean(D1B[LocType == 'Urban'])",
         Units_ = c(
           D1B = "PRSN/ACRE",
-          LocType = "category"
+          LocType = "category",
+          Marea = ""
         ),
         By_ = "Marea",
         Table = "Bzone",
@@ -443,7 +459,8 @@ calcMetropolitanMeasures <-
         Expr = "mean(UrbanPop / UrbanArea)",
         Units_ = c(
           UrbanPop = "PRSN",
-          UrbanArea = "ACRE"
+          UrbanArea = "ACRE",
+          Marea = ""
         ),
         By_ = "Marea",
         Table = "Bzone",
@@ -463,7 +480,8 @@ calcMetropolitanMeasures <-
         Expr = "max(D1B[LocType == 'Urban'])",
         Units_ = c(
           D1B = "PRSN/ACRE",
-          LocType = "category"
+          LocType = "category",
+          Marea = ""
         ),
         By_ = "Marea",
         Table = "Bzone",
@@ -475,7 +493,8 @@ calcMetropolitanMeasures <-
         Expr = "max(UrbanPop / UrbanArea)",
         Units_ = c(
           UrbanPop = "PRSN",
-          UrbanArea = "ACRE"
+          UrbanArea = "ACRE",
+          Marea = ""
         ),
         By_ = "Marea",
         Table = "Bzone",
@@ -495,7 +514,8 @@ calcMetropolitanMeasures <-
         Expr = "median(D1B[LocType == 'Urban'])",
         Units_ = c(
           D1B = "PRSN/ACRE",
-          LocType = "Category"
+          LocType = "Category",
+          Marea = ""
         ),
         By_ = "Marea",
         Table = "Bzone",
@@ -507,7 +527,8 @@ calcMetropolitanMeasures <-
         Expr = "median(UrbanPop / UrbanArea)",
         Units_ = c(
           UrbanPop = "PRSN",
-          UrbanArea = "ACRE"
+          UrbanArea = "ACRE",
+          Marea = ""
         ),
         By_ = "Marea",
         Table = "Bzone",
@@ -529,7 +550,8 @@ calcMetropolitanMeasures <-
           NumHh = "HH",
           TotEmp = "PRSN",
           UrbanArea = "ACRE",
-          LocType = "category"
+          LocType = "category",
+          Marea = ""
         ),
         By_ = "Marea",
         Table = "Bzone",
@@ -542,7 +564,8 @@ calcMetropolitanMeasures <-
         Units_ = c(
           NumHh = "HH",
           TotEmp = "PRSN",
-          UrbanArea = "ACRE"
+          UrbanArea = "ACRE",
+          Marea = ""
         ),
         By_ = "Marea",
         Table = "Bzone",
@@ -562,7 +585,8 @@ calcMetropolitanMeasures <-
         Expr = "mean(D1D[LocType == 'Urban'])",
         Units_ = c(
           D1D = "HHJOB/ACRE",
-          LocType = "category"
+          LocType = "category",
+          Marea = ""
         ),
         By_ = "Marea",
         Table = "Bzone",
@@ -573,7 +597,8 @@ calcMetropolitanMeasures <-
       MeanBzoneActivityDen_Ma <- summarizeDatasets(
         Expr = "mean(D1D)",
         Units_ = c(
-          D1D = "HHJOB/ACRE"
+          D1D = "HHJOB/ACRE",
+          Marea = ""
         ),
         By_ = "Marea",
         Table = "Bzone",
@@ -593,7 +618,8 @@ calcMetropolitanMeasures <-
         Expr = "max(D1D[LocType == 'Urban'])",
         Units_ = c(
           D1D = "HHJOB/ACRE",
-          LocType = "category"
+          LocType = "category",
+          Marea = ""
         ),
         By_ = "Marea",
         Table = "Bzone",
@@ -604,7 +630,8 @@ calcMetropolitanMeasures <-
       MaxBzoneActivityDen_Ma <- summarizeDatasets(
         Expr = "max(D1D)",
         Units_ = c(
-          D1D = "HHJOB/ACRE"
+          D1D = "HHJOB/ACRE",
+          Marea = ""
         ),
         By_ = "Marea",
         Table = "Bzone",
@@ -624,7 +651,8 @@ calcMetropolitanMeasures <-
         Expr = "median(D1D[LocType == 'Urban'])",
         Units_ = c(
           D1D = "HHJOB/ACRE",
-          LocType = "category"
+          LocType = "category",
+          Marea = ""
         ),
         By_ = "Marea",
         Table = "Bzone",
@@ -635,7 +663,8 @@ calcMetropolitanMeasures <-
       MedianBzoneActivityDen_Ma <- summarizeDatasets(
         Expr = "median(D1D)",
         Units_ = c(
-          D1D = "HHJOB/ACRE"
+          D1D = "HHJOB/ACRE",
+          Marea = ""
         ),
         By_ = "Marea",
         Table = "Bzone",
@@ -655,7 +684,8 @@ calcMetropolitanMeasures <-
         Expr = "sum(IsUrbanMixNbrhd[LocType == 'Urban'])",
         Units_ = c(
           IsUrbanMixNbrhd = "",
-          LocType = "category"
+          LocType = "category",
+          Marea = ""
         ),
         By_ = "Marea",
         Table = "Household",
@@ -666,7 +696,8 @@ calcMetropolitanMeasures <-
       NumUrbanMixHh_Ma <- summarizeDatasets(
         Expr = "sum(IsUrbanMixNbrhd)",
         Units_ = c(
-          IsUrbanMixNbrhd = ""
+          IsUrbanMixNbrhd = "",
+          Marea = ""
         ),
         By_ = "Marea",
         Table = "Household",
@@ -695,7 +726,8 @@ calcMetropolitanMeasures <-
         Units = c(
           SFDU = "DU",
           NumHh = "HH",
-          LocType = "category"
+          LocType = "category",
+          Marea = ""
         ),
         By_ = "Marea",
         Table = "Bzone",
@@ -707,7 +739,8 @@ calcMetropolitanMeasures <-
         Expr = "sum(SFDU) / (sum(NumHh))",
         Units = c(
           SFDU = "DU",
-          NumHh = "HH"
+          NumHh = "HH",
+          Marea = ""
         ),
         By_ = "Marea",
         Table = "Bzone",
@@ -727,7 +760,8 @@ calcMetropolitanMeasures <-
         Expr = "mean(PropTdmDvmtReduction[LocType == 'Urban'])",
         Units = c(
           PropTdmDvmtReduction = "proportion",
-          LocType = "category"
+          LocType = "category",
+          Marea = ""
         ),
         By_ = "Marea",
         Table = "Household",
@@ -738,7 +772,8 @@ calcMetropolitanMeasures <-
       MeanTdmPropDvmtReduction_Ma <- summarizeDatasets(
         Expr = "mean(PropTdmDvmtReduction)",
         Units = c(
-          PropTdmDvmtReduction = "proportion"
+          PropTdmDvmtReduction = "proportion",
+          Marea = ""
         ),
         By_ = "Marea",
         Table = "Household",
@@ -758,7 +793,8 @@ calcMetropolitanMeasures <-
         Expr = "max(PropTdmDvmtReduction[LocType == 'Urban'])",
         Units = c(
           PropTdmDvmtReduction = "proportion",
-          LocType = "category"
+          LocType = "category",
+          Marea = ""
         ),
         By_ = "Marea",
         Table = "Household",
@@ -769,7 +805,8 @@ calcMetropolitanMeasures <-
       MaxTdmPropDvmtReduction_Ma <- summarizeDatasets(
         Expr = "max(PropTdmDvmtReduction)",
         Units = c(
-          PropTdmDvmtReduction = "proportion"
+          PropTdmDvmtReduction = "proportion",
+          Marea = ""
         ),
         By_ = "Marea",
         Table = "Household",
@@ -789,7 +826,8 @@ calcMetropolitanMeasures <-
         Expr = "sum(IsIMP[LocType == 'Urban']) / count(IsIMP[LocType == 'Urban'])",
         Units = c(
           IsIMP = "binary",
-          LocType = "category"
+          LocType = "category",
+          Marea = ""
         ),
         By_ = "Marea",
         Table = "Household",
@@ -801,7 +839,8 @@ calcMetropolitanMeasures <-
         Expr = "sum(IsIMP) / count(IsIMP)",
         Units = c(
           IsIMP = "binary",
-          LocType = "category"
+          LocType = "category",
+          Marea = ""
         ),
         By_ = "Marea",
         Table = "Household",
@@ -819,7 +858,8 @@ calcMetropolitanMeasures <-
     MareaPropEcoWorkers_Ma <- summarizeDatasets(
       Expr = "sum(IsECO) / count(IsECO)",
       Units = c(
-        IsECO = "binary"
+        IsECO = "binary",
+        Marea = ""
       ),
       By_ = "Marea",
       Table = "Worker",
@@ -836,7 +876,8 @@ calcMetropolitanMeasures <-
     MareaPropWkrPayForPkg_Ma <- summarizeDatasets(
       Expr = "sum(PaysForParking) / count(PaysForParking)",
       Units = c(
-        PaysForParking = "binary"
+        PaysForParking = "binary",
+        Marea = ""
       ),
       By_ = "Marea",
       Table = "Worker",
@@ -853,7 +894,8 @@ calcMetropolitanMeasures <-
     MareaPropWkrCashoutPkg_Ma <- summarizeDatasets(
       Expr = "sum(IsCashOut) / count(IsCashOut)",
       Units = c(
-        IsCashOut = "binary"
+        IsCashOut = "binary",
+        Marea = ""
       ),
       By_ = "Marea",
       Table = "Worker",
@@ -902,7 +944,8 @@ calcMetropolitanMeasures <-
       Units = c(
         ComSvcUrbanDvmt = "MI/DAY",
         ComSvcTownDvmt = "MI/DAY",
-        ComSvcRuralDvmt = "MI/DAY"
+        ComSvcRuralDvmt = "MI/DAY",
+        Marea = ""
       ),
       By_ = "Marea",
       Table = "Marea",
@@ -919,7 +962,8 @@ calcMetropolitanMeasures <-
     MareaVanDvmt_Ma <- summarizeDatasets(
       Expr = "sum(VanDvmt)",
       Units = c(
-        VanDvmt = "MI/DAY"
+        VanDvmt = "MI/DAY",
+        Marea = ""
       ),
       By_ = "Marea",
       Table = "Marea",
@@ -938,7 +982,8 @@ calcMetropolitanMeasures <-
       Units_ = c(
         UrbanHhDvmt = "MI/DAY",
         TownHhDvmt = "MI/DAY",
-        RuralHhDvmt = "MI/DAY"
+        RuralHhDvmt = "MI/DAY",
+        Marea = ""
       ),
       By_ = "Marea",
       Table = "Marea",
@@ -963,7 +1008,8 @@ calcMetropolitanMeasures <-
     ComSvcDvmt_Ma <- summarizeDatasets(
       Expr = "sum(ComSvcUrbanDvmt)",
       Units = c(
-        ComSvcUrbanDvmt = "MI/DAY"
+        ComSvcUrbanDvmt = "MI/DAY",
+        Marea = ""
       ),
       By_ = "Marea",
       Table = "Marea",
@@ -980,7 +1026,8 @@ calcMetropolitanMeasures <-
     VanDvmt_Ma <- summarizeDatasets(
       Expr = "sum(VanDvmt)",
       Units = c(
-        VanDvmt = "MI/DAY"
+        VanDvmt = "MI/DAY",
+        Marea = ""
       ),
       By_ = "Marea",
       Table = "Marea",
@@ -997,7 +1044,8 @@ calcMetropolitanMeasures <-
     HhDvmt_Ma <- summarizeDatasets(
       Expr = "sum(UrbanHhDvmt)",
       Units_ = c(
-        UrbanHhDvmt = "MI/DAY"
+        UrbanHhDvmt = "MI/DAY",
+        Marea = ""
       ),
       By_ = "Marea",
       Table = "Marea",
@@ -1024,7 +1072,8 @@ calcMetropolitanMeasures <-
       Units = c(
         LdvFwyDvmt = "MI/DAY",
         LdvArtDvmt = "MI/DAY",
-        LdvOthDvmt = "MI/DAY"
+        LdvOthDvmt = "MI/DAY",
+        Marea = ""
       ),
       By_ = "Marea",
       Table = "Marea",
@@ -1163,7 +1212,8 @@ calcMetropolitanMeasures <-
     MareaHhGGE_Ma <- summarizeDatasets(
       Expr = "sum(DailyGGE)",
       Units = c(
-        DailyGGE = "GGE/DAY"
+        DailyGGE = "GGE/DAY",
+        Marea = ""
       ),
       By_ = "Marea",
       Table = "Household",
@@ -1181,7 +1231,8 @@ calcMetropolitanMeasures <-
       Expr = "sum(ComSvcUrbanGGE + ComSvcNonUrbanGGE)",
       Units = c(
         ComSvcUrbanGGE = "GGE",
-        ComSvcNonUrbanGGE = "GGE"
+        ComSvcNonUrbanGGE = "GGE",
+        Marea = ""
       ),
       By_ = "Marea",
       Table = "Marea",
@@ -1198,7 +1249,8 @@ calcMetropolitanMeasures <-
     MareaVanGGE_Ma <- summarizeDatasets(
       Expr = "sum(VanGGE)",
       Units = c(
-        VanGGE = "GGE"
+        VanGGE = "GGE",
+        Marea = ""
       ),
       By_ = "Marea",
       Table = "Marea",
@@ -1223,7 +1275,8 @@ calcMetropolitanMeasures <-
     MareaHhCO2e_Ma <- summarizeDatasets(
       Expr = "sum(DailyCO2e)",
       Units = c(
-        DailyCO2e = "MT/YR"
+        DailyCO2e = "MT/YR",
+        Marea = ""
       ),
       By_ = "Marea",
       Table = "Household",
@@ -1241,7 +1294,8 @@ calcMetropolitanMeasures <-
       Expr = "sum(ComSvcUrbanCO2e + ComSvcNonUrbanCO2e)",
       Units = c(
         ComSvcUrbanCO2e = "MT",
-        ComSvcNonUrbanCO2e = "MT"
+        ComSvcNonUrbanCO2e = "MT",
+        Marea = ""
       ),
       By_ = "Marea",
       Table = "Marea",
@@ -1258,7 +1312,8 @@ calcMetropolitanMeasures <-
     MareaVanCO2e_Ma <- 365 * summarizeDatasets(
       Expr = "sum(VanCO2e)",
       Units = c(
-        VanCO2e = "MT"
+        VanCO2e = "MT",
+        Marea = ""
       ),
       By_ = "Marea",
       Table = "Marea",
@@ -1292,7 +1347,8 @@ calcMetropolitanMeasures <-
       Expr = "sum(DailyCO2e[LocType == 'Urban'])",
       Units = c(
         DailyCO2e = "MT/YR",
-        LocType = ""
+        LocType = "",
+        Marea = ""
       ),
       By_ = "Marea",
       Table = "Household",
@@ -1309,7 +1365,8 @@ calcMetropolitanMeasures <-
     ComSvcCO2e_Ma <- 365 * summarizeDatasets(
       Expr = "sum(ComSvcUrbanCO2e)",
       Units = c(
-        ComSvcUrbanCO2e = "MT"
+        ComSvcUrbanCO2e = "MT",
+        Marea = ""
       ),
       By_ = "Marea",
       Table = "Marea",
@@ -1326,7 +1383,8 @@ calcMetropolitanMeasures <-
     VanCO2e_Ma <- 365 * summarizeDatasets(
       Expr = "sum(VanCO2e)",
       Units = c(
-        VanCO2e = "MT"
+        VanCO2e = "MT",
+        Marea = ""
       ),
       By_ = "Marea",
       Table = "Marea",
@@ -1413,243 +1471,6 @@ calcMetropolitanMeasures <-
       )
     
 
-    # #Household population by age group
-    # #---------------------------------
-    # #Age0to14
-    # HhPop0to14_Ma <- summarizeDatasets(
-    #   Expr = "sum(Age0to14[LocType == 'Urban'])",
-    #   Units_ = c(
-    #     Age0to14 = "PRSN",
-    #     LocType = ""
-    #   ),
-    #   By_ = "Marea",
-    #   Table = "Household",
-    #   Group = Year,
-    #   QueryPrep_ls = QPrep_ls
-    # )[Ma]
-    # #Age15to19
-    # HhPop15to19_Ma <- summarizeDatasets(
-    #   Expr = "sum(Age15to19[LocType == 'Urban'])",
-    #   Units_ = c(
-    #     Age15to19 = "PRSN",
-    #     LocType = ""
-    #   ),
-    #   By_ = "Marea",
-    #   Table = "Household",
-    #   Group = Year,
-    #   QueryPrep_ls = QPrep_ls
-    # )[Ma]
-    # #Age20to29
-    # HhPop20to29_Ma <- summarizeDatasets(
-    #   Expr = "sum(Age20to29[LocType == 'Urban'])",
-    #   Units_ = c(
-    #     Age20to29 = "PRSN",
-    #     LocType = ""
-    #   ),
-    #   By_ = "Marea",
-    #   Table = "Household",
-    #   Group = Year,
-    #   QueryPrep_ls = QPrep_ls
-    # )[Ma]
-    # #Age30to54
-    # HhPop30to54_Ma <- summarizeDatasets(
-    #   Expr = "sum(Age30to54[LocType == 'Urban'])",
-    #   Units_ = c(
-    #     Age30to54 = "PRSN",
-    #     LocType = ""
-    #   ),
-    #   By_ = "Marea",
-    #   Table = "Household",
-    #   Group = Year,
-    #   QueryPrep_ls = QPrep_ls
-    # )[Ma]
-    # #Age55to64
-    # HhPop55to64_Ma <- summarizeDatasets(
-    #   Expr = "sum(Age55to64[LocType == 'Urban'])",
-    #   Units_ = c(
-    #     Age55to64 = "PRSN",
-    #     LocType = ""
-    #   ),
-    #   By_ = "Marea",
-    #   Table = "Household",
-    #   Group = Year,
-    #   QueryPrep_ls = QPrep_ls
-    # )[Ma]
-    # #Age65Plus
-    # HhPop65Plus_Ma <- summarizeDatasets(
-    #   Expr = "sum(Age65Plus[LocType == 'Urban'])",
-    #   Units_ = c(
-    #     Age65Plus = "PRSN",
-    #     LocType = ""
-    #   ),
-    #   By_ = "Marea",
-    #   Table = "Household",
-    #   Group = Year,
-    #   QueryPrep_ls = QPrep_ls
-    # )[Ma]
-    # #Matrix of population by age and Marea
-    # HhPop_AgMa <- rbind(
-    #   Pop0to14 = HhPop0to14_Ma,
-    #   Pop15to19 = HhPop15to19_Ma,
-    #   Pop20to29 = HhPop20to29_Ma,
-    #   Pop30to54 = HhPop30to54_Ma,
-    #   Pop55to64 = HhPop55to64_Ma,
-    #   Pop65Plus = HhPop65Plus_Ma
-    # )
-    # 
-    # #Household workers by age group
-    # #------------------------------
-    # #Age15to19
-    # HhWkr15to19_Ma <- summarizeDatasets(
-    #   Expr = "sum(Wkr15to19[LocType == 'Urban'])",
-    #   Units_ = c(
-    #     Wkr15to19 = "PRSN",
-    #     LocType = ""
-    #   ),
-    #   By_ = "Marea",
-    #   Table = "Household",
-    #   Group = Year,
-    #   QueryPrep_ls = QPrep_ls
-    # )[Ma]
-    # #Age20to29
-    # HhWkr20to29_Ma <- summarizeDatasets(
-    #   Expr = "sum(Wkr20to29[LocType == 'Urban'])",
-    #   Units_ = c(
-    #     Wkr20to29 = "PRSN",
-    #     LocType = ""
-    #   ),
-    #   By_ = "Marea",
-    #   Table = "Household",
-    #   Group = Year,
-    #   QueryPrep_ls = QPrep_ls
-    # )[Ma]
-    # #Age30to54
-    # HhWkr30to54_Ma <- summarizeDatasets(
-    #   Expr = "sum(Wkr30to54[LocType == 'Urban'])",
-    #   Units_ = c(
-    #     Wkr30to54 = "PRSN",
-    #     LocType = ""
-    #   ),
-    #   By_ = "Marea",
-    #   Table = "Household",
-    #   Group = Year,
-    #   QueryPrep_ls = QPrep_ls
-    # )[Ma]
-    # #Age55to64
-    # HhWkr55to64_Ma <- summarizeDatasets(
-    #   Expr = "sum(Wkr55to64[LocType == 'Urban'])",
-    #   Units_ = c(
-    #     Wkr55to64 = "PRSN",
-    #     LocType = ""
-    #   ),
-    #   By_ = "Marea",
-    #   Table = "Household",
-    #   Group = Year,
-    #   QueryPrep_ls = QPrep_ls
-    # )[Ma]
-    # #Age65Plus
-    # HhWkr65Plus_Ma <- summarizeDatasets(
-    #   Expr = "sum(Wkr65Plus[LocType == 'Urban'])",
-    #   Units_ = c(
-    #     Wkr65Plus = "PRSN",
-    #     LocType = ""
-    #   ),
-    #   By_ = "Marea",
-    #   Table = "Household",
-    #   Group = Year,
-    #   QueryPrep_ls = QPrep_ls
-    # )[Ma]
-    # #Matrix of drivers by age and Marea
-    # HhWkr_AgMa <- rbind(
-    #   Wkr15to19 = HhWkr15to19_Ma,
-    #   Wkr20to29 = HhWkr20to29_Ma,
-    #   Wkr30to54 = HhWkr30to54_Ma,
-    #   Wkr55to64 = HhWkr55to64_Ma,
-    #   Wkr65Plus = HhWkr65Plus_Ma,
-    #   WkrPerPop15to19 = HhWkr15to19_Ma / HhPop15to19_Ma,
-    #   WkrPerPop20to29 = HhWkr20to29_Ma / HhPop20to29_Ma,
-    #   WkrPerPop30to54 = HhWkr30to54_Ma / HhPop30to54_Ma,
-    #   WkrPerPop55to64 = HhWkr55to64_Ma / HhPop55to64_Ma,
-    #   WkrPerPop65Plus = HhWkr65Plus_Ma / HhPop65Plus_Ma
-    # )
-    # 
-    # #Household drivers by age group
-    # #------------------------------
-    # #Age15to19
-    # HhDvr15to19_Ma <- summarizeDatasets(
-    #   Expr = "sum(Drv15to19[LocType == 'Urban'])",
-    #   Units_ = c(
-    #     Drv15to19 = "PRSN",
-    #     LocType = ""
-    #   ),
-    #   By_ = "Marea",
-    #   Table = "Household",
-    #   Group = Year,
-    #   QueryPrep_ls = QPrep_ls
-    # )[Ma]
-    # #Age20to29
-    # HhDvr20to29_Ma <- summarizeDatasets(
-    #   Expr = "sum(Drv20to29[LocType == 'Urban'])",
-    #   Units_ = c(
-    #     Drv20to29 = "PRSN",
-    #     LocType = ""
-    #   ),
-    #   By_ = "Marea",
-    #   Table = "Household",
-    #   Group = Year,
-    #   QueryPrep_ls = QPrep_ls
-    # )[Ma]
-    # #Age30to54
-    # HhDvr30to54_Ma <- summarizeDatasets(
-    #   Expr = "sum(Drv30to54[LocType == 'Urban'])",
-    #   Units_ = c(
-    #     Drv30to54 = "PRSN",
-    #     LocType = ""
-    #   ),
-    #   By_ = "Marea",
-    #   Table = "Household",
-    #   Group = Year,
-    #   QueryPrep_ls = QPrep_ls
-    # )[Ma]
-    # #Age55to64
-    # HhDvr55to64_Ma <- summarizeDatasets(
-    #   Expr = "sum(Drv55to64[LocType == 'Urban'])",
-    #   Units_ = c(
-    #     Drv55to64 = "PRSN",
-    #     LocType = ""
-    #   ),
-    #   By_ = "Marea",
-    #   Table = "Household",
-    #   Group = Year,
-    #   QueryPrep_ls = QPrep_ls
-    # )[Ma]
-    # #Age65Plus
-    # HhDvr65Plus_Ma <- summarizeDatasets(
-    #   Expr = "sum(Drv65Plus[LocType == 'Urban'])",
-    #   Units_ = c(
-    #     Drv65Plus = "PRSN",
-    #     LocType = ""
-    #   ),
-    #   By_ = "Marea",
-    #   Table = "Household",
-    #   Group = Year,
-    #   QueryPrep_ls = QPrep_ls
-    # )[Ma]
-    # #Matrix of drivers by age and Marea
-    # HhDvr_AgMa <- rbind(
-    #   Dvr15to19 = HhDvr15to19_Ma,
-    #   Dvr20to29 = HhDvr20to29_Ma,
-    #   Dvr30to54 = HhDvr30to54_Ma,
-    #   Dvr55to64 = HhDvr55to64_Ma,
-    #   Dvr65Plus = HhDvr65Plus_Ma,
-    #   DvrPerPop15to19 = HhDvr15to19_Ma / HhPop15to19_Ma,
-    #   DvrPerPop20to29 = HhDvr20to29_Ma / HhPop20to29_Ma,
-    #   DvrPerPop30to54 = HhDvr30to54_Ma / HhPop30to54_Ma,
-    #   DvrPerPop55to64 = HhDvr55to64_Ma / HhPop55to64_Ma,
-    #   DvrPerPop65Plus = HhDvr65Plus_Ma / HhPop65Plus_Ma
-    # )
-    
-    
     #Return data frame of all results
     #--------------------------
     rbind(
