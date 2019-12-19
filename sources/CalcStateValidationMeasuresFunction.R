@@ -257,6 +257,101 @@ calcStateValidationMeasures <-
         Description = "Number of vehicles owned or leased by households"
       )
       
+      #----------
+      #Population
+      #----------
+      Age0to14 = summarizeDatasets(
+        Expr = "sum(Age0to14)",
+        Units_ = c(
+          Age0to14 = "PRSN"
+        ),
+        Table = "Household",
+        Group = Year,
+        QueryPrep_ls = QPrep_ls
+      )
+      attributes(Age0to14) <- list(
+        Units = "persons",
+        Description = "Number of persons age 0 to 14"
+      )
+      Age15to19 = summarizeDatasets(
+        Expr = "sum(Age15to19)",
+        Units_ = c(
+          Age15to19 = "PRSN"
+        ),
+        Table = "Household",
+        Group = Year,
+        QueryPrep_ls = QPrep_ls
+      )
+      attributes(Age15to19) <- list(
+        Units = "persons",
+        Description = "Number of persons age 15 to 19"
+      )
+      Age20to29 = summarizeDatasets(
+        Expr = "sum(Age20to29)",
+        Units_ = c(
+          Age20to29 = "PRSN"
+        ),
+        Table = "Household",
+        Group = Year,
+        QueryPrep_ls = QPrep_ls
+      )
+      attributes(Age20to29) <- list(
+        Units = "persons",
+        Description = "Number of persons age 20 to 29"
+      )
+      Age30to54 = summarizeDatasets(
+        Expr = "sum(Age30to54)",
+        Units_ = c(
+          Age30to54 = "PRSN"
+        ),
+        Table = "Household",
+        Group = Year,
+        QueryPrep_ls = QPrep_ls
+      )
+      attributes(Age30to54) <- list(
+        Units = "persons",
+        Description = "Number of persons age 30 to 54"
+      )
+      Age55to64 = summarizeDatasets(
+        Expr = "sum(Age55to64)",
+        Units_ = c(
+          Age55to64 = "PRSN"
+        ),
+        Table = "Household",
+        Group = Year,
+        QueryPrep_ls = QPrep_ls
+      )
+      attributes(Age55to64) <- list(
+        Units = "persons",
+        Description = "Number of persons age 55 to 64"
+      )
+      Age65Plus = summarizeDatasets(
+        Expr = "sum(Age65Plus)",
+        Units_ = c(
+          Age65Plus = "PRSN"
+        ),
+        Table = "Household",
+        Group = Year,
+        QueryPrep_ls = QPrep_ls
+      )
+      attributes(Age65Plus) <- list(
+        Units = "persons",
+        Description = "Number of persons age 65 and older"
+      )
+      TotalPopulation = summarizeDatasets(
+        Expr = "sum(HhSize)",
+        Units_ = c(
+          HhSize = "PRSN"
+        ),
+        Table = "Household",
+        Group = Year,
+        QueryPrep_ls = QPrep_ls
+      )
+      attributes(TotalPopulation) <- list(
+        Units = "persons",
+        Description = "Number of persons"
+      )
+      
       #-------
       #Drivers
       #-------
@@ -519,6 +614,12 @@ calcStateValidationMeasures <-
           "TotalDvmt",
           "TotalGGE",
           "NumHouseholdVehicles",
+          "Age0to14",
+          "Age15to19",
+          "Age20to29",
+          "Age30to54",
+          "Age55to64",
+          "Age65Plus",
           "Drv15to19",
           "Drv20to29",
           "Drv30to54",
