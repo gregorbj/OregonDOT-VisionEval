@@ -1,0 +1,21 @@
+{
+  "Model": "VE-State",
+  "Scenario": "Complete Base Year Model Run",
+  "Description": "Loads datastore for completed modules and runs rest of modules",
+  "Region": "Oregon",
+  "BaseYear": "2010",
+  "Years": ["2010"],
+  "DatastoreName": "Datastore",
+  "DatastoreType": "RD",
+  "Seed": 1,
+  "RequiredVEPackages": [
+    "VESimHouseholds",
+    "VESimLandUseData",
+    "VESimLandUse",
+    "VESimTransportSupply",
+    "VEHouseholdVehicles",
+    "VEHouseholdTravel",
+    "VEPowertrainsAndFuelsx4TargetRule",
+    "VETravelPerformance"
+  ]
+}

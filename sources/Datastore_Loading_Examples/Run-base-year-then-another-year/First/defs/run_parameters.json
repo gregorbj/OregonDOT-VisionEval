@@ -1,0 +1,21 @@
+{
+  "Model": "VE-State",
+  "Scenario": "Run Base Year",
+  "Description": "Run base year in test load",
+  "Region": "Oregon",
+  "BaseYear": "2010",
+  "Years": ["2010"],
+  "DatastoreName": "Datastore",
+  "DatastoreType": "RD",
+  "Seed": 1,
+  "RequiredVEPackages": [
+    "VESimHouseholds",
+    "VESimLandUseData",
+    "VESimLandUse",
+    "VESimTransportSupply",
+    "VEHouseholdVehicles",
+    "VEHouseholdTravel",
+    "VEPowertrainsAndFuelsx4TargetRule",
+    "VETravelPerformance"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "Model": "VE-State",
+  "Scenario": "Run Part for Base Year",
+  "Description": "Runs modules up through SimulateRoadMiles for base year",
+  "Region": "Oregon",
+  "BaseYear": "2010",
+  "Years": ["2010"],
+  "DatastoreName": "Datastore",
+  "DatastoreType": "RD",
+  "Seed": 1,
+  "RequiredVEPackages": [
+    "VESimHouseholds",
+    "VESimLandUseData",
+    "VESimLandUse",
+    "VESimTransportSupply",
+    "VEHouseholdVehicles",
+    "VEHouseholdTravel",
+    "VEPowertrainsAndFuelsx4TargetRule",
+    "VETravelPerformance"
+  ]
+}
