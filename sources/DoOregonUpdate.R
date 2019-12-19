@@ -3,7 +3,7 @@
 #================
 
 #Brian Gregor
-#12/6/2019
+#12/19/2019
 
 #This script updates an official VisionEval installation to include all the new or modified VisionEval packages that have been developed for the Oregon DOT. This script sources in the updateVisionEvalInstall.R script which defines the updateVisionEvalInstall.R script which implements the updating. Some important things to note:
 #1) The VEInstallationDir argument is used to specify the full path to the VisionEval installation. Since it is unlikely that your installation directory (folder) is the same as mine, you will need to modify the argument assignment to identify the location of your VisionEval installation directory (folder).
@@ -19,6 +19,8 @@ updateVisionEvalInstall(
   ),
   Packages = c(
     "sources/framework/visioneval",
+    "sources/modules/VEHouseholdVehicles",
+    "sources/modules/VEHouseholdTravel",
     "sources/modules/VEPowertrainsAndFuels",
     "sources/modules/VEPowertrainsAndFuelsx4TargetRule",
     "sources/modules/VEPowertrainsAndFuelsxAP",
