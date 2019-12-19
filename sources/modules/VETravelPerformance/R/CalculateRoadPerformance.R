@@ -5,7 +5,7 @@
 #<doc>
 #
 ## CalculateRoadPerformance Module
-#### January 23, 2019
+#### September 5, 2019
 #
 #This module calculates freeway and arterial congestion level and the amounts of DVMT by congestion level. It also calculates the average speed and delay at each congestion level. In addition, it splits light-duty vehicle (LDV) DVMT between freeways and arterials as a function of relative speeds and congestion prices. The following performance measures are saved to the datastore:
 #
@@ -1163,12 +1163,7 @@ CalculateRoadPerformanceSpecifications <- list(
       TYPE = "character",
       UNITS = "ID",
       PROHIBIT = "",
-      ISELEMENTOF = c(
-        "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI",
-        "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI",
-        "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC",
-        "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT",
-        "VT", "VA", "WA", "WV", "WI", "WY", "DC", "PR", NA)
+      ISELEMENTOF = ""
     ),
     item(
       NAME = "Marea",
@@ -1770,7 +1765,7 @@ CalculateRoadPerformance <- function(L) {
     AveSpeed_MaRc[ma, "Fwy"] <- calcAveSpd(
       Dvmt_Cl = BalanceResults_ls[[ma]]$FwyDvmt_Cl,
       Spd_Cl = SpeedAndDelay_ls[[ma]]$Speed[,"Fwy"]
-      )
+    )
     AveSpeed_MaRc[ma, "Art"] <- calcAveSpd(
       Dvmt_Cl = BalanceResults_ls[[ma]]$ArtDvmt_Cl,
       Spd_Cl = SpeedAndDelay_ls[[ma]]$Speed[,"Art"]
