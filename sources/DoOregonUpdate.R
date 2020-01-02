@@ -19,6 +19,7 @@ updateVisionEvalInstall(
   ),
   Packages = c(
     "sources/framework/visioneval",
+    "sources/modules/VESimHouseholds",
     "sources/modules/VEHouseholdVehicles",
     "sources/modules/VEHouseholdTravel",
     "sources/modules/VEPowertrainsAndFuels",
