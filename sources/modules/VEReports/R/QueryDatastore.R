@@ -714,7 +714,7 @@ summarizeDatasets <-
     #Identify whether symbol is an operand
     isOperand <- function(Symbol) {
       Functions_ <- c("sum", "count", "mean", "wtmean", "max", "min", "median")
-      Operators_ <- c("+", "-", "*", "/")
+      Operators_ <- c("+", "-", "*", "/", "&", "|")
       Comparators_ <- c("==", ">=", "<=", "!=", ">", "<")
       Group_ <- c("(", ")", "[", "]")
       NonOperands_ <- c(Functions_, Operators_, Comparators_, Group_)
