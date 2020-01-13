@@ -127,9 +127,10 @@ calcMetropolitanMeasures <-
     #Number of vehicles owned by households in Marea
     #-----------------------------------------------
     MareaHhVehicles_Ma <- summarizeDatasets(
-      Expr = "sum(Vehicles)",
+      Expr = "sum(NumAuto) + sum(NumLtTrk)",
       Units_ = c(
-        Vehicles = "VEH",
+        NumAuto = "VEH",
+        NumLtTrk = "VEH",
         Marea = ""
       ),
       By_ = "Marea",
@@ -141,6 +142,116 @@ calcMetropolitanMeasures <-
       list(Units = "Household light-duty vehicles",
            Description = "Total number of light-duty vehicles owned/leased by households residing in Marea")
 
+    #Marea number of light trucks
+    #----------------------------
+    MareaHhLightTrucks_Ma <- summarizeDatasets(
+      Expr = "sum(NumLtTrk)",
+      Units_ = c(
+        NumLtTrk = "VEH",
+        Marea = ""
+      ),
+      By_ = "Marea",
+      Table = "Household",
+      Group = Year,
+      QueryPrep_ls = QPrep_ls
+    )[Ma]
+    
+    #Marea light-truck vehicle proportion
+    #------------------------------------
+    MareaHhLtTrkProp_Ma <- MareaHhLightTrucks_Ma / MareaHhVehicles_Ma
+    attributes(MareaHhLtTrkProp_Ma) <- 
+      list(Units = "Light truck proportion of household vehicles",
+           Description = "Light truck proportion of light-duty vehicles owned/leased by households residing in the Marea")
+    
+    #Average household vehicle age for Marea
+    #---------------------------------------
+    MareaHhAveVehAge_Ma <- summarizeDatasets(
+      Expr = "mean(Age[VehicleAccess == 'Own'])",
+      Units_ = c(
+        Age = "YR",
+        VehicleAccess = "",
+        Marea = ""
+      ),
+      By_ = "Marea",
+      Table = "Vehicle",
+      Group = Year,
+      QueryPrep_ls = QPrep_ls
+    )[Ma]
+    attributes(MareaHhAveVehAge_Ma) <- 
+      list(Units = "Years",
+           Description = "Average age of vehicles owned/leased by households residing in the Marea")
+    
+    #Average car service light truck proportion of car service DVMT
+    #--------------------------------------------------------------
+    MareaCarSvcLtTrkDvmtProp_Ma <- summarizeDatasets(
+      Expr = "sum(DvmtProp[VehicleAccess != 'Own' & Type == 'LtTrk']) / sum(DvmtProp[VehicleAccess != 'Own'])",
+      Units_ = c(
+        DvmtProp = "",
+        VehicleAccess = "",
+        Type = "",
+        Marea = ""
+      ),
+      By_ = "Marea",
+      Table = "Vehicle",
+      Group = Year,
+      QueryPrep_ls = QPrep_ls
+    )[Ma]
+    attributes(MareaCarSvcLtTrkDvmtProp_Ma) <- 
+      list(Units = "Proportion",
+           Description = "Average proportion car service vehicle DVMT in light trucks used by households residing in the Marea")
+    
+    #Average car service vehicle age for Marea
+    #-----------------------------------------
+    MareaCarSvcAveVehAge_Ma <- summarizeDatasets(
+      Expr = "mean(Age[VehicleAccess != 'Own'])",
+      Units_ = c(
+        Age = "YR",
+        VehicleAccess = "",
+        Marea = ""
+      ),
+      By_ = "Marea",
+      Table = "Vehicle",
+      Group = Year,
+      QueryPrep_ls = QPrep_ls
+    )[Ma]
+    attributes(MareaCarSvcAveVehAge_Ma) <- 
+      list(Units = "Years",
+           Description = "Average age of car service vehicles used by households residing in the Marea")
+    
+    #Average commercial service vehicle light truck proportion
+    #---------------------------------------------------------
+    MareaComSvcLtTrkDvmtProp <- summarizeDatasets(
+      Expr = "ComSvcLtTrkProp",
+      Units_ = c(
+        ComSvcLtTrkProp = ""
+      ),
+      Table = "Region",
+      Group = Year,
+      QueryPrep_ls = QPrep_ls
+    )
+    MareaComSvcLtTrkDvmtProp_Ma <- rep(MareaComSvcLtTrkDvmtProp, length(Ma))
+    attributes(MareaComSvcLtTrkDvmtProp_Ma) <- 
+      list(Units = "Proportion",
+           Description = "Light truck proportion of commercial service vehicle DVMT in the Marea")
+    rm(MareaComSvcLtTrkDvmtProp)
+
+    #Average commercial service vehicle age
+    #--------------------------------------
+    MareaComSvcAveVehAge <- summarizeDatasets(
+      Expr = "AveComSvcVehicleAge",
+      Units_ = c(
+        AveComSvcVehicleAge = "YR"
+      ),
+      Table = "Region",
+      Group = Year,
+      QueryPrep_ls = QPrep_ls
+    )
+    MareaComSvcAveVehAge_Ma <- rep(MareaComSvcAveVehAge, length(Ma))
+    attributes(MareaComSvcAveVehAge_Ma) <- 
+      list(Units = "Years",
+           Description = "Average age of commercial service vehicles used in the Marea")
+    rm(MareaComSvcAveVehAge)
+        
     #Number of households in urbanized area
     #--------------------------------------
     HhNum_Ma <- summarizeDatasets(
@@ -284,9 +395,10 @@ calcMetropolitanMeasures <-
     #Number of vehicles
     #------------------
     HhVehicles_Ma <- summarizeDatasets(
-      Expr = "sum(Vehicles[LocType == 'Urban'])",
+      Expr = "sum(NumAuto[LocType == 'Urban']) + sum(NumLtTrk[LocType == 'Urban'])",
       Units_ = c(
-        Vehicles = "VEH",
+        NumAuto = "VEH",
+        NumLtTrk = "VEH",
         LocType = "",
         Marea = ""
       ),
@@ -349,22 +461,53 @@ calcMetropolitanMeasures <-
       list(Units = "Light truck proportion of household vehicles",
            Description = "Light truck proportion of light-duty vehicles owned/leased by households residing in urbanized area")
     
-    #Average household vehicle age
+    #Total daily work parking cost
     #-----------------------------
-    MareaHhAveVehAge_Ma <- summarizeDatasets(
-      Expr = "mean(Age)",
+    HhTotDailyWkrParkingCost_Ma <- summarizeDatasets(
+      Expr = "sum(ParkingCost[LocType == 'Urban'])",
       Units_ = c(
-        Age = "YR",
+        ParkingCost = "",
+        LocType = "",
         Marea = ""
       ),
       By_ = "Marea",
-      Table = "Vehicle",
+      Table = list(
+        Worker = c("ParkingCost"),
+        Household = c("Marea", "LocType")
+      ),
+      Key = "HhId",
       Group = Year,
       QueryPrep_ls = QPrep_ls
     )[Ma]
-    attributes(MareaHhAveVehAge_Ma) <- 
-      list(Units = "Years",
-           Description = "Average age of vehicles owned by households residing in the Marea")
+    attributes(HhTotDailyWkrParkingCost_Ma) <-
+      list(Units = "USD per day",
+           Description = "Total daily work parking expenditures by households living in the urbanized portion of the Marea")
+    
+    #Total daily non-work parking cost
+    #---------------------------------
+    HhTotDailyOthParkingCost_Ma <- summarizeDatasets(
+      Expr = "sum(OtherParkingCost[LocType == 'Urban'])",
+      Units = c(
+        OtherParkingCost = "",
+        LocType = "",
+        Marea = ""
+      ),
+      By_ = "Marea",
+      Table = "Household",
+      Group = Year,
+      QueryPrep_ls = QPrep_ls
+    )[Ma]
+    attributes(HhTotDailyOthParkingCost_Ma) <-
+      list(Units = "USD per day",
+           Description = "Total daily non-work parking expenditures by households living in the urbanized portion of the Marea")
+    
+    #Average daily household parking cost
+    #------------------------------------
+    HhAveDailyParkingCost_Ma <- 
+      (HhTotDailyWkrParkingCost_Ma + HhTotDailyOthParkingCost_Ma) / HhNum_Ma
+    attributes(HhAveDailyParkingCost_Ma) <-
+      list(Units = "USD per day",
+           Description = "Average daily parking expenditures by households living in the urbanized portion of the Marea")
     
     #Data frame of household characteristics
     #---------------------------------------
@@ -376,6 +519,12 @@ calcMetropolitanMeasures <-
         "MareaHhIncome_Ma",
         "MareaHhDrivers_Ma",
         "MareaHhVehicles_Ma",
+        "MareaHhLtTrkProp_Ma",
+        "MareaHhAveVehAge_Ma",
+        "MareaCarSvcLtTrkDvmtProp_Ma",
+        "MareaCarSvcAveVehAge_Ma",
+        "MareaComSvcLtTrkDvmtProp_Ma",
+        "MareaComSvcAveVehAge_Ma",
         "HhNum_Ma",
         "HhPop_Ma",
         "HhAveSize_Ma",
@@ -391,7 +540,9 @@ calcMetropolitanMeasures <-
         "HhAveVehPerWkr_Ma",
         "HhAveVehPerDvr_Ma",
         "HhLtTrkProp_Ma",
-        "MareaHhAveVehAge_Ma"
+        "HhTotDailyWkrParkingCost_Ma",
+        "HhTotDailyOthParkingCost_Ma",
+        "HhAveDailyParkingCost_Ma"
       ),
       Ma = Ma
     )
@@ -906,32 +1057,241 @@ calcMetropolitanMeasures <-
       Units = "Proportion of workers",
       Description = "Proportion of Marea workers in cashout parking program"
     )
+
+    #Calculate households and workers by area type if VE-State model
+    #---------------------------------------------------------------    
+    if (checkDataset("AreaType", "Bzone", Year, QPrep_ls$Listing$Datastore$Datastore)) {
+      
+      #Proportion of Marea households by area type
+      #-------------------------------------------
+      MareaHhByAreaType_MaAt <- summarizeDatasets(
+        Expr = "count(AreaType)",
+        Units_ = c(
+          AreaType =  "",
+          Marea = ""
+        ),
+        By_ = c("Marea", "AreaType"),
+        Table = list(
+          Bzone = "AreaType",
+          Household = "Marea"
+        ),
+        Key = "Bzone",
+        Group = Year,
+        QueryPrep_ls = QPrep_ls
+      )[Ma,]
+      MareaPropHhByAreaType_MaAt <-
+        sweep(MareaHhByAreaType_MaAt, 1, rowSums(MareaHhByAreaType_MaAt), "/")
+      MareaCenterHhProp_Ma <- MareaPropHhByAreaType_MaAt[,"center"]
+      attributes(MareaCenterHhProp_Ma) <- list(
+        Units = "Proportion of households",
+        Description = "Proportion of Marea households living in center area type"
+      )
+      MareaInnerHhProp_Ma <- MareaPropHhByAreaType_MaAt[,"inner"]
+      attributes(MareaInnerHhProp_Ma) <- list(
+        Units = "Proportion of households",
+        Description = "Proportion of Marea households living in inner area type"
+      )
+      MareaOuterHhProp_Ma <- MareaPropHhByAreaType_MaAt[,"outer"]
+      attributes(MareaOuterHhProp_Ma) <- list(
+        Units = "Proportion of households",
+        Description = "Proportion of Marea households living in outer area type"
+      )
+      MareaFringeHhProp_Ma <- MareaPropHhByAreaType_MaAt[,"fringe"]
+      attributes(MareaFringeHhProp_Ma) <- list(
+        Units = "Proportion of households",
+        Description = "Proportion of Marea households living in fringe area type"
+      )
+      
+      #Proportion of urbanized area households by area type
+      #----------------------------------------------------
+      HhByAreaType_MaAt <- summarizeDatasets(
+        Expr = "count(AreaType[LocType == 'Urban'])",
+        Units_ = c(
+          AreaType =  "",
+          Marea = "",
+          LocType = ""
+        ),
+        By_ = c("Marea", "AreaType"),
+        Table = list(
+          Bzone = "AreaType",
+          Household = c("Marea", "LocType")
+        ),
+        Key = "Bzone",
+        Group = Year,
+        QueryPrep_ls = QPrep_ls
+      )[Ma,]
+      PropHhByAreaType_MaAt <-
+        sweep(HhByAreaType_MaAt, 1, rowSums(HhByAreaType_MaAt), "/")
+      CenterHhProp_Ma <- PropHhByAreaType_MaAt[,"center"]
+      attributes(CenterHhProp_Ma) <- list(
+        Units = "Proportion of households",
+        Description = "Proportion of urbanized area households living in center area type"
+      )
+      InnerHhProp_Ma <- PropHhByAreaType_MaAt[,"inner"]
+      attributes(InnerHhProp_Ma) <- list(
+        Units = "Proportion of households",
+        Description = "Proportion of urbanized area households living in inner area type"
+      )
+      OuterHhProp_Ma <- PropHhByAreaType_MaAt[,"outer"]
+      attributes(OuterHhProp_Ma) <- list(
+        Units = "Proportion of households",
+        Description = "Proportion of urbanized area households living in outer area type"
+      )
+      FringeHhProp_Ma <- PropHhByAreaType_MaAt[,"fringe"]
+      attributes(FringeHhProp_Ma) <- list(
+        Units = "Proportion of households",
+        Description = "Proportion of households living in fringe area type"
+      )
+      
+      #Proportion of Marea workers by area type
+      #----------------------------------------
+      MareaWkrByAreaType_MaAt <- summarizeDatasets(
+        Expr = "count(AreaType)",
+        Units_ = c(
+          AreaType =  "",
+          Marea = ""
+        ),
+        By_ = c("Marea", "AreaType"),
+        Table = list(
+          Bzone = "AreaType",
+          Worker = "Marea"
+        ),
+        Key = "Bzone",
+        Group = Year,
+        QueryPrep_ls = QPrep_ls
+      )[Ma,]
+      MareaPropWkrByAreaType_MaAt <-
+        sweep(MareaWkrByAreaType_MaAt, 1, rowSums(MareaWkrByAreaType_MaAt), "/")
+      MareaCenterWkrProp_Ma <- MareaPropWkrByAreaType_MaAt[,"center"]
+      attributes(MareaCenterWkrProp_Ma) <- list(
+        Units = "Proportion of workers",
+        Description = "Proportion of Marea workers working in center area type"
+      )
+      MareaInnerWkrProp_Ma <- MareaPropWkrByAreaType_MaAt[,"inner"]
+      attributes(MareaInnerWkrProp_Ma) <- list(
+        Units = "Proportion of workers",
+        Description = "Proportion of Marea workers working in inner area type"
+      )
+      MareaOuterWkrProp_Ma <- MareaPropWkrByAreaType_MaAt[,"outer"]
+      attributes(MareaOuterWkrProp_Ma) <- list(
+        Units = "Proportion of workers",
+        Description = "Proportion of Marea workers working in outer area type"
+      )
+      MareaFringeWkrProp_Ma <- MareaPropWkrByAreaType_MaAt[,"fringe"]
+      attributes(MareaFringeWkrProp_Ma) <- list(
+        Units = "Proportion of workers",
+        Description = "Proportion of Marea workers working in fringe area type"
+      )
+      
+      #Proportion of urbanized area workers by area type
+      #-------------------------------------------------
+      WkrByAreaType_MaAt <- summarizeDatasets(
+        Expr = "count(AreaType[LocType == 'Urban'])",
+        Units_ = c(
+          AreaType =  "",
+          LocType = "",
+          Marea = ""
+        ),
+        By_ = c("Marea", "AreaType"),
+        Table = list(
+          Bzone = c("AreaType", "LocType"),
+          Worker = "Marea"
+        ),
+        Key = "Bzone",
+        Group = Year,
+        QueryPrep_ls = QPrep_ls
+      )[Ma,]
+      PropWkrByAreaType_MaAt <-
+        sweep(WkrByAreaType_MaAt, 1, rowSums(WkrByAreaType_MaAt), "/")
+      CenterWkrProp_Ma <- PropWkrByAreaType_MaAt[,"center"]
+      attributes(CenterWkrProp_Ma) <- list(
+        Units = "Proportion of workers",
+        Description = "Proportion of urbanized area workers working in center area type"
+      )
+      InnerWkrProp_Ma <- PropWkrByAreaType_MaAt[,"inner"]
+      attributes(InnerWkrProp_Ma) <- list(
+        Units = "Proportion of workers",
+        Description = "Proportion of urbanized area workers working in inner area type"
+      )
+      OuterWkrProp_Ma <- PropWkrByAreaType_MaAt[,"outer"]
+      attributes(OuterWkrProp_Ma) <- list(
+        Units = "Proportion of workers",
+        Description = "Proportion of urbanized area workers working in outer area type"
+      )
+      FringeWkrProp_Ma <- PropWkrByAreaType_MaAt[,"fringe"]
+      attributes(FringeWkrProp_Ma) <- list(
+        Units = "Proportion of workers",
+        Description = "Proportion of urbanized area workers working in fringe area type"
+      )
+      
+    }
     
     #Data frame of land use characteristics
     #--------------------------------------
-    LuCharacteristics_df <- makeMeasureDataFrame(
-      DataNames_ = c(
-        "UrbanAvePopDen_Ma",
-        "TownAvePopDen_Ma",
-        "MeanBzonePopDen_Ma",
-        "MaxBzonePopDen_Ma",
-        "MedianBzonePopDen_Ma",
-        "AveActivityDen_Ma",
-        "MeanBzoneActivityDen_Ma",
-        "MaxBzoneActivityDen_Ma",
-        "MedianBzoneActivityDen_Ma",
-        "PropUrbanMixHh_Ma",
-        "PropSFDU_Ma",
-        "MeanTdmPropDvmtReduction_Ma",
-        "MaxTdmPropDvmtReduction_Ma",
-        "PropImpHouseholds_Ma",
-        "MareaPropEcoWorkers_Ma",
-        "MareaPropWkrPayForPkg_Ma",
-        "MareaPropWkrCashoutPkg_Ma"
-      ),
-      Ma = Ma
-    )
-
+    if (checkDataset("AreaType", "Bzone", Year, QPrep_ls$Listing$Datastore$Datastore)) {
+      LuCharacteristics_df <- makeMeasureDataFrame(
+        DataNames_ = c(
+          "UrbanAvePopDen_Ma",
+          "TownAvePopDen_Ma",
+          "MeanBzonePopDen_Ma",
+          "MaxBzonePopDen_Ma",
+          "MedianBzonePopDen_Ma",
+          "AveActivityDen_Ma",
+          "MeanBzoneActivityDen_Ma",
+          "MaxBzoneActivityDen_Ma",
+          "MedianBzoneActivityDen_Ma",
+          "PropUrbanMixHh_Ma",
+          "PropSFDU_Ma",
+          "MeanTdmPropDvmtReduction_Ma",
+          "MaxTdmPropDvmtReduction_Ma",
+          "PropImpHouseholds_Ma",
+          "CenterHhProp_Ma",
+          "InnerHhProp_Ma",
+          "OuterHhProp_Ma",
+          "FringeHhProp_Ma",
+          "CenterWkrProp_Ma",
+          "InnerWkrProp_Ma",
+          "OuterWkrProp_Ma",
+          "FringeWkrProp_Ma",
+          "MareaPropEcoWorkers_Ma",
+          "MareaPropWkrPayForPkg_Ma",
+          "MareaPropWkrCashoutPkg_Ma",
+          "MareaCenterHhProp_Ma",
+          "MareaInnerHhProp_Ma",
+          "MareaOuterHhProp_Ma",
+          "MareaFringeHhProp_Ma",
+          "MareaCenterWkrProp_Ma",
+          "MareaInnerWkrProp_Ma",
+          "MareaOuterWkrProp_Ma",
+          "MareaFringeWkrProp_Ma"
+        ),
+        Ma = Ma
+      )
+    } else {
+      LuCharacteristics_df <- makeMeasureDataFrame(
+        DataNames_ = c(
+          "UrbanAvePopDen_Ma",
+          "TownAvePopDen_Ma",
+          "MeanBzonePopDen_Ma",
+          "MaxBzonePopDen_Ma",
+          "MedianBzonePopDen_Ma",
+          "AveActivityDen_Ma",
+          "MeanBzoneActivityDen_Ma",
+          "MaxBzoneActivityDen_Ma",
+          "MedianBzoneActivityDen_Ma",
+          "PropUrbanMixHh_Ma",
+          "PropSFDU_Ma",
+          "MeanTdmPropDvmtReduction_Ma",
+          "MaxTdmPropDvmtReduction_Ma",
+          "PropImpHouseholds_Ma",
+          "MareaPropEcoWorkers_Ma",
+          "MareaPropWkrPayForPkg_Ma",
+          "MareaPropWkrCashoutPkg_Ma"
+        ),
+        Ma = Ma
+      )
+    }
+    
     
     #============================    
     #Daily Vehicle Miles Traveled
@@ -1001,6 +1361,55 @@ calcMetropolitanMeasures <-
     attributes(MareaLdvDvmt_Ma) <- list(
       Units = "Miles per day",
       Description = "Sum of daily vehicle miles traveled by households residing in the Marea, commercial service travel attributable to the demand of Marea households and businesses, and on-demand transit van travel in the Marea."
+    )
+    
+    #Marea car service proportion of household DVMT
+    #----------------------------------------------
+    MareaCarSvcPropHhDvmt_Ma <- summarizeDatasets(
+      Expr = "sum(Dvmt[VehicleAccess != 'Own'] * DvmtProp[VehicleAccess != 'Own']) / sum(Dvmt * DvmtProp)",
+      Units_ = c(
+        Dvmt = "",
+        VehicleAccess = "",
+        DvmtProp = "",
+        Marea = ""
+      ),
+      By_ <- "Marea",
+      Table = list(
+        Household = c("Dvmt", "Marea"),
+        Vehicle = c("VehicleAccess", "DvmtProp")
+      ),
+      Key = "HhId",
+      Group = Year,
+      QueryPrep_ls = QPrep_ls
+    )[Ma]
+    attributes(MareaCarSvcPropHhDvmt_Ma) <- list(
+      Units = "Proportion of DVMT",
+      Description = "Proportion of the DVMT of households residing in the Marea using car services"
+    )
+
+    #Urbanized area car service proportion of household DVMT
+    #-------------------------------------------------------
+    CarSvcPropHhDvmt_Ma <- summarizeDatasets(
+      Expr = "sum(Dvmt[VehicleAccess != 'Own' & LocType == 'Urban'] * DvmtProp[VehicleAccess != 'Own' & LocType == 'Urban']) / sum(Dvmt[LocType == 'Urban'] * DvmtProp[LocType == 'Urban'])",
+      Units_ = c(
+        Dvmt = "",
+        VehicleAccess = "",
+        DvmtProp = "",
+        Marea = "",
+        LocType = ""
+      ),
+      By_ <- "Marea",
+      Table = list(
+        Household = c("Dvmt", "Marea", "LocType"),
+        Vehicle = c("VehicleAccess", "DvmtProp")
+      ),
+      Key = "HhId",
+      Group = Year,
+      QueryPrep_ls = QPrep_ls
+    )[Ma]
+    attributes(CarSvcPropHhDvmt_Ma) <- list(
+      Units = "Proportion of DVMT",
+      Description = "Proportion of the DVMT of households residing in the urbanized area using car services"
     )
     
     #Urbanized area commercial service vehicle DVMT
@@ -1182,6 +1591,7 @@ calcMetropolitanMeasures <-
         "MareaComSvcDvmt_Ma",
         "MareaVanDvmt_Ma",
         "MareaLdvDvmt_Ma",
+        "MareaCarSvcPropHhDvmt_Ma",
         "HhDvmt_Ma",
         "ComSvcDvmt_Ma",
         "VanDvmt_Ma",
@@ -1197,7 +1607,8 @@ calcMetropolitanMeasures <-
         "AveLdvDvmtPerVeh_Ma",
         "PropHhDvmt_Ma",
         "PropComSvcDvmt_Ma",
-        "PropVanDvmt_Ma"
+        "PropVanDvmt_Ma",
+        "CarSvcPropHhDvmt_Ma"
       ),
       Ma = Ma
     )
@@ -1230,8 +1641,8 @@ calcMetropolitanMeasures <-
     MareaComSvcGGE_Ma <- summarizeDatasets(
       Expr = "sum(ComSvcUrbanGGE + ComSvcNonUrbanGGE)",
       Units = c(
-        ComSvcUrbanGGE = "GGE",
-        ComSvcNonUrbanGGE = "GGE",
+        ComSvcUrbanGGE = "GGE/DAY",
+        ComSvcNonUrbanGGE = "GGE/DAY",
         Marea = ""
       ),
       By_ = "Marea",
@@ -1249,7 +1660,7 @@ calcMetropolitanMeasures <-
     MareaVanGGE_Ma <- summarizeDatasets(
       Expr = "sum(VanGGE)",
       Units = c(
-        VanGGE = "GGE",
+        VanGGE = "GGE/DAY",
         Marea = ""
       ),
       By_ = "Marea",
@@ -1290,11 +1701,11 @@ calcMetropolitanMeasures <-
     
     #Commercial service CO2e for Marea
     #---------------------------------
-    MareaComSvcCO2e_Ma <- 365 * summarizeDatasets(
+    MareaComSvcCO2e_Ma <- summarizeDatasets(
       Expr = "sum(ComSvcUrbanCO2e + ComSvcNonUrbanCO2e)",
       Units = c(
-        ComSvcUrbanCO2e = "MT",
-        ComSvcNonUrbanCO2e = "MT",
+        ComSvcUrbanCO2e = "MT/YR",
+        ComSvcNonUrbanCO2e = "MT/YR",
         Marea = ""
       ),
       By_ = "Marea",
@@ -1309,10 +1720,10 @@ calcMetropolitanMeasures <-
     
     #Van CO2e for Marea
     #------------------
-    MareaVanCO2e_Ma <- 365 * summarizeDatasets(
+    MareaVanCO2e_Ma <- summarizeDatasets(
       Expr = "sum(VanCO2e)",
       Units = c(
-        VanCO2e = "MT",
+        VanCO2e = "MT/YR",
         Marea = ""
       ),
       By_ = "Marea",
@@ -1362,10 +1773,10 @@ calcMetropolitanMeasures <-
     
     #Commercial service CO2e for urbanized area
     #------------------------------------------
-    ComSvcCO2e_Ma <- 365 * summarizeDatasets(
+    ComSvcCO2e_Ma <- summarizeDatasets(
       Expr = "sum(ComSvcUrbanCO2e)",
       Units = c(
-        ComSvcUrbanCO2e = "MT",
+        ComSvcUrbanCO2e = "MT/YR",
         Marea = ""
       ),
       By_ = "Marea",
@@ -1380,10 +1791,10 @@ calcMetropolitanMeasures <-
     
     #Van CO2e for urbanized area
     #---------------------------
-    VanCO2e_Ma <- 365 * summarizeDatasets(
+    VanCO2e_Ma <- summarizeDatasets(
       Expr = "sum(VanCO2e)",
       Units = c(
-        VanCO2e = "MT",
+        VanCO2e = "MT/YR",
         Marea = ""
       ),
       By_ = "Marea",
