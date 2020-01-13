@@ -84,7 +84,7 @@ calcStateValidationMeasures <-
       HouseholdDvmt <- summarizeDatasets(
         Expr = "sum(Dvmt)",
         Units = c(
-          Dvmt = "MI"
+          Dvmt = "MI/DAY"
         ),
         Table = "Household",
         Group = Year,
@@ -98,9 +98,9 @@ calcStateValidationMeasures <-
       ComSvcDvmt <- summarizeDatasets(
         Expr = "sum(ComSvcUrbanDvmt) + sum(ComSvcTownDvmt) + sum(ComSvcRuralDvmt)",
         Units = c(
-          ComSvcUrbanDvmt = "MI",
-          ComSvcTownDvmt = "MI",
-          ComSvcRuralDvmt = "MI"
+          ComSvcUrbanDvmt = "MI/DAY",
+          ComSvcTownDvmt = "MI/DAY",
+          ComSvcRuralDvmt = "MI/DAY"
         ),
         Table = "Marea",
         Group = Year,
@@ -114,7 +114,7 @@ calcStateValidationMeasures <-
       PTVanDvmt <- summarizeDatasets(
         Expr = "sum(VanDvmt)",
         Units = c(
-          VanDvmt = "MI"
+          VanDvmt = "MI/DAY"
         ),
         Table = "Marea",
         Group = Year,
@@ -134,8 +134,8 @@ calcStateValidationMeasures <-
       HvyTruckDvmt <- summarizeDatasets(
         Expr = "sum(HvyTrkUrbanDvmt) + sum(HvyTrkNonUrbanDvmt)",
         Units = c(
-          HvyTrkUrbanDvmt = "MI",
-          HvyTrkNonUrbanDvmt = "MI"
+          HvyTrkUrbanDvmt = "MI/DAY",
+          HvyTrkNonUrbanDvmt = "MI/DAY"
         ),
         Table = "Region",
         Group = Year,
@@ -149,7 +149,7 @@ calcStateValidationMeasures <-
       BusDvmt <- summarizeDatasets(
         Expr = "sum(BusDvmt)",
         Units = c(
-          BusDvmt = "MI"
+          BusDvmt = "MI/DAY"
         ),
         Table = "Marea",
         Group = Year,
@@ -193,8 +193,8 @@ calcStateValidationMeasures <-
       ComSvcGGE <- summarizeDatasets(
         Expr = "sum(ComSvcNonUrbanGGE) + sum(ComSvcUrbanGGE)",
         Units_ = c(
-          ComSvcNonUrbanGGE = "GGE",
-          ComSvcUrbanGGE = "GGE"
+          ComSvcNonUrbanGGE = "GGE/DAY",
+          ComSvcUrbanGGE = "GGE/DAY"
         ),
         Table = "Marea",
         Group = Year,
@@ -208,7 +208,7 @@ calcStateValidationMeasures <-
       PTVanGGE <- summarizeDatasets(
         Expr = "sum(VanGGE)",
         Units_ = c(
-          VanGGE = "GGE"
+          VanGGE = "GGE/DAY"
         ),
         Table = "Marea",
         Group = Year,
@@ -222,7 +222,7 @@ calcStateValidationMeasures <-
       BusGGE <- summarizeDatasets(
         Expr = "sum(BusGGE)",
         Units_ = c(
-          BusGGE = "GGE"
+          BusGGE = "GGE/DAY"
         ),
         Table = "Marea",
         Group = Year,
@@ -546,8 +546,8 @@ calcStateValidationMeasures <-
       ComSvcCO2e <- summarizeDatasets(
         Expr = "sum(ComSvcNonUrbanCO2e) + sum(ComSvcUrbanCO2e)",
         Units_ = c(
-          ComSvcNonUrbanCO2e = "GM",
-          ComSvcUrbanCO2e = "GM"
+          ComSvcNonUrbanCO2e = "GM/DAY",
+          ComSvcUrbanCO2e = "GM/DAY"
         ),
         Table = "Marea",
         Group = Year,
@@ -561,7 +561,7 @@ calcStateValidationMeasures <-
       PTVanCO2e <- summarizeDatasets(
         Expr = "sum(VanCO2e)",
         Units_ = c(
-          VanCO2e = "GM"
+          VanCO2e = "GM/DAY"
         ),
         Table = "Marea",
         Group = Year,
