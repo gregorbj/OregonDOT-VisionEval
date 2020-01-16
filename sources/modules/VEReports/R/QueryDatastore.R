@@ -771,7 +771,7 @@ summarizeDatasets <-
       Comparators_ <- c("==", ">=", "<=", "!=", ">", "<", "&", "|")
       Group_ <- c("(", ")", "[", "]")
       NonOperands_ <- c(Functions_, Operators_, Comparators_, Group_)
-      !(deparse(Symbol) %in% NonOperands_) & !is.character(Symbol)
+      !(deparse(Symbol) %in% NonOperands_) & !is.character(Symbol) & !is.numeric(Symbol) & !is.logical(Symbol)
     }
     #Recursive function to get the operands in an expression
     getOperands <- function(AST) {
