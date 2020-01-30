@@ -1154,7 +1154,7 @@ CreateSimBzones <- function(L) {
     PropTownHh_Az = L$Year$Azone$PropTownHh,
     PropMetroHh_Az = L$Year$Azone$PropMetroHh,
     Az = Az
-  )
+    )
 
   #Allocate jobs to location types and Azones
   #------------------------------------------
@@ -1167,7 +1167,7 @@ CreateSimBzones <- function(L) {
     TownJobWkrRatio_Az = L$Year$Azone$TownJobWkrRatio,
     Marea_Az = L$Year$Azone$Marea,
     Az = Az
-  )
+    )
 
   #Create a data frame of SimBzones
   #--------------------------------
@@ -1270,7 +1270,7 @@ CreateSimBzones <- function(L) {
           D2ActProp_D1D2,
           EmpProp_D2_ls,
           LocTyD2ActProp_D1D2
-        )
+          )
         Bzones_df$D2Lvl[Select_] <- as.character(D2_ls$D2Lvl)
         Bzones_df$NumHh[Select_] <- D2_ls$NumHh
         Bzones_df$TotEmp[Select_] <- D2_ls$TotEmp
