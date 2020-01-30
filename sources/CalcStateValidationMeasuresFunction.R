@@ -92,7 +92,27 @@ calcStateValidationMeasures <-
       )
       attributes(HouseholdDvmt) <- list(
         Units = "miles per day",
-        Description = "Total DVMT of persons in households and non-institutional group quarters"
+        Description = "Total DVMT (in owned and car service vehicles) of persons in households and non-institutional group quarters"
+      )
+      #Household Car Service DVMT
+      HouseholdCarSvcDvmt <- summarizeDatasets(
+        Expr = "sum(Dvmt[VehicleAccess != 'Own'] * DvmtProp[VehicleAccess != 'Own'])",
+        Units = c(
+          Dvmt = "MI/DAY",
+          DvmtProp = "",
+          VehicleAccess = ""
+        ),
+        Table = list(
+          Household = c("Dvmt"),
+          Vehicle = c("DvmtProp", "VehicleAccess")
+        ),
+        Key = "HhId",
+        Group = Year,
+        QueryPrep_ls = QPrep_ls
+      )
+      attributes(HouseholdCarSvcDvmt) <- list(
+        Units = "miles per day",
+        Description = "Total DVMT in car service vehicles of persons in households and non-institutional group quarters"
       )
       #Commercial Service DVMT
       ComSvcDvmt <- summarizeDatasets(
@@ -528,7 +548,7 @@ calcStateValidationMeasures <-
       #----------------------------------------------
       #Average Light-duty Vehicle GHG Emissions Rates
       #----------------------------------------------
-      #Household daily GGE
+      #Household daily CO2e
       HouseholdCO2e <- summarizeDatasets(
         Expr = "sum(DailyCO2e)",
         Units_ = c(
@@ -542,7 +562,7 @@ calcStateValidationMeasures <-
         Units = "grams per day",
         Description = "Daily greenhousehouse gas emissions of household vehicles"
       )
-      #Commercial Service Vehicle GGE
+      #Commercial Service Vehicle CO2e
       ComSvcCO2e <- summarizeDatasets(
         Expr = "sum(ComSvcNonUrbanCO2e) + sum(ComSvcUrbanCO2e)",
         Units_ = c(
@@ -557,7 +577,7 @@ calcStateValidationMeasures <-
         Units = "grams per day",
         Description = "Daily greenhousehouse gas emissions of commercial service vehicles"
       )
-      #Public Transit Van GGE
+      #Public Transit Van CO2e
       PTVanCO2e <- summarizeDatasets(
         Expr = "sum(VanCO2e)",
         Units_ = c(
@@ -570,6 +590,12 @@ calcStateValidationMeasures <-
       attributes(PTVanCO2e) <- list(
         Units = "grams per day",
         Description = "Daily greenhousehouse gas emissions of public transit vans"
+      )
+      #Light-duty Vehicle CO2e
+      LdvCO2e <- HouseholdCO2e + ComSvcCO2e + PTVanCO2e
+      attributes(LdvCO2e) <- list(
+        Units = "grams per day",
+        Description = "Daily greenhousehouse gas emissions of light-duty vehicles"
       )
       #HouseholdCO2eRate
       HouseholdCO2eRate <- HouseholdCO2e / HouseholdDvmt
@@ -590,7 +616,7 @@ calcStateValidationMeasures <-
         Description = "Average greenhousehouse gas emissions rate of public transit vans"
       )
       #LdvCO2eRate
-      LdvCO2eRate <- (HouseholdCO2e + ComSvcCO2e + PTVanCO2e) / LdvDvmt
+      LdvCO2eRate <- LdvCO2e / LdvDvmt
       attributes(LdvCO2eRate) <- list(
         Units = "grams per mile",
         Description = "Average greenhousehouse gas emissions rate of light-duty vehicles"
@@ -605,6 +631,7 @@ calcStateValidationMeasures <-
           "Income",
           "PerCapInc",
           "HouseholdDvmt",
+          "HouseholdCarSvcDvmt",
           "ComSvcDvmt",
           "PTVanDvmt",
           "LdvDvmt",
@@ -633,6 +660,10 @@ calcStateValidationMeasures <-
           "Wkr65Plus",
           "TotalWorkers",
           "AverageLdvMpg",
+          "HouseholdCO2e",
+          "ComSvcCO2e",
+          "PTVanCO2e",
+          "LdvCO2e",
           "HouseholdCO2eRate",
           "ComSvcCO2eRate",
           "PTVanCO2eRate",
