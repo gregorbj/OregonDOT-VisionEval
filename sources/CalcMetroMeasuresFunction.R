@@ -509,6 +509,90 @@ calcMetropolitanMeasures <-
       list(Units = "USD per day",
            Description = "Average daily parking expenditures by households living in the urbanized portion of the Marea")
     
+    #Proportion of households that have reduced car ownership due to use of car services
+    #-----------------------------------------------------------------------------------
+    #All households
+    PropHhReduceVehicleOwnership_Ma <- summarizeDatasets(
+      Expr = "sum(OwnCostSavings > 0 & LocType == 'Urban') / count(OwnCostSavings[LocType == 'Urban'])",
+      Units = c(
+        OwnCostSavings = "",
+        LocType = "",
+        Marea = ""
+      ),
+      Table = list(
+        Household = c("OwnCostSavings", "Marea"),
+        Bzone = c("LocType")
+      ),
+      By_ = "Marea",
+      Key = "Bzone",
+      Group = Year,
+      QueryPrep_ls = QPrep_ls
+    )[Ma]
+    attributes(PropHhReduceVehicleOwnership_Ma) <-
+      list(Units = "proportion of households",
+           Description = "Proportion of households living in the urbanized portion of the Marea that reduce vehicle ownership due to car service availability")
+    #Households in high density (>= 10,000 persons per square mile)
+    PropHhHiDenReduceVehicleOwnership_Ma <- summarizeDatasets(
+      Expr = "sum(OwnCostSavings > 0 & LocType == 'Urban' & D1B >= 10000) / count(OwnCostSavings[LocType == 'Urban' & D1B >= 10000])",
+      Units = c(
+        OwnCostSavings = "",
+        LocType = "",
+        Marea = "",
+        D1B = "PRSN/SQMI"
+      ),
+      Table = list(
+        Household = c("OwnCostSavings", "Marea"),
+        Bzone = c("LocType", "D1B")
+      ),
+      By_ = "Marea",
+      Key = "Bzone",
+      Group = Year,
+      QueryPrep_ls = QPrep_ls
+    )[Ma]
+    attributes(PropHhHiDenReduceVehicleOwnership_Ma) <-
+      list(Units = "proportion of households",
+           Description = "Proportion of households living in the high density urbanized portion of the Marea that reduce vehicle ownership due to car service availability")
+    #Households in medium density (>= 4,000 & < 10,000 persons per square mile)
+    PropHhMedDenReduceVehicleOwnership_Ma <- summarizeDatasets(
+      Expr = "sum(OwnCostSavings > 0 & LocType == 'Urban' & D1B >= 4000 & D1B < 10000) / count(OwnCostSavings[LocType == 'Urban' & D1B >= 4000 & D1B < 10000])",
+      Units = c(
+        OwnCostSavings = "",
+        LocType = "",
+        Marea = "",
+        D1B = "PRSN/SQMI"
+      ),
+      Table = list(
+        Household = c("OwnCostSavings", "Marea"),
+        Bzone = c("LocType", "D1B")
+      ),
+      By_ = "Marea",
+      Key = "Bzone",
+      Group = Year,
+      QueryPrep_ls = QPrep_ls
+    )[Ma]
+    attributes(PropHhMedDenReduceVehicleOwnership_Ma) <-
+      list(Units = "proportion of households",
+           Description = "Proportion of households living in the medium density urbanized portion of the Marea that reduce vehicle ownership due to car service availability")
+    
+    #Proportion of households that have high level car service available to them
+    #---------------------------------------------------------------------------
+    PropHhWithHiCarSvc_Ma <- summarizeDatasets(
+      Expr = "sum(NumHh[CarSvcLevel == 'High' & LocType == 'Urban']) / sum(NumHh[LocType == 'Urban'])",
+      Units = c(
+        NumHh = "",
+        CarSvcLevel = "",
+        LocType = "",
+        Marea = ""
+      ),
+      Table = "Bzone",
+      By_ = "Marea",
+      Group = Year,
+      QueryPrep_ls = QPrep_ls
+    )[Ma]
+    attributes(PropHhWithHiCarSvc_Ma) <-
+      list(Units = "proportion of households",
+           Description = "Proportion of households living in Bzones in the urbanized portion of the Marea that have high car service availability")
+    
     #Data frame of household characteristics
     #---------------------------------------
     HhCharacteristics_df <- makeMeasureDataFrame(
@@ -542,7 +626,11 @@ calcMetropolitanMeasures <-
         "HhLtTrkProp_Ma",
         "HhTotDailyWkrParkingCost_Ma",
         "HhTotDailyOthParkingCost_Ma",
-        "HhAveDailyParkingCost_Ma"
+        "HhAveDailyParkingCost_Ma",
+        "PropHhReduceVehicleOwnership_Ma",
+        "PropHhHiDenReduceVehicleOwnership_Ma",
+        "PropHhMedDenReduceVehicleOwnership_Ma",
+        "PropHhWithHiCarSvc_Ma"
       ),
       Ma = Ma
     )
@@ -1057,7 +1145,7 @@ calcMetropolitanMeasures <-
       Units = "Proportion of workers",
       Description = "Proportion of Marea workers in cashout parking program"
     )
-
+    
     #Calculate households and workers by area type if VE-State model
     #---------------------------------------------------------------    
     if (checkDataset("AreaType", "Bzone", Year, QPrep_ls$Listing$Datastore$Datastore)) {
