@@ -28,7 +28,8 @@ updateVisionEvalInstall(
     "sources/modules/VEPowertrainsAndFuelsxSTSRec",
     "sources/modules/VESimLandUse",
     "sources/modules/VETravelPerformance",
-    "sources/modules/VEReports"
+    "sources/modules/VEReports",
+    "sources/modules/VELandUse"
   ),
   VEInstallationDir = "~/VE_361"
 )
