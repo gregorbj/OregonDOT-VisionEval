@@ -21,6 +21,7 @@ updateVisionEvalInstall(
     "sources/framework/visioneval",
     "sources/modules/VESimHouseholds",
     "sources/modules/VEHouseholdVehicles",
+    "sources/modules/VEHouseholdVehiclesWithAdj",
     "sources/modules/VEHouseholdTravel",
     "sources/modules/VEPowertrainsAndFuels",
     "sources/modules/VEPowertrainsAndFuelsx4TargetRule",
