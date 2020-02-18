@@ -638,6 +638,12 @@ Types <- function(){
       ),
       mode = "integer"
     ),
+    drivers = list(
+      units = list(
+        DRV = c(DRV = 1)
+      ),
+      mode = "integer"
+    ),
     vehicles = list(
       units = list(
         VEH = c(VEH = 1)
