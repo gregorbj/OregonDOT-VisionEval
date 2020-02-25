@@ -1,6 +1,7 @@
-Package: VEPowertrainsAndFuelsxSTSRec
+Package: VEPowertrainsAndFuelsxSTSRecOnRoad
 Type: Package
-Title: Default Powertrains And Fuels for ODOT STS Recommended scenario
+Title: Default Powertrains And Fuels for ODOT STS Recommended scenario with
+    reduced ICEV MPG
 Version: 0.9.5
 Author: Brian Gregor [aut, cre],
 Maintainer: Brian Gregor <gregorb@or-analytics.com>
@@ -10,10 +11,10 @@ Description: Contains modules for inputting default powertrain and fuel
     characteristics and for allowing households to override some of the defaults
     with characteristics for their region. Calculates the carbon intensity of 
     fuels and assigns powertrains and powertrain characteristics to household 
-    vehicles and car service vehicles. The default values are for the Oregon
-    DOT Statewide Transportation Strategy recommended scenario as of February
-    25, 2020.  The ICEV MPG values by model year were adjusted 6% lower to 
-    better match validation targets for fuel consumption.
+    vehicles and car service vehicles. This scenario modifies the default values
+    for the Oregon DOT Statewide Transportation Strategy recommended scenario 
+    as of January 31, 2020 by lowering the ICEV MPG values by model year by 6% 
+    to better match validation targets for fuel consumption.
 License: file LICENSE
 LazyData: TRUE
 Depends: R (>= 3.1.0)
