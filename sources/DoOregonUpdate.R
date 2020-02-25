@@ -27,6 +27,7 @@ updateVisionEvalInstall(
     "sources/modules/VEPowertrainsAndFuelsx4TargetRule",
     "sources/modules/VEPowertrainsAndFuelsxAP",
     "sources/modules/VEPowertrainsAndFuelsxSTSRec",
+    "sources/modules/VEPowertrainsAndFuelsxSTSRecOnRoad",
     "sources/modules/VESimLandUse",
     "sources/modules/VETravelPerformance",
     "sources/modules/VEReports",
