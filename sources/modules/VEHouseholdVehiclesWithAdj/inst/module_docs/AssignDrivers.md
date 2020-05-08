@@ -16,33 +16,33 @@ glm(formula = makeFormula(StartTerms_), family = binomial, data = EstData_df[Tra
 
 Deviance Residuals: 
     Min       1Q   Median       3Q      Max  
--3.3008   0.1298   0.2071   0.3991   3.0757  
+-3.2999   0.1296   0.2085   0.3972   3.0800  
 
 Coefficients:
                   Estimate Std. Error z value Pr(>|z|)    
-(Intercept)     -1.802e+01  1.056e+02  -0.171    0.865    
-Age15to19        1.719e+01  1.056e+02   0.163    0.871    
-Age20to29        1.957e+01  1.056e+02   0.185    0.853    
-Age30to54        1.987e+01  1.056e+02   0.188    0.851    
-Age55to64        1.974e+01  1.056e+02   0.187    0.852    
-Age65Plus        1.916e+01  1.056e+02   0.181    0.856    
-Worker           1.308e+00  5.121e-02  25.540   <2e-16 ***
-HhSize          -2.698e-01  1.663e-02 -16.226   <2e-16 ***
-Income           4.454e-05  1.988e-06  22.401   <2e-16 ***
-IncomeSq        -1.879e-10  1.186e-11 -15.840   <2e-16 ***
-IsSF             4.541e-01  5.122e-02   8.866   <2e-16 ***
-PopDensity      -4.119e-05  3.169e-06 -12.999   <2e-16 ***
-IsUrbanMixNbrhd -6.302e-01  5.955e-02 -10.582   <2e-16 ***
-TranRevMiPC     -8.225e-03  7.520e-04 -10.937   <2e-16 ***
+(Intercept)     -1.808e+01  1.054e+02  -0.172    0.864    
+Age15to19        1.716e+01  1.054e+02   0.163    0.871    
+Age20to29        1.958e+01  1.054e+02   0.186    0.853    
+Age30to54        1.991e+01  1.054e+02   0.189    0.850    
+Age55to64        1.976e+01  1.054e+02   0.188    0.851    
+Age65Plus        1.916e+01  1.054e+02   0.182    0.856    
+Worker           1.250e+00  5.124e-02  24.397   <2e-16 ***
+HhSize          -2.763e-01  1.670e-02 -16.546   <2e-16 ***
+Income           4.614e-05  1.994e-06  23.137   <2e-16 ***
+IncomeSq        -1.942e-10  1.190e-11 -16.317   <2e-16 ***
+IsSF             4.480e-01  5.112e-02   8.764   <2e-16 ***
+PopDensity      -3.857e-05  3.172e-06 -12.158   <2e-16 ***
+IsUrbanMixNbrhd -6.468e-01  5.955e-02 -10.862   <2e-16 ***
+TranRevMiPC     -7.692e-03  7.537e-04 -10.206   <2e-16 ***
 ---
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 26592  on 31369  degrees of freedom
-Residual deviance: 14878  on 31356  degrees of freedom
-  (10192 observations deleted due to missingness)
-AIC: 14906
+    Null deviance: 26597  on 31290  degrees of freedom
+Residual deviance: 14870  on 31277  degrees of freedom
+  (10271 observations deleted due to missingness)
+AIC: 14898
 
 Number of Fisher Scoring iterations: 16
 
@@ -58,31 +58,31 @@ glm(formula = makeFormula(StartTerms_), family = binomial, data = EstData_df[Tra
 
 Deviance Residuals: 
     Min       1Q   Median       3Q      Max  
--3.2951   0.1226   0.1779   0.3478   2.6044  
+-3.2674   0.1243   0.1790   0.3534   2.5817  
 
 Coefficients:
               Estimate Std. Error z value Pr(>|z|)    
-(Intercept) -1.946e+01  1.139e+02  -0.171    0.864    
-Age15to19    1.857e+01  1.139e+02   0.163    0.871    
-Age20to29    2.086e+01  1.139e+02   0.183    0.855    
-Age30to54    2.102e+01  1.139e+02   0.184    0.854    
-Age55to64    2.104e+01  1.139e+02   0.185    0.853    
-Age65Plus    2.036e+01  1.139e+02   0.179    0.858    
-Worker       1.587e+00  4.589e-02  34.575   <2e-16 ***
-HhSize      -2.367e-01  1.467e-02 -16.138   <2e-16 ***
-Income       4.540e-05  1.799e-06  25.239   <2e-16 ***
-IncomeSq    -2.054e-10  1.134e-11 -18.113   <2e-16 ***
-IsSF         3.993e-01  4.317e-02   9.248   <2e-16 ***
-PopDensity  -6.089e-05  3.716e-06 -16.388   <2e-16 ***
+(Intercept) -1.937e+01  1.152e+02  -0.168    0.866    
+Age15to19    1.852e+01  1.152e+02   0.161    0.872    
+Age20to29    2.080e+01  1.152e+02   0.181    0.857    
+Age30to54    2.098e+01  1.152e+02   0.182    0.855    
+Age55to64    2.095e+01  1.152e+02   0.182    0.856    
+Age65Plus    2.030e+01  1.152e+02   0.176    0.860    
+Worker       1.615e+00  4.577e-02  35.275   <2e-16 ***
+HhSize      -2.381e-01  1.447e-02 -16.457   <2e-16 ***
+Income       4.288e-05  1.794e-06  23.903   <2e-16 ***
+IncomeSq    -1.968e-10  1.127e-11 -17.459   <2e-16 ***
+IsSF         4.426e-01  4.293e-02  10.309   <2e-16 ***
+PopDensity  -5.971e-05  3.684e-06 -16.211   <2e-16 ***
 ---
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 43576  on 57878  degrees of freedom
-Residual deviance: 21901  on 57867  degrees of freedom
-  (16467 observations deleted due to missingness)
-AIC: 21925
+    Null deviance: 43390  on 57735  degrees of freedom
+Residual deviance: 22003  on 57724  degrees of freedom
+  (16610 observations deleted due to missingness)
+AIC: 22027
 
 Number of Fisher Scoring iterations: 17
 
@@ -93,6 +93,20 @@ The models are estimated using the *Hh_df* (household) and *Per_df* (person) dat
 ## How the Module Works
 
 The module iterates through each age group excluding the 0-14 year age group and creates a temporary set of person records for households in the region. For each household there are as many person records as there are persons in the age group in the household. A worker status attribute is added to each record based on the number of workers in the age group in the household. For example, if a household has 2 persons and 1 worker in the 20-29 year age group, one of the records would have its worker status attribute equal to 1 and the other would have its worker status attribute equal to 0. The person records are also populated with the household characteristics used in the model. The binomial logit model is applied to the person records to determine the probability that each person is a driver. The driver status of each person is determined by random draws with the modeled probability determining the likelihood that the person is determined to be a driver. The resulting number of drivers in the age group is then tabulated by household.
+
+The module accepts an optional input file *region_hh_ave_driver_per_capita.csv* that is used to specify ratios of licensed drivers to population by age group in the region for each model run year. The specifications for this file are described in the table below. If the file is present, the driver assignments computed by the model are adjusted to match the input target ratios. The process for making adjustments is described below. Although these inputs are not required, they may be important for calibrating the model for the base year and other past years that are modeled. The number of drivers in the household are significant inputs to the vehicle ownership and household travel models. Therefore if the modeled number of drivers is not consistent with observed values, the modeled estimates of household vehicles and household DVMT may not be consistent with observed values as well. These inputs may also be important for modeling future scenarios which assume future changes in driver licensing rates.
+
+Adjustments to match target inputs are done by age group as follows:
+1. The driver model (binomial logit model) is applied to make an initial assignment of drivers in the age group as described above.
+2. The difference in the total modeled number of drivers in the region and target number of drivers is calculated.
+3. If the model produces fewer drivers than the target number, additional drivers equal to the calculated difference are assigned from the unassigned population. The assignment is done by sampling from this population where the probability that a person is assigned is the modeled probability that the person is a driver.
+4. If the model produced more drivers than the target number, then a number of assigned drivers equal to the calculated difference is removed from the assigned population. The unassignment is done by sampling from this population where the probability of a driver being unassigned is 1 minus the model probability that the person is a driver.
+
+The values for the target ratios may be computed from state or federal data sources. State motor vehicle departments maintain data on licensed drivers and their ages. As the structure of those data and the means of acquiring them will vary by state no suggestions are made here regarding how to acquire or process them. Alternately, driver ratios may be computed from data published in Highway Statistics reports by the Federal Highway Administration. Both the state and federal data may be used to calculate the driver ratios by age group at the state level. However, if the user is not satisfied with using the state-level ratios for their model region, they will need to use data from their state's motor vehicle department for their area. The advantage of using data from the FHWA Highway Statistics reports is that they are available in a consistent and easy to use format from 1995 to the present. This can be useful for evaluating trends over time and consider the implications for future licensing rates. Following are the relevant report tables:
+
+**Table DL-20** (Licensed drivers, by sex and percentage in each age group) provides ratios of drivers to population by age group for the nation. If the user is willing to assume that the driver ratios in their region match those of the nation then data in this table can be used to populate the values in the *region_hh_ave_driver_per_capita.csv* file. Aggregation of age groups in the table will be necessary.
+
+**Table DL-22** (Licensed drivers, by State, sex, and age group) provides the number of drivers by age group by state. Aggregation of age groups in this table will be necessary. These data would need to be combined with estimates of population by age group to calculate the driver ratios. The population by age group tablulations are in the *azone_hh_pop_by_age.csv* input file that the user prepared for the *CreateHouseholds* module.
 
 
 ## User Inputs
