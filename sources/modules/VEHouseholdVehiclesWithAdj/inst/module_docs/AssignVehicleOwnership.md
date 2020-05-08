@@ -33,7 +33,7 @@ IsUrbanMixNbrhd  0.839238   0.093167   9.008  < 2e-16 ***
 LogDensity       0.239777   0.039492   6.072 1.27e-09 ***
 TranRevMiPC      0.014992   0.001327  11.299  < 2e-16 ***
 ---
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
@@ -67,7 +67,7 @@ IsSF        -0.77947    0.08803  -8.854  < 2e-16 ***
 Drivers     -4.11347    0.09972 -41.248  < 2e-16 ***
 LogDensity   0.13658    0.02565   5.324 1.01e-07 ***
 ---
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
@@ -101,7 +101,7 @@ IsUrbanMixNbrhd -0.2344384  0.0482043  -4.863 1.15e-06 ***
 LogDensity      -0.2022960  0.0127091 -15.917  < 2e-16 ***
 TranRevMiPC     -0.0031226  0.0005294  -5.899 3.66e-09 ***
 ---
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Threshold coefficients:
             Estimate Std. Error z value
@@ -112,7 +112,8 @@ spacing      2.99870    0.02662  112.65
 The ordered logit model for non-metropolitan household vehicle ownership is described below. The variables are the same as for the metropolitan model with the exception of the urban mixed-use neighborhood and transit variables. The signs of the coefficients are the same and the magnitudes are similar.
 
 ```
-formula: VehOrd ~ Workers + LogIncome + Drivers + HhSize + OnlyElderly + IsSF + LogDensity
+formula: 
+VehOrd ~ Workers + LogIncome + Drivers + HhSize + OnlyElderly + IsSF + LogDensity
 data:    EstData_df
 
  link  threshold   nobs  logLik    AIC      niter max.grad cond.H 
@@ -128,7 +129,7 @@ OnlyElderly -0.352559   0.037467  -9.410  < 2e-16 ***
 IsSF         0.710680   0.035003  20.303  < 2e-16 ***
 LogDensity  -0.167458   0.006486 -25.818  < 2e-16 ***
 ---
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Threshold coefficients:
             Estimate Std. Error z value
@@ -136,24 +137,26 @@ threshold.1  7.81783    0.18654   41.91
 spacing      2.68819    0.01687  159.37
 ```
 
+The models are estimated using the *Hh_df* (household) dataset in the VE2001NHTS package. Information about this dataset and how they was developed from the 2001 National Household Travel Survey public use dataset is included in that package.
+
 ## How the Module Works
 
 For each household, the metropolitan or non-metropolitan binary logit and ordered logit models are run to determine the probability of vehicle ownership at each level (0 to 6). The ownership level assigned to the household is determined by random sampling using the assigned probabilities. The assigned probabilities are retained for use in adjusting the number of assigned vehicles to match vehicle ownership targets if they are provided as described below.
 
-The module accepts an optional input file *azone_hh_ave_veh_per_driver.csv* that is used to specify ratios of household vehicles to licensed drivers by Azone for each model run year. The specifications for this file are described in the table below. If the file is present, the household vehicle assignments computed by the model are adjusted to match the input target ratios. Although these inputs are not required, they may be important for calibrating the model for the base year and other past years that are modeled because the number of vehicles in the household are significant inputs to the household travel model. If the modeled number of vehicles is not consistent with observed values, the modeled estimates of household DVMT may not be consistent with observed values as well.
+The module accepts an optional input file *azone_hh_ave_veh_per_driver.csv* that is used to specify ratios of household vehicles to licensed drivers by Azone for each model run year. The specifications for this file are described in the table below. If the file is present, the household vehicle assignments computed by the model are adjusted to match the input target ratios. Although these inputs are not required, they may be important for calibrating the model for the base year and other past years that are modeled. The number of vehicles in the household are significant inputs to the household travel model. Therefore if the modeled number of vehicles is not consistent with observed values, the modeled estimates of household DVMT may not be consistent with observed values as well.
 
 If vehicle ownership targets are provided, the ownership levels of households in each Azone are adjusted to match the target value for the Azone as follows:
 1. The target number of vehicles is calculated from the target ratio of vehicles to drivers and the number of drivers. The difference between the target number of vehicles and the modeled number of vehicles is calculated.
 2. If more vehicles need to assigned to match the target number, the number of vehicles in households having 0 to 5 vehicles is adjusted upward. A selected set of households at each level has their number of vehicles adjusted upward by 1. If fewer vehicles need to assigned to match the target number, the number of vehicles in households having 1 to 6 vehicles is adjusted downward. A selected set of households at each level has their number of vehicles adjusted downward by 1. The number of households to adjust at each ownership level is the rounded product of the total number of vehicles to adjust and the proportion of households at the level out of the households in all levels to be adjusted.
-3. The selection of the set of households at each ownership level to adjust is done probabilitically using the ownership probabilities described above. If the total number of vehicles to be assigned at the ownership level is to be increased, a probability that each household has an additional vehicle is that household's probability for the next highest ownership level. If the total number of vehicles to be assigned at the ownership level is to be reduced, the probability that each household has one less vehicle is that household's probability for the next lower ownership level. The households having the highest probability for change are selected to add one more or one less vehicle.
+3. The selection of the set of households at each ownership level to adjust is done probabilistically using the ownership probabilities described above. If the total number of vehicles to be assigned at the ownership level is to be increased, a probability that each household has an additional vehicle is that household's probability for the next highest ownership level. If the total number of vehicles to be assigned at the ownership level is to be reduced, the probability that each household has one less vehicle is that household's probability for the next lower ownership level. The households having the highest probability for change are selected to add one more or one less vehicle.
 
-The vehicle target values to place in the *azone_hh_ave_veh_per_driver.csv* input file may be computed from state or federal data sources. State motor vehicle departments maintain data on numbers registered vehicles and licensed drivers by location. That data is most useful because it can be tabulated by Azone whereas the federal data is only available at the state level. In addition, the state department of motor vehicle data may allow household vehicles to be distinguished from commercial and governmental fleet vehicles. However, as the structure of those data and the means of acquiring them vary by state no suggestions are made here regarding how to acquire or process them. If state vehicle data can't be acquired some data are available in the *Highway Statistics* reports produced by the Federal Highway Administration to calculate the statewide ratio of vehicles to drivers that then can be applied uniformly to all Azones.
+The values for the target vehicle to driver ratios may be computed from state or federal data sources. State motor vehicle departments maintain data on numbers registered vehicles and licensed drivers by location. Because the structure of those data and the means of acquiring them will vary by state no suggestions are made here regarding how to acquire or process them. State level data is most useful because it can be tabulated by Azone whereas the federal data are only available at the state level. In addition, the state department of motor vehicle data may indicate which vehicles are owned by households and which are part of commercial fleets. This information is valuable for calculating the household vehicle ownership ratios. If state vehicle data can't be acquired some data are available in the *Highway Statistics* reports produced by the Federal Highway Administration to calculate the statewide ratio of vehicles to drivers that then can be applied uniformly to all Azones.
 
 **Table MV-1** (State motor-vehicle registrations) tabulates the number of vehicles registered by state and type (automobiles, buses, trucks, motorcycles). The automobile category includes all light-duty vehicles.
 
 **Table MV-7** (Publicly owned vehicles) tabulates the number of publicly owned vehicles by state and type. The values for publicly owned automobiles can be used to adjust the totals from Table MV-1 to get a better estimate of the number of household vehicles.
 
-Unfortunately, no information is provided in Highway Statistics reports on the number of commercial fleet vehicles. However a rough estimate may be calculated using data from tables in the annual *National Transportation Statistics* reports published by the US Department of Transportation. **Table 1-14** (U.S. Automobile and Truck Fleets by Use) tabulates vehicles in government and commercial fleets of 15 of more vehicles by category for the nation. These data may be used to estimate the government proportion of all fleet vehicles. That proportion can in turn be used to scale the state level estimate of government vehicles in Table MV-7 to estimate the total number of fleet vehicles for the state. Another source of information on the relative proportions of government and non-government fleet vehicles is *https://www.automotive-fleet.com/* which publishes fleet vehicle estimates annually.
+Unfortunately, no information is provided in Highway Statistics reports on the number of commercial fleet vehicles. However a rough estimate may be calculated using data from tables in the annual *National Transportation Statistics* reports published by the US Department of Transportation. **Table 1-14** (U.S. Automobile and Truck Fleets by Use) tabulates vehicles in government and commercial fleets of 15 of more vehicles by category for the nation. These data may be used to estimate the government proportion of all fleet vehicles. That proportion can in turn be used to scale scale the state level estimate of government vehicles in Table MV-7 to estimate the total number of fleet vehicles for the state. Another source of information on the relative proportions of government and non-government fleet vehicles is https://www.automotive-fleet.com/ which publishes fleet vehicle estimates annually.
 
 
 ## User Inputs
