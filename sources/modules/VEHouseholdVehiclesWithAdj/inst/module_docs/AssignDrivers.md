@@ -16,33 +16,33 @@ glm(formula = makeFormula(StartTerms_), family = binomial, data = EstData_df[Tra
 
 Deviance Residuals: 
     Min       1Q   Median       3Q      Max  
--3.3008   0.1298   0.2071   0.3991   3.0757  
+-3.3128   0.1293   0.2088   0.3980   3.0793  
 
 Coefficients:
                   Estimate Std. Error z value Pr(>|z|)    
-(Intercept)     -1.802e+01  1.056e+02  -0.171    0.865    
-Age15to19        1.719e+01  1.056e+02   0.163    0.871    
-Age20to29        1.957e+01  1.056e+02   0.185    0.853    
-Age30to54        1.987e+01  1.056e+02   0.188    0.851    
-Age55to64        1.974e+01  1.056e+02   0.187    0.852    
-Age65Plus        1.916e+01  1.056e+02   0.181    0.856    
-Worker           1.308e+00  5.121e-02  25.540   <2e-16 ***
-HhSize          -2.698e-01  1.663e-02 -16.226   <2e-16 ***
-Income           4.454e-05  1.988e-06  22.401   <2e-16 ***
-IncomeSq        -1.879e-10  1.186e-11 -15.840   <2e-16 ***
-IsSF             4.541e-01  5.122e-02   8.866   <2e-16 ***
-PopDensity      -4.119e-05  3.169e-06 -12.999   <2e-16 ***
-IsUrbanMixNbrhd -6.302e-01  5.955e-02 -10.582   <2e-16 ***
-TranRevMiPC     -8.225e-03  7.520e-04 -10.937   <2e-16 ***
+(Intercept)     -1.802e+01  1.046e+02  -0.172    0.863    
+Age15to19        1.714e+01  1.046e+02   0.164    0.870    
+Age20to29        1.960e+01  1.046e+02   0.187    0.851    
+Age30to54        1.991e+01  1.046e+02   0.190    0.849    
+Age55to64        1.971e+01  1.046e+02   0.188    0.851    
+Age65Plus        1.915e+01  1.046e+02   0.183    0.855    
+Worker           1.260e+00  5.111e-02  24.650   <2e-16 ***
+HhSize          -2.681e-01  1.656e-02 -16.185   <2e-16 ***
+Income           4.404e-05  1.993e-06  22.100   <2e-16 ***
+IncomeSq        -1.818e-10  1.189e-11 -15.290   <2e-16 ***
+IsSF             4.439e-01  5.096e-02   8.710   <2e-16 ***
+PopDensity      -4.143e-05  3.173e-06 -13.057   <2e-16 ***
+IsUrbanMixNbrhd -5.938e-01  5.963e-02  -9.959   <2e-16 ***
+TranRevMiPC     -8.115e-03  7.522e-04 -10.789   <2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 26592  on 31369  degrees of freedom
-Residual deviance: 14878  on 31356  degrees of freedom
-  (10192 observations deleted due to missingness)
-AIC: 14906
+    Null deviance: 26759  on 31394  degrees of freedom
+Residual deviance: 14926  on 31381  degrees of freedom
+  (10167 observations deleted due to missingness)
+AIC: 14954
 
 Number of Fisher Scoring iterations: 16
 
@@ -58,31 +58,31 @@ glm(formula = makeFormula(StartTerms_), family = binomial, data = EstData_df[Tra
 
 Deviance Residuals: 
     Min       1Q   Median       3Q      Max  
--3.2951   0.1226   0.1779   0.3478   2.6044  
+-3.2811   0.1216   0.1761   0.3464   2.6088  
 
 Coefficients:
               Estimate Std. Error z value Pr(>|z|)    
-(Intercept) -1.946e+01  1.139e+02  -0.171    0.864    
-Age15to19    1.857e+01  1.139e+02   0.163    0.871    
-Age20to29    2.086e+01  1.139e+02   0.183    0.855    
-Age30to54    2.102e+01  1.139e+02   0.184    0.854    
-Age55to64    2.104e+01  1.139e+02   0.185    0.853    
-Age65Plus    2.036e+01  1.139e+02   0.179    0.858    
-Worker       1.587e+00  4.589e-02  34.575   <2e-16 ***
-HhSize      -2.367e-01  1.467e-02 -16.138   <2e-16 ***
-Income       4.540e-05  1.799e-06  25.239   <2e-16 ***
-IncomeSq    -2.054e-10  1.134e-11 -18.113   <2e-16 ***
-IsSF         3.993e-01  4.317e-02   9.248   <2e-16 ***
-PopDensity  -6.089e-05  3.716e-06 -16.388   <2e-16 ***
+(Intercept) -1.941e+01  1.145e+02  -0.170    0.865    
+Age15to19    1.848e+01  1.145e+02   0.161    0.872    
+Age20to29    2.081e+01  1.145e+02   0.182    0.856    
+Age30to54    2.103e+01  1.145e+02   0.184    0.854    
+Age55to64    2.100e+01  1.145e+02   0.183    0.854    
+Age65Plus    2.034e+01  1.145e+02   0.178    0.859    
+Worker       1.630e+00  4.595e-02  35.479   <2e-16 ***
+HhSize      -2.294e-01  1.466e-02 -15.653   <2e-16 ***
+Income       4.338e-05  1.802e-06  24.065   <2e-16 ***
+IncomeSq    -1.963e-10  1.132e-11 -17.343   <2e-16 ***
+IsSF         3.993e-01  4.327e-02   9.228   <2e-16 ***
+PopDensity  -6.212e-05  3.668e-06 -16.935   <2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 43576  on 57878  degrees of freedom
-Residual deviance: 21901  on 57867  degrees of freedom
-  (16467 observations deleted due to missingness)
-AIC: 21925
+    Null deviance: 43517  on 57790  degrees of freedom
+Residual deviance: 21801  on 57779  degrees of freedom
+  (16555 observations deleted due to missingness)
+AIC: 21825
 
 Number of Fisher Scoring iterations: 17
 
@@ -186,17 +186,17 @@ ISELEMENTOF - Categorical values that are permitted. Values in the datastore are
 |LocType          |Household |Year  |character |category   |NA           |Urban, Town, Rural |
 
 ## Datasets Produced by the Module
-The following table documents each dataset that is retrieved from the datastore and used by the module. Each row in the table describes a dataset. All the datasets must be present in the datastore. One or more of these datasets may be entered into the datastore from the user input files. The table names and their meanings are as follows:
+The following table documents each dataset that is placed in the datastore by the module. Each row in the table describes a dataset. All the datasets must be present in the datastore. One or more of these datasets may be entered into the datastore from the user input files. The table names and their meanings are as follows:
 
 NAME - The dataset name.
 
-TABLE - The table in the datastore that the data is retrieved from.
+TABLE - The table in the datastore that the data is placed in.
 
 GROUP - The group in the datastore where the table is located. Note that the datastore has a group named 'Global' and groups for every model run year. For example, if the model run years are 2010 and 2050, then the datastore will have a group named '2010' and a group named '2050'. If the value for 'GROUP' is 'Year', then the dataset will exist in each model run year. If the value for 'GROUP' is 'BaseYear' then the dataset will only exist in the base year group (e.g. '2010'). If the value for 'GROUP' is 'Global' then the dataset will only exist in the 'Global' group.
 
 TYPE - The data type. The framework uses the type to check units and inputs. Refer to the model system design and users guide for information on allowed types.
 
-UNITS - The units that input values need to represent. Some data types have defined units that are represented as abbreviations or combinations of abbreviations. For example 'MI/HR' means miles per hour. Many of these abbreviations are self evident, but the VisionEval model system design and users guide should be consulted.
+UNITS - The native units that are created in the datastore. Some data types have defined units that are represented as abbreviations or combinations of abbreviations. For example 'MI/HR' means miles per hour. Many of these abbreviations are self evident, but the VisionEval model system design and users guide should be consulted.
 
 PROHIBIT - Values that are prohibited. Values in the datastore do not meet any of the listed conditions.
 
