@@ -1,5 +1,5 @@
 # Initialize Module
-### December 3, 2019
+### June 1, 2020
 
 Modules in the VESimLandUse package synthesize Bzones and their land use attributes as a function of Azone characteristics as well as data derived from the US Environmental Protection Agency's Smart Location Database (SLD) augmented with US Census housing and household income data, and data from the National Transit Database. Details on these data are included in the VESimLandUseData package. The combined dataset contains a number of land use attributes at the US Census block group level. The goal of Bzone synthesis to generate a set of SimBzones in each Azone that reasonably represent block group land use characteristics given the characteristics of the Azone, the Marea that the Azone is a part of, and scenario inputs provided by the user.
 
@@ -239,37 +239,6 @@ UNLIKELY - Values that are unlikely. Values that meet any of the listed conditio
 
 DESCRIPTION - A description of the data.
 
-### marea_uza_profile_names.csv
-|NAME           |TYPE      |UNITS |PROHIBIT |ISELEMENTOF |UNLIKELY |DESCRIPTION                                                                                                                                                                        |
-|:--------------|:---------|:-----|:--------|:-----------|:--------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|Geo            |          |      |         |Mareas      |         |Must contain a record for each Marea which is applied to all years.                                                                                                                |
-|UzaProfileName |character |ID    |         |            |         |Name of a specific urbanized area for the urbanized area profile to use in SimBzone creation or one of the following: small, medium-small, medium, medium-large, large, very-large |
-### azone_hh_loc_type_prop.csv
-|NAME        |TYPE   |UNITS      |PROHIBIT     |ISELEMENTOF |UNLIKELY |DESCRIPTION                                                                                 |
-|:-----------|:------|:----------|:------------|:-----------|:--------|:-------------------------------------------------------------------------------------------|
-|Geo         |       |           |             |Azones      |         |Must contain a record for each Azone and model run year.                                    |
-|Year        |       |           |             |            |         |Must contain a record for each Azone and model run year.                                    |
-|PropMetroHh |double |proportion |NA, < 0, > 1 |            |         |Proportion of households residing in the metropolitan (i.e. urbanized) part of the Azone    |
-|PropTownHh  |double |proportion |NA, < 0, > 1 |            |         |Proportion of households residing in towns (i.e. urban-like but not urbanized) in the Azone |
-|PropRuralHh |double |proportion |NA, < 0, > 1 |            |         |Proportion of households residing in rural (i.e. not urbanized or town) parts of the Azone  |
-### azone_wkr_loc_type_prop.csv
-|   |NAME               |TYPE   |UNITS      |PROHIBIT     |ISELEMENTOF |UNLIKELY |DESCRIPTION                                                                                                                                 |
-|:--|:------------------|:------|:----------|:------------|:-----------|:--------|:-------------------------------------------------------------------------------------------------------------------------------------------|
-|1  |Geo                |       |           |             |Azones      |         |Must contain a record for each Azone and model run year.                                                                                    |
-|11 |Year               |       |           |             |            |         |Must contain a record for each Azone and model run year.                                                                                    |
-|5  |PropWkrInMetroJobs |double |proportion |NA, < 0, > 1 |            |         |Proportion of workers residing in the Azone who work at jobs in the metropolitan (i.e. urbanized) area associated with the Azone            |
-|6  |PropWkrInTownJobs  |double |proportion |NA, < 0, > 1 |            |         |Proportion of workers residing in the Azone who work at jobs in towns (i.e. urban-like but not urbanized) in the Azone                      |
-|7  |PropWkrInRuralJobs |double |proportion |NA, < 0, > 1 |            |         |Proportion of workers residing in the Azone who work at jobs in rural (i.e. not urbanized or town) parts of the Azone                       |
-|8  |PropMetroJobs      |double |proportion |NA, < 0, > 1 |            |         |Proportion of the jobs of the metropolitan area that the Azone is associated with that are located in the metropolitan portion of the Azone |
-|9  |TownJobWkrRatio    |double |proportion |NA, < 0      |            |         |Ratio of jobs located in towns in the Azone to workers residing in the Azone who work at jobs located in towns (inside or outside the Azone |
-### azone_loc_type_land_area.csv
-|   |NAME            |TYPE     |UNITS      |PROHIBIT |ISELEMENTOF |UNLIKELY |DESCRIPTION                                                                                                                                                                                                                              |
-|:--|:---------------|:--------|:----------|:--------|:-----------|:--------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|1  |Geo             |         |           |         |Azones      |         |Must contain a record for each Azone and model run year.                                                                                                                                                                                 |
-|13 |Year            |         |           |         |            |         |Must contain a record for each Azone and model run year.                                                                                                                                                                                 |
-|10 |MetroLandArea   |area     |SQMI       |NA, < 0  |            |         |Land area (excluding large water bodies and large tracts of undevelopable land) in the metropolitan (i.e. urbanized) portion of the Azone                                                                                                |
-|11 |TownLandArea    |area     |SQMI       |NA, < 0  |            |         |Land area (excluding large water bodies and large tracts of undevelopable land) in towns (i.e. urban-like but not urbanized) in the Azone                                                                                                |
-|12 |RuralAveDensity |compound |HHJOB/ACRE |NA, < 0  |            |         |Average activity density (households and jobs per acre) of rural (i.e. not metropolitan or town) portions of the Azone not including large waterbodies or large tracts of agricultural lands, forest lands, or otherwise protected lands |
 ### azone_gq_pop-prop_by_area-type.csv
 This input file is OPTIONAL.
 
@@ -281,6 +250,25 @@ This input file is OPTIONAL.
 |14 |PropGQPopInner  |double |proportion |NA, < 0, > 1 |            |         |Proportion of Azone non-institutional group quarters population located in inner area type  |
 |15 |PropGQPopOuter  |double |proportion |NA, < 0, > 1 |            |         |Proportion of Azone non-institutional group quarters population located in outer area type  |
 |16 |PropGQPopFringe |double |proportion |NA, < 0, > 1 |            |         |Proportion of Azone non-institutional group quarters population located in fringe area type |
+### azone_gq_pop_by_age.csv
+|   |NAME         |TYPE   |UNITS |PROHIBIT |ISELEMENTOF |UNLIKELY |DESCRIPTION                                              |
+|:--|:------------|:------|:-----|:--------|:-----------|:--------|:--------------------------------------------------------|
+|1  |Geo          |       |      |         |Azones      |         |Must contain a record for each Azone and model run year. |
+|11 |Year         |       |      |         |            |         |Must contain a record for each Azone and model run year. |
+|25 |GrpAge0to14  |people |PRSN  |NA, < 0  |            |         |Group quarters population in 0 to 14 year old age group  |
+|26 |GrpAge15to19 |people |PRSN  |NA, < 0  |            |         |Group quarters population in 15 to 19 year old age group |
+|27 |GrpAge20to29 |people |PRSN  |NA, < 0  |            |         |Group quarters population in 20 to 29 year old age group |
+|28 |GrpAge30to54 |people |PRSN  |NA, < 0  |            |         |Group quarters population in 30 to 54 year old age group |
+|29 |GrpAge55to64 |people |PRSN  |NA, < 0  |            |         |Group quarters population in 55 to 64 year old age group |
+|30 |GrpAge65Plus |people |PRSN  |NA, < 0  |            |         |Group quarters population in 65 or older age group       |
+### azone_hh_loc_type_prop.csv
+|NAME        |TYPE   |UNITS      |PROHIBIT     |ISELEMENTOF |UNLIKELY |DESCRIPTION                                                                                 |
+|:-----------|:------|:----------|:------------|:-----------|:--------|:-------------------------------------------------------------------------------------------|
+|Geo         |       |           |             |Azones      |         |Must contain a record for each Azone and model run year.                                    |
+|Year        |       |           |             |            |         |Must contain a record for each Azone and model run year.                                    |
+|PropMetroHh |double |proportion |NA, < 0, > 1 |            |         |Proportion of households residing in the metropolitan (i.e. urbanized) part of the Azone    |
+|PropTownHh  |double |proportion |NA, < 0, > 1 |            |         |Proportion of households residing in towns (i.e. urban-like but not urbanized) in the Azone |
+|PropRuralHh |double |proportion |NA, < 0, > 1 |            |         |Proportion of households residing in rural (i.e. not urbanized or town) parts of the Azone  |
 ### azone_hh_pop_by_age.csv
 |   |NAME      |TYPE   |UNITS |PROHIBIT |ISELEMENTOF |UNLIKELY |DESCRIPTION                                                              |
 |:--|:---------|:------|:-----|:--------|:-----------|:--------|:------------------------------------------------------------------------|
@@ -299,17 +287,14 @@ This input file is OPTIONAL.
 |11 |Year       |         |                         |         |            |         |Must contain a record for each Azone and model run year.             |
 |23 |AveHhSize  |compound |PRSN/HH                  |< 0      |            |         |Average household size of households (non-group quarters)            |
 |24 |Prop1PerHh |double   |proportion of households |< 0      |            |         |Proportion of households (non-group quarters) having only one person |
-### azone_gq_pop_by_age.csv
-|   |NAME         |TYPE   |UNITS |PROHIBIT |ISELEMENTOF |UNLIKELY |DESCRIPTION                                              |
-|:--|:------------|:------|:-----|:--------|:-----------|:--------|:--------------------------------------------------------|
-|1  |Geo          |       |      |         |Azones      |         |Must contain a record for each Azone and model run year. |
-|11 |Year         |       |      |         |            |         |Must contain a record for each Azone and model run year. |
-|25 |GrpAge0to14  |people |PRSN  |NA, < 0  |            |         |Group quarters population in 0 to 14 year old age group  |
-|26 |GrpAge15to19 |people |PRSN  |NA, < 0  |            |         |Group quarters population in 15 to 19 year old age group |
-|27 |GrpAge20to29 |people |PRSN  |NA, < 0  |            |         |Group quarters population in 20 to 29 year old age group |
-|28 |GrpAge30to54 |people |PRSN  |NA, < 0  |            |         |Group quarters population in 30 to 54 year old age group |
-|29 |GrpAge55to64 |people |PRSN  |NA, < 0  |            |         |Group quarters population in 55 to 64 year old age group |
-|30 |GrpAge65Plus |people |PRSN  |NA, < 0  |            |         |Group quarters population in 65 or older age group       |
+### azone_loc_type_land_area.csv
+|   |NAME            |TYPE     |UNITS      |PROHIBIT |ISELEMENTOF |UNLIKELY |DESCRIPTION                                                                                                                                                                                                                              |
+|:--|:---------------|:--------|:----------|:--------|:-----------|:--------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|1  |Geo             |         |           |         |Azones      |         |Must contain a record for each Azone and model run year.                                                                                                                                                                                 |
+|13 |Year            |         |           |         |            |         |Must contain a record for each Azone and model run year.                                                                                                                                                                                 |
+|10 |MetroLandArea   |area     |SQMI       |NA, < 0  |            |         |Land area (excluding large water bodies and large tracts of undevelopable land) in the metropolitan (i.e. urbanized) portion of the Azone                                                                                                |
+|11 |TownLandArea    |area     |SQMI       |NA, < 0  |            |         |Land area (excluding large water bodies and large tracts of undevelopable land) in towns (i.e. urban-like but not urbanized) in the Azone                                                                                                |
+|12 |RuralAveDensity |compound |HHJOB/ACRE |NA, < 0  |            |         |Average activity density (households and jobs per acre) of rural (i.e. not metropolitan or town) portions of the Azone not including large waterbodies or large tracts of agricultural lands, forest lands, or otherwise protected lands |
 ### azone_relative_employment.csv
 This input file is OPTIONAL.
 
@@ -322,6 +307,21 @@ This input file is OPTIONAL.
 |33 |RelEmp30to54 |double |proportion |< 0      |            |         |Ratio of workers to persons age 30 to 54 in model year vs. in estimation data year    |
 |34 |RelEmp55to64 |double |proportion |< 0      |            |         |Ratio of workers to persons age 55 to 64 in model year vs. in estimation data year    |
 |35 |RelEmp65Plus |double |proportion |< 0      |            |         |Ratio of workers to persons age 65 or older in model year vs. in estimation data year |
+### azone_wkr_loc_type_prop.csv
+|   |NAME               |TYPE   |UNITS      |PROHIBIT     |ISELEMENTOF |UNLIKELY |DESCRIPTION                                                                                                                                 |
+|:--|:------------------|:------|:----------|:------------|:-----------|:--------|:-------------------------------------------------------------------------------------------------------------------------------------------|
+|1  |Geo                |       |           |             |Azones      |         |Must contain a record for each Azone and model run year.                                                                                    |
+|11 |Year               |       |           |             |            |         |Must contain a record for each Azone and model run year.                                                                                    |
+|5  |PropWkrInMetroJobs |double |proportion |NA, < 0, > 1 |            |         |Proportion of workers residing in the Azone who work at jobs in the metropolitan (i.e. urbanized) area associated with the Azone            |
+|6  |PropWkrInTownJobs  |double |proportion |NA, < 0, > 1 |            |         |Proportion of workers residing in the Azone who work at jobs in towns (i.e. urban-like but not urbanized) in the Azone                      |
+|7  |PropWkrInRuralJobs |double |proportion |NA, < 0, > 1 |            |         |Proportion of workers residing in the Azone who work at jobs in rural (i.e. not urbanized or town) parts of the Azone                       |
+|8  |PropMetroJobs      |double |proportion |NA, < 0, > 1 |            |         |Proportion of the jobs of the metropolitan area that the Azone is associated with that are located in the metropolitan portion of the Azone |
+|9  |TownJobWkrRatio    |double |proportion |NA, < 0      |            |         |Ratio of jobs located in towns in the Azone to workers residing in the Azone who work at jobs located in towns (inside or outside the Azone |
+### marea_uza_profile_names.csv
+|NAME           |TYPE      |UNITS |PROHIBIT |ISELEMENTOF |UNLIKELY |DESCRIPTION                                                                                                                                                                        |
+|:--------------|:---------|:-----|:--------|:-----------|:--------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|Geo            |          |      |         |Mareas      |         |Must contain a record for each Marea which is applied to all years.                                                                                                                |
+|UzaProfileName |character |ID    |         |            |         |Name of a specific urbanized area for the urbanized area profile to use in SimBzone creation or one of the following: small, medium-small, medium, medium-large, large, very-large |
 
 ## Datasets Used by the Module
 This module uses no datasets that are in the datastore.
